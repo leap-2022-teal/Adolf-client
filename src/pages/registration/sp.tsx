@@ -9,7 +9,6 @@ export default function SProvider() {
   const [password, setPassword] = useState('');
   const [cpassword, setCpassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
-  const [userInputData, setUserInputData] = useState({});
   const [open, setOpen] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
   const toggle = () => {
@@ -18,22 +17,18 @@ export default function SProvider() {
   const toggleConfirm = () => {
     setOpenConfirm(!openConfirm);
   };
-  let userData = {};
+  let spData = {};
 
-  console.log(userInputData);
   function handleLogin() {
     if (password === cpassword) {
-      userData = { email, phone, password };
+      spData = { phone, email, password };
       axios
-        .post(`http://localhost:9000/registration/sp`, {
-          userData,
-        })
+        .post(`http://localhost:8000/registration/sp`, spData)
         .then((res) => {
-          const { data, status } = res;
-        })
-        .catch(({ response, code }) => {
-          const { data } = response;
-          alert(data.message);
+          const { status } = res;
+          if (status === 201) {
+            alert('Success');
+          }
         });
     } else {
       setPasswordError(true);
@@ -42,7 +37,7 @@ export default function SProvider() {
 
   useEffect(() => {
     if (password === cpassword) {
-      userData = { email, phone, password };
+      spData = { phone, email, password };
       setPasswordError(false);
     } else {
       setPasswordError(true);
