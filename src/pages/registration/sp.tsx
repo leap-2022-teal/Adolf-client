@@ -51,6 +51,7 @@ export default function SProvider() {
   const ErrorClass = 'border-2 border-rose-600 outline-rose-600';
   const normal = 'border-black border-[1px]';
   const passwordErrorMessage = 'Таны оруулсан нууц үг давхцахгүй байна!!';
+  if (typeof window === 'undefined') return null;
   return (
     <>
       <div className="w-[400px]">
