@@ -12,6 +12,7 @@ export default function Login() {
       })
       .then((res) => {
         const { data, status } = res;
+        console.log(status);
         if (status === 200) {
           const { token } = data;
           localStorage.setItem('loginToken', token);
@@ -20,6 +21,10 @@ export default function Login() {
         } else {
           alert(`Error: ${status}`);
         }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err.response?.data.message);
       });
   }
 
