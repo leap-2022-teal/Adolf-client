@@ -6,21 +6,20 @@ import Image from 'next/image';
 
 function SpData() {
   const [name, setName] = useState<string>('');
-  const [discountType, setDiscountType] = useState('');
-  const [discountValue, setDiscountValue] = useState('');
-  const [discription, setDiscription] = useState('');
-  const [building, setBuilding] = useState('');
-  const [lat, setLat] = useState('');
-  const [long, setLong] = useState('');
-  const [mondayFriday, setMondayFriday] = useState('');
-  const [saturdaySunday, setSaturdaySunday] = useState('');
-  const [closeMonday, setCloseMonday] = useState('');
-  const [closeSaturdaySunday, setCloseSaturdaySunday] = useState('');
-  const [profilePicture, setProfilePicture] = useState('');
+  const [discountType, setDiscountType] = useState<string>('');
+  const [discountValue, setDiscountValue] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
+  const [lat, setLat] = useState<string>();
+  const [long, setLong] = useState<string>();
+  const [mondayFriday, setMondayFriday] = useState<string>('');
+  const [saturdaySunday, setSaturdaySunday] = useState<string>('');
+  const [closeMonday, setCloseMonday] = useState<string>('');
+  const [closeSaturdaySunday, setCloseSaturdaySunday] = useState<string>('');
   const [uploading, setUploading] = useState(false);
   const [image, setImage] = useState<any>('');
   const [location, setLocation] = useState<string>('');
-  console.log('eneshu', location);
+  // console.log('eneshu', location);
   async function handleFileUpload(event: any) {
     setUploading(true);
     const imageFile = event.target.files[0];
@@ -36,8 +35,29 @@ function SpData() {
         setUploading(false);
       });
   }
-  function logValue() {
-    console.log(location);
+  let spData = {};
+  function handleSpData() {
+    spData = {
+      name,
+      discountType,
+      discountValue,
+      description,
+      address,
+      lat,
+      long,
+      mondayFriday,
+      saturdaySunday,
+      closeMonday,
+      closeSaturdaySunday,
+      image,
+      location,
+    };
+    axios.post(`http://localhost:8000/spData`, spData).then((res) => {
+      const { status } = res;
+      if (status === 201) {
+        alert('Success');
+      }
+    });
   }
 
   return (
@@ -47,7 +67,6 @@ function SpData() {
           <h1 className=" font-semibold">ProfilePicture</h1>
           <input
             type="file"
-            value={profilePicture}
             name="profilePicture"
             onChange={handleFileUpload}
             className=" file:bg-green-600  ml-[120px] file:border-none file:h-[40px] file:w-[100px] file:text-white file:rounded-[20px] mt-[10px]"
@@ -88,10 +107,9 @@ function SpData() {
               <option value="10">Дархан</option>
               <option value="11">Эрдэнэт</option>
             </select>
-            <button onClick={logValue}>submit</button>
             <textarea
-              value={building}
-              onChange={(e) => setBuilding(e.target.value)}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
               placeholder="bairshil nemelt medeelel"
               className="border-[2px] border-black w-[400px] rounded-[10px]"
             ></textarea>
@@ -113,7 +131,7 @@ function SpData() {
             </div>
           </div>
         </div>
-        <input
+        {/* <input
           type="file"
           className=" file:bg-green-600  ml-[120px] file:border-none file:h-[40px] file:w-[100px] file:text-white file:rounded-[20px] mt-[10px]"
         />
@@ -130,10 +148,10 @@ function SpData() {
         <div>
           <textarea
             className=" file:bg-green-600  ml-[120px] file:border-none file:h-[40px] file:w-[100px] file:text-white file:rounded-[20px] mt-[10px] min-w-[400px] h-[200px] border-4 border-black-400 border-solid"
-            value={discription}
+            value={description}
             placeholder="tailbar"
             onChange={(event) => {
-              setDiscription(event.target.value);
+              setDescription(event.target.value);
             }}
           />
         </div>
@@ -141,6 +159,7 @@ function SpData() {
           <div className="flex flex-col items-center ">
             <div>
               <label htmlFor="monday">Даваа-Баасан </label>
+
               <input
                 className="border-[1px] border-black"
                 type="time"
@@ -199,7 +218,10 @@ function SpData() {
             Үйлчилгээ+
           </button>
         </Link>
-        <button className=" w-[150px] h-[40px] border-[2px] mx-auto mt-[40px] bg-green-600 border-none text-white rounded-[10px]">
+        <button
+          onClick={handleSpData}
+          className=" w-[150px] h-[40px] border-[2px] mx-auto mt-[40px] bg-green-600 border-none text-white rounded-[10px]"
+        >
           Submit
         </button>
       </div>
