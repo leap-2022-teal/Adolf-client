@@ -1,13 +1,11 @@
 import Link from 'next/link';
 import { use, useEffect, useState } from 'react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
 import Image from 'next/image';
 
 function SpData() {
-  const [name, setName] = useState('');
+  const [name, setName] = useState<string>('');
   const [discountType, setDiscountType] = useState('');
   const [discountValue, setDiscountValue] = useState('');
   const [discription, setDiscription] = useState('');
@@ -19,22 +17,29 @@ function SpData() {
   const [closeMonday, setCloseMonday] = useState('');
   const [closeSaturdaySunday, setCloseSaturdaySunday] = useState('');
   const [profilePicture, setProfilePicture] = useState('');
-  const [uploading, setUplouding] = useState(false);
-  // async function handleFileUploud(event: any) {
-  //   const imageFile = event.target.files[0];
-  //   const formData = new FormData();
-  //   formData.append('profilePicture', imageFile);
-  //   await fetch(`${process.env.REACT_APP_API_URL}/upload-image`, {
-  //     method: 'POST',
-  //     body: formData,
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setProfilePicture(data);
-  //       // setUplouding(false);
-  //     });
-  // }
-  // console.log(profilePicture);
+  const [uploading, setUploading] = useState(false);
+  const [image, setImage] = useState<any>('');
+  const [location, setLocation] = useState<string>('');
+  console.log('eneshu', location);
+  async function handleFileUpload(event: any) {
+    setUploading(true);
+    const imageFile = event.target.files[0];
+    const formData = new FormData();
+    formData.append('image', imageFile); //formData.append(name, value) – add a form field with the given name and value,
+    await fetch('http://localhost:8000/upload-image', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setImage(data);
+        setUploading(false);
+      });
+  }
+  function logValue() {
+    console.log(location);
+  }
+
   return (
     <>
       <div className="flex flex-col w-[800px] h-[100%] border-[3px] border-green-600 sm-[400px]">
@@ -44,16 +49,16 @@ function SpData() {
             type="file"
             value={profilePicture}
             name="profilePicture"
-            // onChange={handleFileUploud}
+            onChange={handleFileUpload}
             className=" file:bg-green-600  ml-[120px] file:border-none file:h-[40px] file:w-[100px] file:text-white file:rounded-[20px] mt-[10px]"
           />
-          {/* {uploading && (
+          {uploading && (
             <div className="border-4 border-red-600" role="status"></div>
           )}
 
-          {profilePicture && (
-            <img src={profilePicture.path} width="100" alt="" />
-          )} */}
+          {image && (
+            <Image src={image.path} width="100" height="150" alt="upload" />
+          )}
         </div>
         <div className="flex flex-col items-center gap-[40px] ">
           <input
@@ -67,21 +72,23 @@ function SpData() {
             <select
               name="District"
               id=""
+              onChange={(e) => setLocation(e.target.value)}
               className="w-[400px] h-[40px] rounded-[10px] border-[2px] border-black  "
             >
-              <option value="">Бүх байршил</option>
-              <option value="">УБ-Багануур</option>
-              <option value="">УБ-Багахангай</option>
-              <option value="">УБ-Баянгол</option>
-              <option value="">УБ-Баянзүрх</option>
-              <option value="">УБ-Налайх</option>
-              <option value="">УБ-Сонгинохайрхан</option>
-              <option value="">УБ-Сүхбаатар</option>
-              <option value="">УБ-Хан-Уул</option>
-              <option value="">УБ-Чингэлтэй</option>
-              <option value="">Дархан</option>
-              <option value="">Эрдэнэт</option>
+              <option selected>Бүх байршил</option>
+              <option value="1">УБ-Багануур</option>
+              <option value="2">УБ-Багахангай</option>
+              <option value="3">УБ-Баянгол</option>
+              <option value="4">УБ-Баянзүрх</option>
+              <option value="5">УБ-Налайх</option>
+              <option value="6">УБ-Сонгинохайрхан</option>
+              <option value="7">УБ-Сүхбаатар</option>
+              <option value="8">УБ-Хан-Уул</option>
+              <option value="9">УБ-Чингэлтэй</option>
+              <option value="10">Дархан</option>
+              <option value="11">Эрдэнэт</option>
             </select>
+            <button onClick={logValue}>submit</button>
             <textarea
               value={building}
               onChange={(e) => setBuilding(e.target.value)}
