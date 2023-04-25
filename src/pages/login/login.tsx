@@ -1,8 +1,33 @@
+import axios from 'axios';
 import { useState } from 'react';
 
 export default function Login() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
+  function handleLogin() {
+    axios
+      .post('http://localhost:8000/registration/login', {
+        phoneNumber,
+        password,
+      })
+      .then((res) => {
+        const { data, status } = res;
+        console.log(status);
+        if (status === 200) {
+          const { token } = data;
+          localStorage.setItem('loginToken', token);
+          window.location.reload();
+          alert('Амжилттай нэвтэрлээ');
+        } else {
+          alert(`Error: ${status}`);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err.response?.data.message);
+      });
+  }
+
   return (
     <div
       className=" bg-[#1f2937]
@@ -29,7 +54,10 @@ export default function Login() {
           />
         </div>
         <div className="flex gap-[20px] justify-center ">
-          <button className="w-[50%] text-[#cbd5e1] h-[2.5rem] bg-neutral-400 bg-opacity-10 rounded-[2rem] cursor-pointer ml-[-40px] ">
+          <button
+            className="w-[50%] text-[#cbd5e1] h-[2.5rem] bg-neutral-400 bg-opacity-10 rounded-[2rem] cursor-pointer ml-[-40px] "
+            onClick={handleLogin}
+          >
             Signin
           </button>
           <a

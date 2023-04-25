@@ -20,7 +20,7 @@ export default function Client() {
   };
   let userData = {};
 
-  function handleLogin() {
+  function handleRegistration() {
     if (password === cpassword) {
       userData = { phone, email, password };
       console.log('some', userData);
@@ -130,7 +130,7 @@ export default function Client() {
           </div>
         </form>
         <button
-          onClick={handleLogin}
+          onClick={handleRegistration}
           className="  border-solid border-black border-[1px] w-[100px] h-[40px] rounded-[5px] mt-[10px]  "
         >
           Бүртгүүлэх
