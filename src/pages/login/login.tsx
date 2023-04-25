@@ -11,9 +11,12 @@ export default function Login() {
         password,
       })
       .then((res) => {
-        const { status } = res;
-        if (status === 201) {
-          alert('Success');
+        const { data, status } = res;
+        if (status === 200) {
+          const { token } = data;
+          localStorage.setItem('loginToken', token);
+          window.location.reload();
+          alert('Амжилттай нэвтэрлээ');
         } else {
           alert(`Error: ${status}`);
         }
