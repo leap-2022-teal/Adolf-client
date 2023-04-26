@@ -3,23 +3,57 @@ import { use, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
 import Image from 'next/image';
+interface FormValues {
+  name: string;
+  image: string;
+  district: string;
+  address: string;
+  lat: string;
+  long: string;
+  description: string;
+  mondayFriday: string;
+  saturdaySunday: string;
+  closeMonday: string;
+  closeSaturdaySunday: string;
+  discountType: string;
+  discountValue: string;
+}
 
 function SpData() {
-  const [name, setName] = useState<string>('');
-  const [discountType, setDiscountType] = useState<string>('');
-  const [discountValue, setDiscountValue] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
-  const [address, setAddress] = useState<string>('');
-  const [lat, setLat] = useState<string>();
-  const [long, setLong] = useState<string>();
-  const [mondayFriday, setMondayFriday] = useState<string>('');
-  const [saturdaySunday, setSaturdaySunday] = useState<string>('');
-  const [closeMonday, setCloseMonday] = useState<string>('');
-  const [closeSaturdaySunday, setCloseSaturdaySunday] = useState<string>('');
   const [uploading, setUploading] = useState(false);
   const [image, setImage] = useState<any>('');
-  const [district, setDistrict] = useState<string>('');
-  // console.log('eneshu', District);
+  const [formValues, setFormValues] = useState<FormValues>({
+    name: '',
+    image: '',
+    district: '',
+    address: '',
+    lat: '',
+    long: '',
+    description: '',
+    mondayFriday: '',
+    saturdaySunday: '',
+    closeMonday: '',
+    closeSaturdaySunday: '',
+    discountType: '',
+    discountValue: '',
+  });
+  // const handleInputChange = (
+  //   e: React.ChangeEvent<
+  //     HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+  //   >
+  // ) => {
+  //   const { name, value } = e.target;
+  //   setFormValues({ ...formValues, [name]: value });
+  // };
+  function handleInputChange(evt: any) {
+    const value = evt.target.value;
+    setFormValues({
+      ...formValues,
+      [evt.target.name]: value,
+    });
+  }
+
+  // console.log('eneshu', District)
   async function handleFileUpload(event: any) {
     setUploading(true);
     const imageFile = event.target.files[0];
@@ -35,30 +69,10 @@ function SpData() {
         setUploading(false);
       });
   }
-  let spData = {};
-  function handleSpData() {
-    spData = {
-      name,
-      discountType,
-      discountValue,
-      description,
-      address,
-      lat,
-      long,
-      mondayFriday,
-      saturdaySunday,
-      closeMonday,
-      closeSaturdaySunday,
-      image,
-      district,
-    };
-    axios.post(`http://localhost:8000/spData`, spData).then((res) => {
-      const { status } = res;
-      if (status === 201) {
-        alert('Success');
-      }
-    });
-  }
+  const handleSubmit = async () => {
+    console.log(formValues);
+    // Handle form submission logic here
+  };
 
   return (
     <>
@@ -81,78 +95,68 @@ function SpData() {
         </div>
         <div className="flex flex-col items-center gap-[40px] ">
           <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            value={formValues.name}
+            onChange={handleInputChange}
             type="text"
             placeholder="Байгууллагын нэр"
             className="w-[400px] h-[40px]  border-[2px] rounded-[10px]  placeholder:pl-[10px] border-black mt-[40px] focus:pl-[10px] "
           />
           <div className="flex flex-col gap-[10px]">
             <select
-              name="District"
+              value={formValues.district}
+              name="district"
               id=""
-              onChange={(e) => setDistrict(e.target.value)}
+              onChange={handleInputChange}
               className="w-[400px] h-[40px] rounded-[10px] border-[2px] border-black  "
             >
-              <option selected>Бүх байршил</option>
-              <option value="1">УБ-Багануур</option>
-              <option value="2">УБ-Багахангай</option>
-              <option value="3">УБ-Баянгол</option>
+              <option selected>Дүүрэг сонгох</option>
               <option value="4">УБ-Баянзүрх</option>
               <option value="5">УБ-Налайх</option>
               <option value="6">УБ-Сонгинохайрхан</option>
               <option value="7">УБ-Сүхбаатар</option>
               <option value="8">УБ-Хан-Уул</option>
               <option value="9">УБ-Чингэлтэй</option>
+              <option value="1">УБ-Багануур</option>
+              <option value="2">УБ-Багахангай</option>
+              <option value="3">УБ-Баянгол</option>
               <option value="10">Дархан</option>
               <option value="11">Эрдэнэт</option>
             </select>
-            <textarea
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+            <input
+              name="address"
+              value={formValues.address}
+              onChange={handleInputChange}
               placeholder="bairshil nemelt medeelel"
               className="border-[2px] border-black w-[400px] rounded-[10px]"
-            ></textarea>
+            ></input>
             <div className="flex gap-[38px]">
               <input
+                name="lat"
                 type="text"
                 placeholder="Lat"
-                value={lat}
-                onChange={(e) => setLat(e.target.value)}
+                value={formValues.lat}
+                onChange={handleInputChange}
                 className="border-[2px] border-black h-[40px] rounded-[10px]"
               />
               <input
+                name="long"
                 type="text"
                 placeholder="Long"
-                value={long}
-                onChange={(e) => setLong(e.target.value)}
+                value={formValues.long}
+                onChange={handleInputChange}
                 className="border-[2px] border-black h-[40px] rounded-[10px]"
               />
             </div>
           </div>
         </div>
-        {/* <input
-          type="file"
-          className=" file:bg-green-600  ml-[120px] file:border-none file:h-[40px] file:w-[100px] file:text-white file:rounded-[20px] mt-[10px]"
-        />
-        {/* <div>
-          <CKEditor
-            editor={ClassicEditor}
-            // data={discription}
-            onChange={(event, editor) => {
-              const data = editor.getData();
-              setDiscription(data);
-            }}
-          />
-        </div> */}
         <div>
           <textarea
+            name="description"
             className=" file:bg-green-600  ml-[120px] file:border-none file:h-[40px] file:w-[100px] file:text-white file:rounded-[20px] mt-[10px] min-w-[400px] h-[200px] border-4 border-black-400 border-solid"
-            value={description}
+            value={formValues.description}
             placeholder="tailbar"
-            onChange={(event) => {
-              setDescription(event.target.value);
-            }}
+            onChange={handleInputChange}
           />
         </div>
         <div>
@@ -163,16 +167,16 @@ function SpData() {
               <input
                 className="border-[1px] border-black"
                 type="time"
-                value={mondayFriday}
-                onChange={(e) => setMondayFriday(e.target.value)}
-                name="monday"
+                value={formValues.mondayFriday}
+                onChange={handleInputChange}
+                name="mondayFriday"
               />
               <input
                 className="border-[1px] border-black"
                 type="time"
-                value={closeMonday}
-                onChange={(e) => setCloseMonday(e.target.value)}
-                name="monday"
+                value={formValues.closeMonday}
+                onChange={handleInputChange}
+                name="closeMonday"
               />
             </div>
 
@@ -181,36 +185,38 @@ function SpData() {
               <input
                 className="border-[1px] border-black"
                 type="time"
-                value={saturdaySunday}
-                onChange={(e) => setSaturdaySunday(e.target.value)}
-                name="saturday"
+                value={formValues.saturdaySunday}
+                onChange={handleInputChange}
+                name="saturdaySunday"
               />
               <input
                 className="border-[1px] border-black"
                 type="time"
-                value={closeSaturdaySunday}
-                onChange={(e) => setCloseSaturdaySunday(e.target.value)}
-                name="saturday"
+                value={formValues.closeSaturdaySunday}
+                onChange={handleInputChange}
+                name="closeSaturdaySunday"
               />
             </div>
           </div>
         </div>
         <div className="w-[400px] h-[200px] flex flex-col border-black border-[2px] mx-auto mt-[40px] rounded-[10px]  gap-[25px]">
           <h3 className="flex justify-center font-semibold">Coupon</h3>
-          <textarea
-            name=""
+          <input
+            name="discountType"
+            type="text"
             id=""
             className="w-[300px] h-[50px] border-[2px] border-black rounded-[10px] placeholder:pl-[10px] placeholder:pt-[10px] focus:pl-[5px] mx-auto "
             placeholder="DiscountType"
-            value={discountType}
-            onChange={(e) => setDiscountType(e.target.value)}
-          ></textarea>
+            value={formValues.discountType}
+            onChange={handleInputChange}
+          ></input>
           <input
+            name="discountValue"
             type="text"
             className="w-[300px] h-[40px] border-[2px] mx-auto border-black rounded-[10px] placeholder:pl-[10px] focus:pl-[5px]"
             placeholder="DiscountValue"
-            value={discountValue}
-            onChange={(e) => setDiscountValue(e.target.value)}
+            value={formValues.discountValue}
+            onChange={handleInputChange}
           />
         </div>
         <Link href="service">
@@ -219,7 +225,7 @@ function SpData() {
           </button>
         </Link>
         <button
-          onClick={handleSpData}
+          onClick={handleSubmit}
           className=" w-[150px] h-[40px] border-[2px] mx-auto mt-[40px] bg-green-600 border-none text-white rounded-[10px]"
         >
           Submit
