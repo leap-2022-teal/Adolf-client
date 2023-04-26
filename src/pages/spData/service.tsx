@@ -26,14 +26,12 @@ export default function Service() {
   }
 
   function handleSubmit() {
-    axios
-      .post(`http://localhost:8000/spData/service`, serviceData)
-      .then((res) => {
-        const { status } = res;
-        if (status === 201) {
-          alert('Success');
-        }
-      });
+    axios.post(`http://localhost:8000/service/sd`, serviceData).then((res) => {
+      const { status } = res;
+      if (status === 201) {
+        alert('Success');
+      }
+    });
     console.log(serviceData);
   }
   return (
