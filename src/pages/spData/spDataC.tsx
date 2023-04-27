@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
 import Image from 'next/image';
+import { LastTextLineData } from 'ckeditor5/src/typing';
 interface FormValues {
   phoneNumber: string;
   password: string;
@@ -10,8 +11,6 @@ interface FormValues {
   image: string;
   district: string;
   address: string;
-  lat: string;
-  long: string;
   description: string;
   mondayFriday: string;
   saturdaySunday: string;
@@ -20,8 +19,12 @@ interface FormValues {
   discountType: string;
   discountValue: string;
   socailAddress: string;
+  location: {
+    type: 'Point';
+    coordinates: [string, string];
+  };
 }
-
+const denver = { type: 'Point', coordinates: [-104.9903, 39.7392] };
 function SpData() {
   const [uploading, setUploading] = useState(false);
   const [image, setImage] = useState<any>('');
@@ -32,8 +35,6 @@ function SpData() {
     image: '',
     district: '',
     address: '',
-    lat: '',
-    long: '',
     description: '',
     mondayFriday: '',
     saturdaySunday: '',
@@ -42,10 +43,11 @@ function SpData() {
     discountType: '',
     discountValue: '',
     socailAddress: '',
+    location: { type: 'Point', coordinates: ['', ''] },
   });
   function handleInputChange(evt: any) {
     const value = evt.target.value;
-    // console.log(evt.nativeEvent.target[value]);
+    console.log(evt.target.name);
     setFormValues({
       ...formValues,
       [evt.target.name]: value,
@@ -167,19 +169,41 @@ function SpData() {
             ></input>
             <div className="flex gap-[38px]">
               <input
-                name="lat"
+                name="location.coordinates[0]"
                 type="text"
                 placeholder="Lat"
-                value={formValues.lat}
-                onChange={handleInputChange}
+                value={formValues.location.coordinates[0]}
+                onChange={(e) =>
+                  setFormValues({
+                    ...formValues,
+                    location: {
+                      type: 'Point',
+                      coordinates: [
+                        e.target.value,
+                        formValues.location.coordinates[1],
+                      ],
+                    },
+                  })
+                }
                 className="border-[2px] border-black h-[40px] rounded-[10px]"
               />
               <input
-                name="long"
+                name="location.coordinates[1]"
                 type="text"
                 placeholder="Long"
-                value={formValues.long}
-                onChange={handleInputChange}
+                value={formValues.location.coordinates[1]}
+                onChange={(e) =>
+                  setFormValues({
+                    ...formValues,
+                    location: {
+                      type: 'Point',
+                      coordinates: [
+                        formValues.location.coordinates[0],
+                        e.target.value,
+                      ],
+                    },
+                  })
+                }
                 className="border-[2px] border-black h-[40px] rounded-[10px]"
               />
             </div>
