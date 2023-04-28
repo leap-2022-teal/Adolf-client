@@ -61,7 +61,7 @@ export default function Login() {
             Signin
           </button>
           <a
-            href="#"
+            href="/registration/client"
             className="my-[10px] text-[13px] tracking-[0.1rem] text-white "
           >
             Signup
