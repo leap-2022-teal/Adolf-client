@@ -2,8 +2,8 @@ import axios from 'axios';
 import { useState } from 'react';
 
 export default function Login() {
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [password, setPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState<any>('');
+  const [password, setPassword] = useState<any>('');
   function handleLogin() {
     axios
       .post('http://localhost:8000/registration/login', {
