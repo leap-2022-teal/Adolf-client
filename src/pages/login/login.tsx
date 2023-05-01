@@ -1,9 +1,12 @@
 import axios from 'axios';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 export default function Login() {
   const [phoneNumber, setPhoneNumber] = useState<any>('');
   const [password, setPassword] = useState<any>('');
+  const router = useRouter();
+
   function handleLogin() {
     axios
       .post('http://localhost:8000/registration/login', {
@@ -16,7 +19,8 @@ export default function Login() {
         if (status === 200) {
           const { token } = data;
           localStorage.setItem('loginToken', token);
-          window.location.reload();
+          // window.location.reload();
+          router.push('/');
           alert('Амжилттай нэвтэрлээ');
         } else {
           alert(`Error: ${status}`);
