@@ -20,7 +20,7 @@ export default function Login() {
           const { token } = data;
           localStorage.setItem('loginToken', token);
           // window.location.reload();
-          router.push('/');
+          // router.push('/');
           alert('Амжилттай нэвтэрлээ');
         } else {
           alert(`Error: ${status}`);
