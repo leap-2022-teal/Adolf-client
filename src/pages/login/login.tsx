@@ -1,12 +1,14 @@
+import { UserProfileContext } from '@/components/context';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 export default function Login() {
-  const [phoneNumber, setPhoneNumber] = useState<any>('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [password, setPassword] = useState<any>('');
   const router = useRouter();
-
+  const { userPhoneNumber, setUserPhoneNumber } =
+    useContext<any>(UserProfileContext);
   function handleLogin() {
     axios
       .post('http://localhost:8000/registration/login', {
@@ -17,8 +19,9 @@ export default function Login() {
         const { data, status } = res;
         console.log(status);
         if (status === 200) {
-          const { token } = data;
+          const { token, userId } = data;
           localStorage.setItem('loginToken', token);
+          setUserPhoneNumber(userId);
           // window.location.reload();
           // router.push('/');
           alert('Амжилттай нэвтэрлээ');
@@ -31,7 +34,7 @@ export default function Login() {
         alert(err.response?.data.message);
       });
   }
-
+  console.log('dugaar', userPhoneNumber);
   return (
     <div
       className=" bg-[#1f2937]
