@@ -1,141 +1,46 @@
-import axios from 'axios';
 import Link from 'next/link';
-import test from 'node:test';
-import { useEffect, useState } from 'react';
-import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
+import { useContext, useEffect, useState } from 'react';
+import AppContext from '@/components/AppContext';
+function Client() {
+  const context = useContext<any>(AppContext);
 
-export default function Client() {
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
-  const [cpassword, setCpassword] = useState('');
-  const [passwordError, setPasswordError] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [openConfirm, setOpenConfirm] = useState(false);
-  const toggle = () => {
-    setOpen(!open);
-  };
-  const toggleConfirm = () => {
-    setOpenConfirm(!openConfirm);
-  };
-  let userData = {};
-
-  function handleRegistration() {
-    if (password === cpassword) {
-      userData = { phone, email, password };
-      console.log('some', userData);
-      axios
-        .post(`http://localhost:8000/registration/client`, userData)
-        .then((res) => {
-          const { status } = res;
-          if (status === 201) {
-            alert('Success');
-          }
-        });
-    } else {
-      setPasswordError(true);
-    }
-  }
-
-  useEffect(() => {
-    if (password === cpassword) {
-      userData = { phone, email, password };
-      console.log({ userData });
-      setPasswordError(false);
-    } else {
-      setPasswordError(true);
-    }
-  }, [cpassword, password]);
-  const ErrorClass = 'border-2 border-rose-600 outline-rose-600';
-  const normal = 'border-black border-[1px]';
-  const passwordErrorMessage = 'Таны оруулсан нууц үг давхцахгүй байна!!';
   return (
     <>
-      <div className="form">
-        <div className="w-[400px]">
-          <h1 className="flex justify-center">Бүртгүүлэх</h1>
-          <div className=" flex justify-around">
-            <Link className="text-[#f43f5e]" href="">
-              Хэрэглэгч
-            </Link>
-            <Link href="/registration/sp">Байгууллага</Link>
-          </div>
+      <div className="w-[400px] flex flex-col items-center gap-[20px] mt-[20px] mx-auto">
+        <div className="w-[150px] h-[150px] mx-auto mt-[40px]">
+          <img src="/car-wash.png" alt="logo" />
         </div>
-        <form action="" className="flex flex-col ">
-          <div className="w-[400px] flex flex-col gap-[20px] mt-[20px]">
-            <input
-              type="text"
-              placeholder="Phone number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="bg-[#f1f5f9] h-[40px] rounded-[5px]  placeholder:ps-[10px] border-black border-[1px]"
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="bg-[#f1f5f9] h-[40px] rounded-[5px]  placeholder:ps-[10px] border-black border-[1px]"
-            />
-
-            <div className="relative ">
-              <input
-                type={open === false ? 'password' : 'text'}
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="bg-[#f1f5f9] h-[40px] rounded-[5px]  w-[400px] placeholder:ps-[10px] border-black border-[1px]"
-              />
-
-              <div className="absolute top-3 right-3">
-                {open === false ? (
-                  <AiOutlineEyeInvisible
-                    onClick={toggle}
-                    className="w-[20px] h-[20px]"
-                  />
-                ) : (
-                  <AiOutlineEye
-                    onClick={toggle}
-                    className="w-[20px] h-[20px]"
-                  />
-                )}
-              </div>
-            </div>
-
-            <div className="relative">
-              <input
-                type={openConfirm === false ? 'password' : 'text'}
-                placeholder="Confirm password"
-                value={cpassword}
-                onChange={(e) => setCpassword(e.target.value)}
-                className={`bg-[#f1f5f9] w-[400px] h-[40px] rounded-[5px] placeholder:ps-[10px] ${
-                  passwordError ? ErrorClass : normal
-                } `}
-              />
-              <div className="absolute top-3 right-3">
-                {openConfirm === false ? (
-                  <AiOutlineEyeInvisible
-                    onClick={toggleConfirm}
-                    className="w-[20px] h-[20px]"
-                  />
-                ) : (
-                  <AiOutlineEye
-                    onClick={toggleConfirm}
-                    className="w-[20px] h-[20px]"
-                  />
-                )}
-              </div>
-            </div>
-            {passwordError && <span> {passwordErrorMessage} </span>}
-          </div>
-        </form>
-        <button
-          onClick={handleRegistration}
-          className="  border-solid border-black border-[1px] w-[100px] h-[40px] rounded-[5px] mt-[10px]  "
+        <h1 className="text-black  flex justify-center my-[10px] tracking-[0.5px] text-[22px] font-medium">
+          Let's get started
+        </h1>
+        <span className="flex justify-center mt-[-30px] text-slate-500 text-[11px] font-light ">
+          We will send a verification code on your phone number.
+        </span>
+        <input
+          type="text"
+          placeholder="Phone number"
+          value={context.phone}
+          onChange={(e) => context.setPhone(e.target.value)}
+          className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[20px] "
+        />
+        <Link
+          href="/registration/sp"
+          className=" text-white h-[2.5rem] w-[80%] bg-sky-600 text:flex rounded-[10px] cursor-pointer "
         >
-          Бүртгүүлэх
-        </button>
+          <span className="flex justify-center pt-[6px]"> Continue</span>
+        </Link>
+
+        <a
+          href="/login/login"
+          className="my-[10px] text-[13px] tracking-[0.1rem] text-sky-500  mt-[40px]"
+        >
+          <span className="text-slate-400">Already have an account?</span>
+          <span> </span>
+          Sign in
+        </a>
       </div>
     </>
   );
 }
+
+export default Client;
