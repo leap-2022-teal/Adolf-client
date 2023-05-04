@@ -1,23 +1,28 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
-import dotenv from 'dotenv';
 import { UserProfile, UserProfileContext } from '@/components/context';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import AppContext from '@/components/AppContext';
+
 export default function App({ Component, pageProps }: AppProps) {
   function Greeting() {
     <div>
       <strong>Hello </strong>
     </div>;
   }
-  const { userPhoneNumber } = useContext<any>(UserProfileContext);
+  // const { userPhoneNumber } = useContext<any>(UserProfileContext);
+  const [phone, setPhone] = useState('');
+
   return (
     <>
-      <UserProfile>
+      <AppContext.Provider value={{ phone, setPhone }}>
+        {/* <UserProfile> */}
         <div>
-          <h1>Hello {userPhoneNumber}</h1>
+          <h1>Hello </h1>
           <Component {...pageProps} />
         </div>
-      </UserProfile>
+        {/* </UserProfile> */}
+      </AppContext.Provider>
     </>
   );
 }

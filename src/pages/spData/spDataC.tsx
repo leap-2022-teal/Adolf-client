@@ -153,6 +153,7 @@ function SpData() {
               <option value="Дархан">Дархан</option>
               <option value="Эрдэнэт">Эрдэнэт</option>
             </select>
+
             <input
               name="address"
               value={formValues.address}

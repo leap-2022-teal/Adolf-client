@@ -1,11 +1,8 @@
 import { createContext, useState, ReactNode } from 'react';
 
-export const UserProfileContext = createContext({});
+export const UserProfileContext = createContext<any>(undefined);
 
-interface UserProfileProps {
-  children: ReactNode;
-}
-export const UserProfile = ({ children }: UserProfileProps) => {
+export const UserProfile = ({ children }: any) => {
   const initialState = {
     userNumber: '',
   };
@@ -14,6 +11,7 @@ export const UserProfile = ({ children }: UserProfileProps) => {
   {
     console.log('function', userPhoneNumber);
   }
+
   return (
     <UserProfileContext.Provider
       value={{ userName, userPhoneNumber, setUserPhoneNumber, setUserName }}
