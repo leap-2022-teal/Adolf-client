@@ -129,9 +129,6 @@ export default function Map() {
         ></MarkerF>
       </GoogleMap>
       <button onClick={() => findCoordinate()}>share location</button>
-      {/* <div>
-        lat: {userLoc.lat} lng: {userLoc.lng}
-      </div> */}
     </>
   );
 }
