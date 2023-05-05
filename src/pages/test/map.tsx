@@ -1,21 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {
-  GoogleMap,
-  useJsApiLoader,
-  useLoadScript,
-  InfoBox,
-  Marker,
-  MarkerF,
-  DirectionsService,
-  InfoWindow,
-  MarkerClustererF,
-  GoogleMarkerClusterer,
-  GoogleMapsMarkerClusterer,
-} from '@react-google-maps/api';
+import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
 import { getDistance } from 'geolib';
 import axios from 'axios';
 import { InfoWindowF } from '@react-google-maps/api';
-import Service from '../spData/service';
 import { isVisible } from 'ckeditor5/src/utils';
 
 // import {img} from './people.png'
@@ -36,6 +23,7 @@ export default function Map() {
   const [positions, setPositions] = useState<any>({});
   const [selectedElement, setSelectedElement] = useState<any>(null);
   const [activeMarker, setActiveMarker] = useState<any>(null);
+  const [visible, setVisible] = useState<string>();
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: 'AIzaSyBtqzOp_Nbaz-txtDb4ijwHpz3MRxVXj7c',
@@ -60,7 +48,8 @@ export default function Map() {
   }
   function handleClick(list: any) {
     setSelectedElement(list);
-    console.log(list);
+    setVisible(list._id);
+    console.log(visible);
   }
   console.log(selectedElement);
   function loadData() {
@@ -94,33 +83,34 @@ export default function Map() {
                 scale: 7,
               }}
             />
-            <InfoWindowF
-              visible={false}
-              position={
-                new google.maps.LatLng(
-                  list.address.location.coordinates[0],
-                  list.address.location.coordinates[1]
-                )
-              }
-              onCloseClick={() => {
-                setSelectedElement(null);
-              }}
-            >
-              <div>
-                <h1>{list.name}</h1>
-                {userLoc !== null ? (
-                  getDistance(
-                    { latitude: userLoc.lat, longitude: userLoc.lng },
-                    {
-                      latitude: list.address.location.coordinates[0],
-                      longitude: list.address.location.coordinates[1],
-                    }
+            {visible === list._id ? (
+              <InfoWindowF
+                position={
+                  new google.maps.LatLng(
+                    list.address.location.coordinates[0],
+                    list.address.location.coordinates[1]
                   )
-                ) : (
-                  <h1>Share your location! </h1>
-                )}
-              </div>
-            </InfoWindowF>
+                }
+                onCloseClick={() => {
+                  setSelectedElement(null);
+                }}
+              >
+                <div>
+                  <h1>{list.name}</h1>
+                  {userLoc !== null ? (
+                    getDistance(
+                      { latitude: userLoc.lat, longitude: userLoc.lng },
+                      {
+                        latitude: list.address.location.coordinates[0],
+                        longitude: list.address.location.coordinates[1],
+                      }
+                    )
+                  ) : (
+                    <h1>Share your location! </h1>
+                  )}
+                </div>
+              </InfoWindowF>
+            ) : null}
           </>
         ))}{' '}
         <MarkerF
