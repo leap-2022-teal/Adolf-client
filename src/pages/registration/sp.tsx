@@ -20,13 +20,13 @@ export default function SProvider() {
   const [passwordError, setPasswordError] = useState(false);
   const [open, setOpen] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
-  const [emailError, setemailError] = useState('');
+  const [emailError, setemailError] = useState(false);
   const context = useContext<any>(AppContext);
   const phoneNumber = context.phone;
   const password = formValues.password;
   function handleInputChange(evt: any) {
     const value = evt.target.value;
-    console.log(evt.target.name);
+    // console.log(evt.target.name);
     setFormValues({
       ...formValues,
       [evt.target.name]: value,
@@ -40,15 +40,24 @@ export default function SProvider() {
     setOpenConfirm(!openConfirm);
   };
   let userInput = {};
-
+  // console.log(formValues.email);
+  console.log(
+    formValues.email.match(
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    )
+  );
   const handleValidation = (event: any) => {
     let formIsValid = true;
-    if (!formValues.email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/)) {
+    if (
+      !formValues.email.match(
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+      )
+    ) {
       formIsValid = false;
-      setemailError('Email хаяг @ агуулсан байх ёстой');
+      setemailError(true);
       return false;
     } else {
-      setemailError('');
+      setemailError(false);
       formIsValid = true;
     }
   };
@@ -56,27 +65,29 @@ export default function SProvider() {
   async function handleLogin(e: any) {
     e.preventDefault();
     handleValidation(e);
-    if (password === cpassword) {
-      userInput = { ...formValues, phoneNumber };
-      await axios
-        .post(`http://localhost:8000/registration/client`, userInput)
-        .then((res) => {
-          const { status, data } = res;
-          console.log(status);
-          if (status === 201) {
-            alert('Амжилттай бүргэгдлээ');
-          }
-        })
-        .catch((err) => {
-          // else if (res.status === 400) {
+    if (password.length > 0) {
+      if (password === cpassword) {
+        userInput = { ...formValues, phoneNumber };
+        await axios
+          .post(`http://localhost:8000/registration/client`, userInput)
+          .then((res) => {
+            const { status, data } = res;
+            console.log(status);
+            if (status === 201) {
+              alert('Амжилттай бүргэгдлээ');
+            }
+          })
+          .catch((err) => {
+            // else if (res.status === 400) {
 
-          console.log('ene', err.message);
-          alert(`${err.response.data.message}`);
-          // }
-        });
-      console.log(userInput);
-    } else {
-      setPasswordError(true);
+            console.log('ene', err.message);
+            alert(`${err.response.data.message}`);
+            // }
+          });
+        console.log(userInput);
+      } else {
+        setPasswordError(true);
+      }
     }
   }
 
@@ -126,7 +137,7 @@ export default function SProvider() {
           className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[20px]  "
         />
         <small id="emailHelp" className="text-danger form-text">
-          {emailError}
+          {emailError && 'Email хаяг @ агуулсан байх ёстой'}
         </small>
 
         <div className="relative w-[100%] flex justify-center ">
