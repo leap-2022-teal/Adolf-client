@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { BsList, BsCarFrontFill } from 'react-icons/bs';
 import { BiCalendar } from 'react-icons/bi';
 import { CiCreditCard1, CiSearch } from 'react-icons/ci';
@@ -9,22 +9,28 @@ import { HiOutlineBell } from 'react-icons/hi';
 import Link from 'next/link';
 import axios from 'axios';
 import { data } from 'autoprefixer';
-export default function Home() {
+import { CurrentUser, UserContext } from '@/components/userProvider';
+export default function HomePage() {
   const [showDashboard, setShowDashboard] = useState<boolean>(false);
   const [profilePicture, setProfilepicture] = useState('/blank-profile.png');
   const [test, setTest] = useState<any>();
+  const user = useContext<any>(UserContext);
+
+  console.log({ user });
+
   const onShow =
     'fixed top-0 ml-[-16px] mt-[-16px] left-0 z-40 h-screen p-4 overflow-y-auto transition-transform-translate-x-full bg-white max-w-[400px] w-[80%]  ';
   const onHide =
     'fixed top-0 ml-[-16px] mt-[-16px] left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white ';
 
-  useEffect(() => {
-    axios.get(`http://localhost:8000/sample`).then((res) => {
-      setTest(res.data);
-      console.log(res.data);
-    });
-  }, []);
-
+  // useEffect(() => {
+  //   axios.get(`http://localhost:8000/sample`).then((res) => {
+  //     setTest(res.data);
+  //     console.log(res.data);
+  //   });
+  // }, []);
+  // const some = CurrentUser();
+  // console.log('some', some);
   return (
     <>
       <div className="w-[400px] max-w-[1000px]  mt-[20px] bg-scroll  mx-auto ">

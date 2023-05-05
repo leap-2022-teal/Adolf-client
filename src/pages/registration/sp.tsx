@@ -102,10 +102,10 @@ export default function SProvider() {
           Please complete your information.
         </span>
         <input
+          name="firstName"
           type="text"
           className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[30px]  "
           placeholder="First Name"
-          name="firstName"
           value={formValues.firstName}
           onChange={handleInputChange}
         />

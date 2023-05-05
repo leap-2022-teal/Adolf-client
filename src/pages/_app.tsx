@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <AppContext.Provider value={{ phone, setPhone }}>
         {/* <UserProfile> */}
         <div>
-          <h1>Hello </h1>
+          {/* <h1>Hello </h1> */}
           <Component {...pageProps} />
         </div>
         {/* </UserProfile> */}
