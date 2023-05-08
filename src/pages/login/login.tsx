@@ -1,6 +1,8 @@
+import { UserProfileContext } from '@/components/context';
 import axios from 'axios';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useContext, useState } from 'react';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 
 export default function Login() {
@@ -8,6 +10,9 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [open, setOpen] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
+  const router = useRouter();
+  // const { userPhoneNumber, setUserPhoneNumber } =
+  //   useContext<any>(UserProfileContext);
   const toggle = () => {
     setOpen(!open);
   };
@@ -24,10 +29,13 @@ export default function Login() {
         const { data, status } = res;
         console.log(status);
         if (status === 200) {
-          const { token } = data;
+          const { token, userId } = data;
           localStorage.setItem('loginToken', token);
-          window.location.reload();
+          // setUserPhoneNumber(userId);
+          // window.location.reload();
+          // router.push('/');
           alert('Амжилттай нэвтэрлээ');
+          router.push('/');
         } else {
           alert(`Error: ${status}`);
         }
@@ -37,7 +45,7 @@ export default function Login() {
         alert(err.response?.data.message);
       });
   }
-
+  // console.log('dugaar', userPhoneNumber);
   return (
     <div className=" w-[400px] bg-white h-[800px] rounded-[20px] shadow-black mx-auto">
       <div className="w-[150px] h-[150px] mx-auto mt-[40px]">
@@ -53,6 +61,7 @@ export default function Login() {
         <input
           type="text"
           placeholder="Phone number"
+          maxLength={8}
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
           className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black "
@@ -95,7 +104,7 @@ export default function Login() {
           href="/registration/client"
           className="my-[10px] text-[13px] tracking-[0.1rem] text-sky-500  mt-[40px]"
         >
-          <span className="text-slate-400">Don't have an account?</span>
+          <span className="text-slate-400"> Don't have an account?</span>
           <span> </span>
           Signup
         </a>

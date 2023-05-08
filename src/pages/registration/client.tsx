@@ -20,6 +20,7 @@ function Client() {
           type="text"
           placeholder="Phone number"
           value={context.phone}
+          maxLength={8}
           onChange={(e) => context.setPhone(e.target.value)}
           className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[20px] "
         />

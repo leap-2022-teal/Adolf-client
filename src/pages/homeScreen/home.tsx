@@ -1,6 +1,9 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+
+import { useContext, useEffect, useReducer, useState } from 'react';
+
 import { useRouter } from 'next/router';
+
 import { BsList, BsCarFrontFill } from 'react-icons/bs';
 import { BiCalendar } from 'react-icons/bi';
 import { CiCreditCard1, CiSearch } from 'react-icons/ci';
@@ -9,23 +12,35 @@ import { VscSignOut } from 'react-icons/vsc';
 import { HiOutlineBell } from 'react-icons/hi';
 import Link from 'next/link';
 import axios from 'axios';
-
-export default function Home() {
+import { data } from 'autoprefixer';
+import { CurrentUser, UserContext } from '@/components/userProvider';
+import { useRouter } from 'next/router';
+export default function HomePage() {
   const [showDashboard, setShowDashboard] = useState<boolean>(false);
   const [profilePicture, setProfilepicture] = useState('/blank-profile.png');
-  const [test, setTest] = useState<any>([]);
+  const [test, setTest] = useState<any>();
+  const user = useContext<any>(UserContext);
+  const router = useRouter();
+  console.log('eneshu', user);
+  if (user === undefined) return null;
   const onShow =
     'fixed top-0 ml-[-16px] mt-[-16px] left-0 z-40 h-screen p-4 overflow-y-auto transition-transform-translate-x-full bg-white max-w-[400px] w-[80%]  ';
   const onHide =
     'fixed top-0 ml-[-16px] mt-[-16px] left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white ';
-  const hide = 'hidden';
-  useEffect(() => {
-    axios.get(`http://localhost:8000/sample`).then((res) => {
-      setTest(res.data);
-      console.log(res.data);
-    });
-  }, []);
 
+  // useEffect(() => {
+  //   axios.get(`http://localhost:8000/sample`).then((res) => {
+  //     setTest(res.data);
+  //     console.log(res.data);
+  //   });
+  // }, []);
+  // const some = CurrentUser();
+  // console.log('some', some);
+  function handleSignOut() {
+    localStorage.removeItem('loginToken');
+    router.push('/login/login');
+    return <>some</>;
+  }
   return (
     <>
       <div className="w-[400px] max-w-[1000px]  mt-[20px] bg-scroll  mx-auto ">
@@ -51,10 +66,10 @@ export default function Home() {
                   className=" w-[65px] h-[65px] rounded-[50%] border-1 border-slate-500 absolute top-[50px] left-10"
                 />
                 <h2 className="text-white font-normal text-lg absolute top-[125px] left-10">
-                  Ricardo Dalitay
+                  {user.lastName} {user.firstName}
                 </h2>
                 <span className="text-slate-300 text-[11px] font-normal absolute top-[150px] left-10">
-                  85340910
+                  {user.phoneNumber}
                 </span>
               </div>
               <button
@@ -72,9 +87,9 @@ export default function Home() {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
               </button>
@@ -127,9 +142,9 @@ export default function Home() {
                     >
                       <VscSignOut className=" w-7 h-7 text-slate-400 " />
 
-                      <Link href="/landingPage/home" className="ml-3">
+                      <a onClick={handleSignOut} className="ml-3">
                         Sign Out
-                      </Link>
+                      </a>
                     </a>
                   </li>
                 </ul>
