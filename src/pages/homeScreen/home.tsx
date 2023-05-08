@@ -170,7 +170,7 @@ export default function HomePage() {
             </div>
             <div className="w-[100%] flex flex-col mt-[400px] h-[400px] overflow-y-auto gap-4">
               {test?.map((test: any) => (
-                <div className="w-[90%] mx-auto p-6 bg-blue-100 border border-gray-200 rounded-lg shadow ">
+                <div className="w-[90%] mx-auto p-6 odd:bg-blue-100  even:bg-slate-50 border border-gray-200 rounded-lg shadow ">
                   <a href="#">
                     <h5 className="mb-2 text-xl font-large font-medium text-blue-500">
                       {test.name}
