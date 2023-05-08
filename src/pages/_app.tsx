@@ -4,6 +4,9 @@ import { UserProfile, UserProfileContext } from '@/components/context';
 import { useContext, useState } from 'react';
 import AppContext from '@/components/AppContext';
 
+
+
+
 export default function App({ Component, pageProps }: AppProps) {
   function Greeting() {
     <div>
