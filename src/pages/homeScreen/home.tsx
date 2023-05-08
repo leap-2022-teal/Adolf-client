@@ -169,8 +169,12 @@ export default function HomePage() {
               <CiSearch className="absolute top-1 right-[50px] w-5 h-5 " />
             </div>
             <div className="w-[100%] flex flex-col mt-[400px] h-[400px] overflow-y-auto gap-4">
-              {test?.map((test: any) => (
-                <div className="w-[90%] mx-auto p-6 bg-blue-100 border border-gray-200 rounded-lg shadow ">
+              {test?.map((test: any, index: any) => (
+                <div
+                  key={index}
+                  className="w-[90%] mx-auto p-6 odd:bg-blue-100  even:bg-slate-50 border border-gray-200 rounded-lg shadow "
+                >
+
                   <a href="#">
                     <h5 className="mb-2 text-xl font-large font-medium text-blue-500">
                       {test.name}
