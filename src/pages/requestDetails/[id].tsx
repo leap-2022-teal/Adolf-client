@@ -29,6 +29,8 @@ export default function RequestDeatails() {
     });
   }, []);
   if (!sP) return <div>Loading...</div>;
+  if (!sP) return <div>Loading...</div>;
+  if (!sP) return <div>Loading...</div>;
   return (
     <>
       <div className="w-[400px] mx-auto h-screen  ">
@@ -40,7 +42,7 @@ export default function RequestDeatails() {
         <h5>Select vehicle</h5>
         <div className="w-[90%] h-[200px] mx-auto  overflow-x-auto  rounded ">
           <div className="w-[600px]  flex gap-5 ">
-            <div className="h-[180px] w-[120px] rounded  border-1 border-black bg-gray-100 active:bg-blue-500  focus:outline-none  hover:bg-blue-500 text-gray-500 hover:text-white flex flex-col items-center   ">
+            <div className="h-[180px] w-[120px] rounded  border-1 border-black bg-gray-100 focus:outline-none  hover:bg-blue-500 text-gray-500 hover:text-white flex flex-col items-center   ">
               <img src="/sedan.png" className="w-[100px] h-[100px]  " alt="" />
               <h5 className="text-xl font-large font-medium ">SEDAN</h5>
             </div>
