@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import AppContext from '@/components/AppContext';
+import { useRouter } from 'next/router';
 interface FormValues {
   email: string;
   firstName: string;
@@ -16,6 +17,7 @@ export default function SProvider() {
     lastName: '',
     password: '',
   });
+  const router = useRouter();
   const [cpassword, setCpassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
   const [open, setOpen] = useState(false);
@@ -32,6 +34,7 @@ export default function SProvider() {
       [evt.target.name]: value,
     });
   }
+
   const toggle = () => {
     setOpen(!open);
   };
@@ -75,6 +78,7 @@ export default function SProvider() {
             console.log(status);
             if (status === 201) {
               alert('Амжилттай бүргэгдлээ');
+              router.push('/login/login');
             }
           })
           .catch((err) => {
@@ -112,97 +116,100 @@ export default function SProvider() {
         <span className="flex justify-center mt-[-10px] text-slate-500 text-[11px] font-light ">
           Please complete your information.
         </span>
-        <input
-          name="firstName"
-          type="text"
-          className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[30px]  "
-          placeholder="First Name"
-          value={formValues.firstName}
-          onChange={handleInputChange}
-        />
-        <input
-          name="lastName"
-          type="text"
-          className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[20px]  "
-          placeholder="Last Name"
-          value={formValues.lastName}
-          onChange={handleInputChange}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formValues.email}
-          onChange={handleInputChange}
-          className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[20px]  "
-        />
-        <small id="emailHelp" className="text-danger form-text">
-          {emailError && 'Email хаяг @ агуулсан байх ёстой'}
-        </small>
-
-        <div className="relative w-[100%] flex justify-center ">
+        <form onSubmit={handleLogin}>
           <input
-            type={open === false ? 'password' : 'text'}
-            placeholder="Password"
-            name="password"
-            value={formValues.password}
+            name="firstName"
+            type="text"
+            className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[30px]  "
+            placeholder="First Name"
+            value={formValues.firstName}
             onChange={handleInputChange}
-            className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[20px] "
           />
-
-          <div className="absolute top-8 right-12">
-            {open === false ? (
-              <AiOutlineEyeInvisible
-                onClick={toggle}
-                className="w-[20px] h-[20px]"
-              />
-            ) : (
-              <AiOutlineEye onClick={toggle} className="w-[20px] h-[20px]" />
-            )}
-          </div>
-        </div>
-
-        <div className="relative w-[100%] flex justify-center">
           <input
-            type={openConfirm === false ? 'password' : 'text'}
-            placeholder="Confirm password"
-            value={cpassword}
-            onChange={(e) => setCpassword(e.target.value)}
-            className={`placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[20px]  ${
-              passwordError ? ErrorClass : normal
-            } `}
+            name="lastName"
+            type="text"
+            className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[20px]  "
+            placeholder="Last Name"
+            value={formValues.lastName}
+            onChange={handleInputChange}
           />
-          <div className="absolute top-8 right-12">
-            {openConfirm === false ? (
-              <AiOutlineEyeInvisible
-                onClick={toggleConfirm}
-                className="w-[20px] h-[20px] text-inherit"
-              />
-            ) : (
-              <AiOutlineEye
-                onClick={toggleConfirm}
-                className="w-[20px] h-[20px] "
-              />
-            )}
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formValues.email}
+            onChange={handleInputChange}
+            className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[20px]  "
+          />
+          <small id="emailHelp" className="text-danger form-text">
+            {emailError && 'Email хаяг @ агуулсан байх ёстой'}
+          </small>
+
+          <div className="relative w-[100%] flex justify-center ">
+            <input
+              type={open === false ? 'password' : 'text'}
+              placeholder="Password"
+              name="password"
+              value={formValues.password}
+              onChange={handleInputChange}
+              className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[20px] "
+            />
+
+            <div className="absolute top-8 right-12">
+              {open === false ? (
+                <AiOutlineEyeInvisible
+                  onClick={toggle}
+                  className="w-[20px] h-[20px]"
+                />
+              ) : (
+                <AiOutlineEye onClick={toggle} className="w-[20px] h-[20px]" />
+              )}
+            </div>
           </div>
-        </div>
-        <div className="flex mt-[20px] gap-1 ml-[-40px]">
-          <input type="checkbox" id="checkbox" />
-          <label
-            htmlFor="checkbox"
-            className="flex justify-center mt-[-10px] text-slate-500 text-[11px] font-light pt-[9px]"
-          >
-            By creating an account, you agree to our
-            <span className="text-sky-600 font-normal px-1"> Terms</span>
-          </label>
-        </div>
-        <Link
-          href="/login/login"
-          onClick={handleLogin}
-          className=" text-white h-[2.5rem] w-[80%] bg-sky-600 text:flex rounded-[10px] cursor-pointer  mt-[30px]"
-        >
-          <span className="flex justify-center pt-[6px]"> Бүртгүүлэх</span>
-        </Link>
+
+          <div className="relative w-[100%] flex justify-center">
+            <input
+              type={openConfirm === false ? 'password' : 'text'}
+              placeholder="Confirm password"
+              value={cpassword}
+              onChange={(e) => setCpassword(e.target.value)}
+              className={`placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[20px]  ${
+                passwordError ? ErrorClass : normal
+              } `}
+            />
+            <div className="absolute top-8 right-12">
+              {openConfirm === false ? (
+                <AiOutlineEyeInvisible
+                  onClick={toggleConfirm}
+                  className="w-[20px] h-[20px] text-inherit"
+                />
+              ) : (
+                <AiOutlineEye
+                  onClick={toggleConfirm}
+                  className="w-[20px] h-[20px] "
+                />
+              )}
+            </div>
+          </div>
+          <div className="flex mt-[20px] gap-1 ml-[-40px]">
+            <input type="checkbox" id="checkbox" />
+            <label
+              htmlFor="checkbox"
+              className="flex justify-center mt-[-10px] text-slate-500 text-[11px] font-light pt-[9px]"
+            >
+              By creating an account, you agree to our
+              <span className="text-sky-600 font-normal px-1"> Terms</span>
+            </label>
+          </div>
+          <input
+            type="submit"
+            // onClick={handleLogin}
+            value={'Бүртгүүлэх'}
+            className=" text-white h-[2.5rem] w-[80%] bg-sky-600 text:flex rounded-[10px] cursor-pointer  mt-[30px]"
+          />
+          {/* <span className="flex justify-center pt-[6px]"> Бүртгүүлэх</span> */}
+          {/* </input> */}
+        </form>
         {passwordError && <span> {passwordErrorMessage} </span>}
       </div>
     </>

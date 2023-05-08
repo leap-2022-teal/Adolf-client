@@ -10,12 +10,13 @@ import Link from 'next/link';
 import axios from 'axios';
 import { data } from 'autoprefixer';
 import { CurrentUser, UserContext } from '@/components/userProvider';
+import { useRouter } from 'next/router';
 export default function HomePage() {
   const [showDashboard, setShowDashboard] = useState<boolean>(false);
   const [profilePicture, setProfilepicture] = useState('/blank-profile.png');
   const [test, setTest] = useState<any>();
   const user = useContext<any>(UserContext);
-
+  const router = useRouter();
   console.log('eneshu', user);
   if (user === undefined) return null;
   const onShow =
@@ -31,6 +32,11 @@ export default function HomePage() {
   // }, []);
   // const some = CurrentUser();
   // console.log('some', some);
+  function handleSignOut() {
+    localStorage.removeItem('loginToken');
+    router.push('/login/login');
+    return <>some</>;
+  }
   return (
     <>
       <div className="w-[400px] max-w-[1000px]  mt-[20px] bg-scroll  mx-auto ">
@@ -56,7 +62,7 @@ export default function HomePage() {
                   className=" w-[65px] h-[65px] rounded-[50%] border-1 border-slate-500 absolute top-[50px] left-10"
                 />
                 <h2 className="text-white font-normal text-lg absolute top-[125px] left-10">
-                  {user.lastName}
+                  {user.lastName} {user.firstName}
                 </h2>
                 <span className="text-slate-300 text-[11px] font-normal absolute top-[150px] left-10">
                   {user.phoneNumber}
@@ -132,9 +138,9 @@ export default function HomePage() {
                     >
                       <VscSignOut className=" w-7 h-7 text-slate-400 " />
 
-                      <Link href="/landingPage/home" className="ml-3">
+                      <a onClick={handleSignOut} className="ml-3">
                         Sign Out
-                      </Link>
+                      </a>
                     </a>
                   </li>
                 </ul>
