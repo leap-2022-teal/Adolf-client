@@ -2,8 +2,6 @@ import Image from 'next/image';
 
 import { useContext, useEffect, useReducer, useState } from 'react';
 
-import { useRouter } from 'next/router';
-
 import { BsList, BsCarFrontFill } from 'react-icons/bs';
 import { BiCalendar } from 'react-icons/bi';
 import { CiCreditCard1, CiSearch } from 'react-icons/ci';
@@ -19,28 +17,28 @@ export default function HomePage() {
   const [showDashboard, setShowDashboard] = useState<boolean>(false);
   const [profilePicture, setProfilepicture] = useState('/blank-profile.png');
   const [test, setTest] = useState<any>();
-  const user = useContext<any>(UserContext);
+  // const user = useContext<any>(UserContext);
   const router = useRouter();
-  console.log('eneshu', user);
-  if (user === undefined) return null;
+  // console.log('eneshu', user);
+  // if (user === undefined) return null;
   const onShow =
     'fixed top-0 ml-[-16px] mt-[-16px] left-0 z-40 h-screen p-4 overflow-y-auto transition-transform-translate-x-full bg-white max-w-[400px] w-[80%]  ';
   const onHide =
     'fixed top-0 ml-[-16px] mt-[-16px] left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white ';
-
-  // useEffect(() => {
-  //   axios.get(`http://localhost:8000/sample`).then((res) => {
-  //     setTest(res.data);
-  //     console.log(res.data);
-  //   });
-  // }, []);
+  const hide = 'hidden';
+  useEffect(() => {
+    axios.get(`http://localhost:8000/sample`).then((res) => {
+      setTest(res.data);
+      console.log(res.data);
+    });
+  }, []);
   // const some = CurrentUser();
   // console.log('some', some);
-  function handleSignOut() {
-    localStorage.removeItem('loginToken');
-    router.push('/login/login');
-    return <>some</>;
-  }
+  // function handleSignOut() {
+  //   localStorage.removeItem('loginToken');
+  //   router.push('/login/login');
+  //   return <>some</>;
+  // }
   return (
     <>
       <div className="w-[400px] max-w-[1000px]  mt-[20px] bg-scroll  mx-auto ">
@@ -65,12 +63,12 @@ export default function HomePage() {
                   src={profilePicture}
                   className=" w-[65px] h-[65px] rounded-[50%] border-1 border-slate-500 absolute top-[50px] left-10"
                 />
-                <h2 className="text-white font-normal text-lg absolute top-[125px] left-10">
+                {/* <h2 className="text-white font-normal text-lg absolute top-[125px] left-10">
                   {user.lastName} {user.firstName}
                 </h2>
                 <span className="text-slate-300 text-[11px] font-normal absolute top-[150px] left-10">
                   {user.phoneNumber}
-                </span>
+                </span> */}
               </div>
               <button
                 onClick={() => setShowDashboard(false)}
@@ -142,9 +140,9 @@ export default function HomePage() {
                     >
                       <VscSignOut className=" w-7 h-7 text-slate-400 " />
 
-                      <a onClick={handleSignOut} className="ml-3">
+                      {/* <a onClick={handleSignOut} className="ml-3">
                         Sign Out
-                      </a>
+                      </a> */}
                     </a>
                   </li>
                 </ul>
@@ -169,12 +167,8 @@ export default function HomePage() {
               <CiSearch className="absolute top-1 right-[50px] w-5 h-5 " />
             </div>
             <div className="w-[100%] flex flex-col mt-[400px] h-[400px] overflow-y-auto gap-4">
-              {test?.map((test: any, index: any) => (
-                <div
-                  key={index}
-                  className="w-[90%] mx-auto p-6 odd:bg-blue-100  even:bg-slate-50 border border-gray-200 rounded-lg shadow "
-                >
-
+              {test?.map((test: any) => (
+                <div className="w-[90%] mx-auto p-6 odd:bg-blue-100  even:bg-slate-50 border border-gray-200 rounded-lg shadow ">
                   <a href="#">
                     <h5 className="mb-2 text-xl font-large font-medium text-blue-500">
                       {test.name}
