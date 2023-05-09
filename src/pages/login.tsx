@@ -1,4 +1,3 @@
-import { UserProfileContext } from '@/components/context';
 import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -11,8 +10,7 @@ export default function Login() {
   const [open, setOpen] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
   const router = useRouter();
-  // const { userPhoneNumber, setUserPhoneNumber } =
-  //   useContext<any>(UserProfileContext);
+
   const toggle = () => {
     setOpen(!open);
   };
@@ -21,7 +19,7 @@ export default function Login() {
   };
   function handleLogin() {
     axios
-      .post('http://localhost:8000/registration/login', {
+      .post(`${process.env.REACT_APP_API_URL}/user/login`, {
         phoneNumber,
         password,
       })
@@ -101,10 +99,10 @@ export default function Login() {
 
       <div className="flex gap-[20px] justify-center ">
         <a
-          href="/registration/client"
+          href="/registrationNumber"
           className="my-[10px] text-[13px] tracking-[0.1rem] text-sky-500  mt-[40px]"
         >
-          <span className="text-slate-400"> Don't have an account?</span>
+          <span className="text-slate-400"> Dont have an account?</span>
           <span> </span>
           Signup
         </a>

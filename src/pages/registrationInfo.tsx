@@ -2,7 +2,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
-import AppContext from '@/components/AppContext';
+import AppContext from '@/context/AppContext';
 import { useRouter } from 'next/router';
 interface FormValues {
   email: string;
@@ -10,7 +10,7 @@ interface FormValues {
   lastName: string;
   password: string;
 }
-export default function SProvider() {
+export default function RegistrationInfo() {
   const [formValues, setFormValues] = useState<FormValues>({
     email: '',
     firstName: '',
@@ -34,7 +34,7 @@ export default function SProvider() {
       [evt.target.name]: value,
     });
   }
-
+  console.log(phoneNumber);
   const toggle = () => {
     setOpen(!open);
   };
@@ -72,13 +72,13 @@ export default function SProvider() {
       if (password === cpassword) {
         userInput = { ...formValues, phoneNumber };
         await axios
-          .post(`http://localhost:8000/registration/client`, userInput)
+          .post(`${process.env.REACT_APP_API_URL}/user/registration`, userInput)
           .then((res) => {
             const { status, data } = res;
             console.log(status);
             if (status === 201) {
               alert('Амжилттай бүргэгдлээ');
-              router.push('/login/login');
+              router.push('/login');
             }
           })
           .catch((err) => {

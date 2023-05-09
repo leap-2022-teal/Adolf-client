@@ -8,11 +8,11 @@ export function UserProvider({ children }: any) {
 
 export function CurrentUser() {
   const [user, setUser] = useState<any>();
-  console.log('user', user);
+  console.log('user ni', user);
   useEffect(() => {
     const token = localStorage.getItem('loginToken');
     axios
-      .get('http://localhost:8000/registration/getUserInfo', {
+      .get(`${process.env.REACT_APP_API_URL}/user/getUserInfo`, {
         headers: { Authorization: `Bearer ${token}` },
       })
 

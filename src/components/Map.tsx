@@ -15,7 +15,7 @@ const center = {
   lng: 106.918556,
 };
 
-export default function Maps() {
+export default function Map() {
   <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>;
   const [userLoc, setUserLoc] = useState<any>(null);
   const [markerLoc, setMarkerLoc] = useState<any>({});
@@ -53,14 +53,16 @@ export default function Maps() {
   }
   console.log(selectedElement);
   function loadData() {
-    axios.get(`http://localhost:8000/registration/spavah`).then((res) => {
-      const { data, status } = res;
-      if (status === 200) {
-        setLists(data);
-      } else {
-        alert({ status });
-      }
-    });
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/serviceProvider/getData`)
+      .then((res) => {
+        const { data, status } = res;
+        if (status === 200) {
+          setLists(data);
+        } else {
+          alert({ status });
+        }
+      });
   }
   console.log(lists);
 
