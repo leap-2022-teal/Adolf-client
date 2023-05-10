@@ -46,10 +46,10 @@ export function UserSideBar() {
                 className=" w-[65px] h-[65px] rounded-[50%] border-1 border-slate-500 absolute top-[50px] left-10"
               />
               <h2 className="text-white font-normal text-lg absolute top-[125px] left-10">
-                {user.lastName} {user.firstName}
+                {user?.lastName} {user?.firstName}
               </h2>
               <span className="text-slate-300 text-[11px] font-normal absolute top-[150px] left-10">
-                {user.phoneNumber}
+                {user?.phoneNumber}
               </span>
             </div>
             <button
@@ -116,8 +116,8 @@ export function UserSideBar() {
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
+                  <div
+                    // href="#"
                     className="flex items-center p-2 hover:text-red-500 rounded-lg text-black hover:bg-red-50 "
                   >
                     <VscSignOut className=" w-7 h-7 text-slate-400 " />
@@ -125,7 +125,7 @@ export function UserSideBar() {
                     <a onClick={handleSignOut} className="ml-3">
                       Sign Out
                     </a>
-                  </a>
+                  </div>
                 </li>
               </ul>
             </div>
