@@ -22,6 +22,7 @@ export default function HomePage() {
             <CiSearch className="absolute top-1 right-[50px] w-5 h-5 " />
           </div>
         </div>
+        <SPlist />
       </div>
     </>
   );

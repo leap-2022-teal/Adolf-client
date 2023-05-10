@@ -19,19 +19,21 @@ export default function RequestDeatails() {
   console.log(id);
   useEffect(() => {
     if (id) {
-      axios.get(`http://localhost:8000/serviceProvider/${id}`).then((res) => {
-        const { data, status } = res;
-        if (status === 200) {
-          setSp(data);
-        } else {
-          alert('aldaa garlaa');
-        }
-      });
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/serviceProvider/${id}`)
+        .then((res) => {
+          const { data, status } = res;
+          if (status === 200) {
+            setSp(data);
+          } else {
+            alert('aldaa garlaa');
+          }
+        });
     }
   }, [id]);
   console.log(service);
   useEffect(() => {
-    axios.get(`http://localhost:8000/request`).then((res) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/service`).then((res) => {
       setService(res.data);
       console.log(res.data);
     });
@@ -92,10 +94,10 @@ export default function RequestDeatails() {
         </h5>
         <div className="w-[90%] h-[200px] mx-auto  overflow-x-auto  rounded mt-4 ">
           <div className="w-[400px]  flex gap-5 ">
-            {service.map((e: any) => {
+            {service.map((e: any, index: number) => {
               if (e.carCategory === selectedCategory) {
                 return (
-                  <div className={normal}>
+                  <div key={index} className={normal}>
                     <div className="w-[90%] h-[90px] mt-1  rounded mx-auto from-slate-400">
                       <img
                         src="/car-wash.png"
