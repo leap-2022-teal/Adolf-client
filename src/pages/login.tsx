@@ -19,7 +19,7 @@ export default function Login() {
   };
   function handleLogin() {
     axios
-      .post(`${process.env.REACT_APP_API_URL}/user/login`, {
+      .post(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/user/login`, {
         phoneNumber,
         password,
       })

@@ -1,6 +1,7 @@
 import axios from 'axios';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { textSpanContainsPosition } from 'typescript';
 export default function RequestDeatails() {
   const [sP, setSp] = useState<any>([]);
@@ -8,7 +9,6 @@ export default function RequestDeatails() {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const router = useRouter();
   const { id } = router.query;
-
   const car =
     'h-[180px] w-[120px] rounded  border-1 border-black bg-gray-100   focus:bg-blue-500  text-gray-500 flex flex-col items-center ';
   const setCar =
@@ -20,7 +20,9 @@ export default function RequestDeatails() {
   useEffect(() => {
     if (id) {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/serviceProvider/${id}`)
+        .get(
+          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider/${id}`
+        )
         .then((res) => {
           const { data, status } = res;
           if (status === 200) {
@@ -33,10 +35,12 @@ export default function RequestDeatails() {
   }, [id]);
   console.log(service);
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/service`).then((res) => {
-      setService(res.data);
-      console.log(res.data);
-    });
+    axios
+      .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/service`)
+      .then((res) => {
+        setService(res.data);
+        console.log(res.data);
+      });
   }, []);
   if (!sP) return <div>Loading...</div>;
 
@@ -115,6 +119,7 @@ export default function RequestDeatails() {
             })}
           </div>
         </div>
+        <Link href={`/calendar`}>next</Link>
       </div>
     </>
   );

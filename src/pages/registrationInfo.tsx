@@ -72,7 +72,10 @@ export default function RegistrationInfo() {
       if (password === cpassword) {
         userInput = { ...formValues, phoneNumber };
         await axios
-          .post(`${process.env.REACT_APP_API_URL}/user/registration`, userInput)
+          .post(
+            `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/user/registration`,
+            userInput
+          )
           .then((res) => {
             const { status, data } = res;
             console.log(status);

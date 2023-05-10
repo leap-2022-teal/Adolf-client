@@ -4,6 +4,7 @@ import { UserSideBar } from '@/components/userSideBar';
 import { UserContext } from '@/context/userProvider';
 import Map from '@/components/Map';
 import { SPlist } from './SPlist';
+import Calendar from '../pages/order/calendar';
 export default function HomePage() {
   const user = useContext<any>(UserContext);
   console.log(user);
