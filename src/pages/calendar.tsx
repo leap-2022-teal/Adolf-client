@@ -6,11 +6,15 @@ export default function Calendar() {
   const [start, setStart] = useState<any>();
   const router = useRouter();
   const { id } = router.query;
+  const [selectCalendar, setSelectCalendar] = useState<any>();
+  const [selectTime, setSelectTime] = useState<any>({});
   const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  // const [date, setDate] = useState<DateType>({
-  //   justDate: null,
-  //   dateTime: null,
-  // });
+  const normal =
+    ' flex flex-col border-2 text-gray-600 bg-gray-100  w-[50px] h-[80px]  items-center rounded';
+  const active =
+    ' flex flex-col border-2 text-white bg-blue-500  w-[50px] h-[80px]  items-center rounded';
+  const normalTime = 'rounded bg-gray-100 h-8 text-gray-600  ';
+  const activeTime = 'rounded bg-blue-500 h-8 text-white  ';
   const getDaysArray = function (s: any, e: any) {
     for (
       var a = [], d = new Date(s);
@@ -24,7 +28,7 @@ export default function Calendar() {
 
   let startDay = new Date();
   let end = new Date();
-  end.setDate(startDay.getDate() + 10);
+  end.setDate(startDay.getDate() + 40);
 
   const days: any = getDaysArray(startDay, end);
   // const getTimes = () => {
@@ -45,11 +49,31 @@ export default function Calendar() {
   const close = Number(start?.dayEnd.substring(0, 2));
   const times = [];
   for (let i = beginning; i <= close; i++) {
-    times.push(`${i}:00 - ${i + 1}:00`);
+    // const bookingLog = booking.filter((e: any) => {
+    //   if (e.time.start >= i && e.time.end < i) {
+    //     return i;
+    //   }
+    // });
+    // const count = bookingLog.length;
+    // if (count < zogsool) {
+    //   times.push({
+    //     label: `${i}:00 - ${i + 1}:00`,
+    //     value: i,
+    //     isAvailable: true,
+    //   });
+    // } else {
+    times.push({
+      label: `${i}:00 - ${i + 1}:00`,
+      value: i,
+      // isAvailable: false,
+    });
+    // }
   }
   //
   // };
-  console.log(times);
+  // console.log(times);
+  // const time =setHours(0,0,0,0)
+
   // const times = getTimes();
   return (
     <>
@@ -64,10 +88,19 @@ export default function Calendar() {
           <div className="w-[750px]  flex gap-5 ">
             {days.map((e: any) => {
               e.getDate();
+              // console.log(e, 'e');
               let day = weekDays[e.getDay()];
 
               return (
-                <p className=" flex flex-col border-2 text-gray-500 bg-gray-100  w-[50px] h-[80px]  items-center rounded">
+                <p
+                  className={
+                    selectCalendar?.toString().slice(0, 10) ===
+                    e.toString().slice(0, 10)
+                      ? active
+                      : normal
+                  }
+                  onClick={() => setSelectCalendar(e)}
+                >
                   <span className="mt-3">{day}</span>
                   <span className=" text-xl font-large font-medium">
                     {e.getDate()}
@@ -77,11 +110,18 @@ export default function Calendar() {
             })}
           </div>
         </div>
+        <h5 className="text-slate-500 text-[15px] font-normal ml-10 mb-2 mt-4">
+          Select time
+        </h5>
         <div className=" w-[80%] h-screen mx-auto  ">
           <div className=" grid grid-cols-2 gap-2 ">
             {times?.map((time: any, i: number) => (
-              <div key={`time-${i}`} className="rounded bg-gray-100 h-8    ">
-                <div className="h-2 w-[110px] pt-1  mx-auto">{time}</div>
+              <div
+                key={`time-${i}`}
+                className={selectTime === time.label ? activeTime : normalTime}
+                onClick={() => setSelectTime(time.label)}
+              >
+                <div className="h-2 w-[110px] pt-1  mx-auto">{time.label}</div>
               </div>
             ))}
           </div>
