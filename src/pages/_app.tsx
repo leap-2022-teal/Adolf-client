@@ -1,8 +1,8 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
-import { UserProfile, UserProfileContext } from '@/components/context';
 import { useContext, useState } from 'react';
 import AppContext from '@/context/AppContext';
+import { OrderProvider } from '@/context/orderProvider';
 
 export default function App({ Component, pageProps }: AppProps) {
   function Greeting() {
@@ -16,9 +16,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <AppContext.Provider value={{ phone, setPhone }}>
-        <div>
+        <OrderProvider>
           <Component {...pageProps} />
-        </div>
+        </OrderProvider>
       </AppContext.Provider>
     </>
   );
