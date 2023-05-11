@@ -5,7 +5,7 @@ const nextConfig = {
     domains: ['res.cloudinary.com'],
   },
   env: {
-    NEXT_PUBLIC_REACT_APP_API_URL: 'http://localhost:8000',
+    NEXT_PUBLIC_REACT_APP_API_URL: process.env.REACT_APP_API_URL,
   },
 };
 

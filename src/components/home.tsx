@@ -1,10 +1,9 @@
 import { useContext } from 'react';
 import { CiSearch } from 'react-icons/ci';
-import { UserSideBar } from '@/components/userSideBar';
-import { UserContext } from '@/context/userProvider';
 import Map from '@/components/Map';
 import { SPlist } from './SPlist';
-import Calendar from '../pages/order/calendar';
+import { UserContext } from '@/context/userProvider';
+import { UserSideBar } from './userSideBar';
 export default function HomePage() {
   const user = useContext<any>(UserContext);
   console.log(user);
@@ -12,7 +11,6 @@ export default function HomePage() {
   return (
     <>
       <div className="w-[400px] max-w-[1000px]  mt-[20px] bg-scroll  mx-auto ">
-        <UserSideBar />
         {/* <Map /> */}
         <div className=" w-[400px] ">
           <div className="relative w-[100%] flex  mt-[20px]">
