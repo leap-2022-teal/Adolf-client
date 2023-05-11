@@ -18,7 +18,7 @@ export function CurrentUser() {
   useEffect(() => {
     const token = localStorage.getItem('loginToken');
     axios
-      .get(`${process.env.REACT_APP_API_URL}/user/getUserInfo`, {
+      .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/user/getUserInfo`, {
         headers: { Authorization: `Bearer ${token}` },
       })
 

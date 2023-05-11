@@ -27,7 +27,9 @@ export default function OrderService() {
   useEffect(() => {
     if (id) {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/serviceProvider/${id}`)
+        .get(
+          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider/${id}`
+        )
         .then((res) => {
           const { data, status } = res;
           if (status === 200) {
@@ -40,10 +42,12 @@ export default function OrderService() {
   }, [id]);
   console.log(selectedService);
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/service`).then((res) => {
-      setService(res.data);
-      console.log(res.data);
-    });
+    axios
+      .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/service`)
+      .then((res) => {
+        setService(res.data);
+        console.log(res.data);
+      });
   }, []);
   if (!sP) return <div>Loading...</div>;
   function handleSave(id: any) {
