@@ -16,7 +16,7 @@ export default function OrderService() {
   const { id } = router.query;
   const [selectedService, setSelectedService] = useState<any>(undefined);
   // const { addToOrder, order } = useContext(UserContext);
-  const { addToOrder, order } = useContext(OrderContext);
+  const { addToOrder, setSPinfo } = useContext(OrderContext);
   const car =
     'h-[180px] w-[120px] rounded  border-1 border-black bg-gray-100   focus:bg-blue-500  text-gray-500 flex flex-col items-center ';
   const setCar =
@@ -25,6 +25,7 @@ export default function OrderService() {
   const normal =
     'h-[180px] w-[120px] border-1 border-black rounded bg-gray-100 hover:bg-blue-500 flex flex-col items-center text-gray-500 hover:text-white ';
   console.log(id);
+  console.log('service', service);
   useEffect(() => {
     if (id) {
       axios
@@ -35,6 +36,7 @@ export default function OrderService() {
           const { data, status } = res;
           if (status === 200) {
             setSp(data);
+            setSPinfo(data);
           } else {
             alert('aldaa garlaa');
           }
@@ -52,8 +54,9 @@ export default function OrderService() {
   }, []);
   if (!sP) return <div>Loading...</div>;
   function handleSave(id: any) {
-    setSelectedService(id);
-    addToOrder(id);
+    const selectedServiceInfo = service.find((one: any) => one._id === id);
+    console.log('enebna', selectedServiceInfo);
+    setSelectedService(selectedServiceInfo);
   }
   return (
     <UserProvider>
@@ -147,9 +150,10 @@ export default function OrderService() {
           </div>
           {/* <button onClick={addToOrder(service.price)}> Next </button> */}
           <Link
-            className=" rounded  ml-[25px] bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center mt-5 "
+            className="rounded  ml-[25px] bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center mt-5 "
             href={`/calendar`}
             type="button"
+            onClick={addToOrder(selectedService)}
           >
             Next
           </Link>

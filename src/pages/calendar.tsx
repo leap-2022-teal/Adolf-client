@@ -1,13 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-
+import { UserProvider } from '@/context/userProvider';
+import { MainLayout } from '@/components/MainLayout';
+import { OrderContext } from '@/context/orderProvider';
+import Link from 'next/link';
 export default function Calendar() {
   const [start, setStart] = useState<any>();
+  console.log('startsh', start);
   const router = useRouter();
   const { id } = router.query;
   const [selectCalendar, setSelectCalendar] = useState<any>();
   const [selectTime, setSelectTime] = useState<any>({});
+  const { addToOrder, setSPinfo, SPinfo } = useContext(OrderContext);
   const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const normal =
     ' flex flex-col border-2 text-gray-600 bg-gray-100  w-[50px] h-[80px]  items-center rounded';
@@ -35,7 +40,7 @@ export default function Calendar() {
   useEffect(() => {
     axios
       .get(
-        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider/644a2c85e6ed7a2e0703a199`
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider/${SPinfo._id}`
       )
       .then((res) => {
         if (res.data.timeTable) {
@@ -76,57 +81,72 @@ export default function Calendar() {
 
   // const times = getTimes();
   return (
-    <>
-      <div className="w-[400px] h-screen  mx-auto">
-        <h1 className="mb-2 text-xl font-large font-medium text-slate-700 ml-8 mt-5">
-          Appointment date
-        </h1>
-        <h5 className="text-slate-500 text-[15px] font-normal ml-10 mb-2 mt-10">
-          Select day
-        </h5>
-        <div className="w-[80%] h-[100px] mx-auto  overflow-x-auto   rounded mt-4">
-          <div className="w-[700px]  flex gap-5 ">
-            {days.map((e: any) => {
-              e.getDate();
-              // console.log(e, 'e');
-              let day = weekDays[e.getDay()];
+    <UserProvider>
+      <MainLayout>
+        <div className="w-[400px] h-screen  mx-auto">
+          <h1 className="mb-2 text-xl font-large font-medium text-slate-700 ml-8 mt-5">
+            Appointment date
+          </h1>
+          <h5 className="text-slate-500 text-[15px] font-normal ml-10 mb-2 mt-10">
+            Select day
+          </h5>
+          <div className="w-[80%] h-[100px] mx-auto  overflow-x-auto   rounded mt-4">
+            <div className="w-[700px]  flex gap-5 ">
+              {days.map((e: any, index: number) => {
+                e.getDate();
+                // console.log(e, 'e');
+                let day = weekDays[e.getDay()];
 
-              return (
-                <p
+                return (
+                  <p
+                    key={index}
+                    className={
+                      selectCalendar?.toString().slice(0, 10) ===
+                      e.toString().slice(0, 10)
+                        ? active
+                        : normal
+                    }
+                    onClick={() => setSelectCalendar(e)}
+                  >
+                    <span className="mt-3">{day}</span>
+                    <span className=" text-xl font-large font-medium">
+                      {e.getDate()}
+                    </span>
+                  </p>
+                );
+              })}
+            </div>
+          </div>
+          <h5 className="text-slate-500 text-[15px] font-normal ml-10 mb-2 mt-4">
+            Select time
+          </h5>
+          <div className=" w-[80%] h-screen mx-auto  ">
+            <div className=" grid grid-cols-2 gap-2 ">
+              {times?.map((time: any, i: number) => (
+                <div
+                  key={`time-${i}`}
                   className={
-                    selectCalendar?.toString().slice(0, 10) ===
-                    e.toString().slice(0, 10)
-                      ? active
-                      : normal
+                    selectTime === time.label ? activeTime : normalTime
                   }
-                  onClick={() => setSelectCalendar(e)}
+                  onClick={() => setSelectTime(time.label)}
                 >
-                  <span className="mt-3">{day}</span>
-                  <span className=" text-xl font-large font-medium">
-                    {e.getDate()}
-                  </span>
-                </p>
-              );
-            })}
+                  <div className="h-2 w-[110px] pt-1  mx-auto">
+                    {time.label}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
+          <Link
+            className="rounded  ml-[25px] bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center mt-5 "
+            href={`/summary`}
+            type="button"
+            // onClick={addToOrder(selectedService)}
+          >
+            Next
+          </Link>
         </div>
-        <h5 className="text-slate-500 text-[15px] font-normal ml-10 mb-2 mt-4">
-          Select time
-        </h5>
-        <div className=" w-[80%] h-screen mx-auto  ">
-          <div className=" grid grid-cols-2 gap-2 ">
-            {times?.map((time: any, i: number) => (
-              <div
-                key={`time-${i}`}
-                className={selectTime === time.label ? activeTime : normalTime}
-                onClick={() => setSelectTime(time.label)}
-              >
-                <div className="h-2 w-[110px] pt-1  mx-auto">{time.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </>
+      </MainLayout>
+    </UserProvider>
   );
 }
