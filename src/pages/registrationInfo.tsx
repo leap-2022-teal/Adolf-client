@@ -123,27 +123,30 @@ export default function RegistrationInfo() {
           <input
             name="firstName"
             type="text"
-            className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[30px]  "
+            className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black  mt-[30px] ml-10  "
             placeholder="First Name"
             value={formValues.firstName}
             onChange={handleInputChange}
           />
+
           <input
             name="lastName"
             type="text"
-            className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[20px]  "
+            className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[20px]  ml-10 "
             placeholder="Last Name"
             value={formValues.lastName}
             onChange={handleInputChange}
           />
+
           <input
             type="email"
             name="email"
             placeholder="Email"
             value={formValues.email}
             onChange={handleInputChange}
-            className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[20px]  "
+            className=" placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] h-[2.5rem] w-[80%] outline-[none] px-[10px] focus:outline-none text-black mt-[20px] ml-10  "
           />
+
           <small id="emailHelp" className="text-danger form-text">
             {emailError && 'Email хаяг @ агуулсан байх ёстой'}
           </small>
@@ -194,11 +197,11 @@ export default function RegistrationInfo() {
               )}
             </div>
           </div>
-          <div className="flex mt-[20px] gap-1 ml-[-40px]">
+          <div className="flex mt-[20px] gap-1 ml-[-40px] ml-[40px]">
             <input type="checkbox" id="checkbox" />
             <label
               htmlFor="checkbox"
-              className="flex justify-center mt-[-10px] text-slate-500 text-[11px] font-light pt-[9px]"
+              className="flex justify-center mt-[-10px] text-slate-500 text-[11px] font-light pt-[9px] ml-[50px]"
             >
               By creating an account, you agree to our
               <span className="text-sky-600 font-normal px-1"> Terms</span>
@@ -208,7 +211,7 @@ export default function RegistrationInfo() {
             type="submit"
             // onClick={handleLogin}
             value={'Бүртгүүлэх'}
-            className=" text-white h-[2.5rem] w-[80%] bg-sky-600 text:flex rounded-[10px] cursor-pointer  mt-[30px]"
+            className=" text-white h-[2.5rem] w-[80%] bg-sky-600 text:flex rounded-[10px] cursor-pointer  mt-[30px] ml-[40px]"
           />
           {/* <span className="flex justify-center pt-[6px]"> Бүртгүүлэх</span> */}
           {/* </input> */}

@@ -7,7 +7,7 @@ import { isVisible } from 'ckeditor5/src/utils';
 
 // import {img} from './people.png'
 const containerStyle = {
-  height: '100vh',
+  height: '300px',
   width: '100%',
 };
 const center = {
@@ -69,7 +69,7 @@ export default function Map() {
   console.log(lists);
 
   return (
-    <div className="w-[800px] h-[400px]">
+    <div>
       {/* <GoogleMap zoom={12} center={center} mapContainerStyle={containerStyle}> */}
       <GoogleMap zoom={12} center={center} mapContainerStyle={containerStyle}>
         {lists.map((list: any) => (

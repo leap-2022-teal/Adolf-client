@@ -14,7 +14,7 @@ export function SPlist() {
   }, []);
   return (
     <>
-      <div className="w-[100%] flex flex-col mt-[400px] h-[400px] overflow-y-auto gap-4">
+      <div className="w-[100%] flex flex-col h-[400px] overflow-y-auto gap-4">
         {spList?.map((spList: any, index: number) => (
           <div
             key={index}

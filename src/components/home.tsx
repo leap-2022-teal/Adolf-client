@@ -11,7 +11,7 @@ export default function HomePage() {
   return (
     <>
       <div className="w-[400px] max-w-[1000px]  mt-[20px] bg-scroll  mx-auto ">
-        {/* <Map /> */}
+        <Map />
         <div className=" w-[400px] ">
           <div className="relative w-[100%] flex  mt-[20px]">
             <input
