@@ -5,6 +5,7 @@ import { UserProvider } from '@/context/userProvider';
 import { MainLayout } from '@/components/MainLayout';
 import { OrderContext } from '@/context/orderProvider';
 import Link from 'next/link';
+import Footer from '@/components/footer';
 export default function Calendar() {
   const [start, setStart] = useState<any>();
   console.log('startsh', start);
@@ -136,15 +137,8 @@ export default function Calendar() {
                 </div>
               ))}
             </div>
+            <Footer next={'summary'} />
           </div>
-          <Link
-            className="rounded  ml-[25px] bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center mt-5 "
-            href={`/summary`}
-            type="button"
-            // onClick={addToOrder(selectedService)}
-          >
-            Next
-          </Link>
         </div>
       </MainLayout>
     </UserProvider>

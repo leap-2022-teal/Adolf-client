@@ -1,3 +1,4 @@
+import Footer from '@/components/footer';
 import { MainLayout } from '@/components/MainLayout';
 import { OrderContext } from '@/context/orderProvider';
 import { UserContext, UserProvider } from '@/context/userProvider';
@@ -157,6 +158,7 @@ export default function OrderService() {
           >
             Next
           </Link>
+          <Footer prev={'/'} next={`/calendar`} />
         </div>
         {/* <Link href={`/calendar`}>next</Link> */}
       </MainLayout>
