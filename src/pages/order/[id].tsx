@@ -146,8 +146,15 @@ export default function OrderService() {
             </div>
           </div>
           {/* <button onClick={addToOrder(service.price)}> Next </button> */}
+          <Link
+            className=" rounded  ml-[25px] bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center mt-5 "
+            href={`/calendar`}
+            type="button"
+          >
+            Next
+          </Link>
         </div>
-        <Link href={`/calendar`}>next</Link>
+        {/* <Link href={`/calendar`}>next</Link> */}
       </MainLayout>
     </UserProvider>
   );
