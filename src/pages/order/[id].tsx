@@ -2,6 +2,7 @@ import { MainLayout } from '@/components/MainLayout';
 import { OrderContext } from '@/context/orderProvider';
 import { UserContext, UserProvider } from '@/context/userProvider';
 import axios from 'axios';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { useEffect, useState } from 'react';
@@ -146,6 +147,7 @@ export default function OrderService() {
           </div>
           {/* <button onClick={addToOrder(service.price)}> Next </button> */}
         </div>
+        <Link href={`/calendar`}>next</Link>
       </MainLayout>
     </UserProvider>
   );
