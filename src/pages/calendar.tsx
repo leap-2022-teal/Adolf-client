@@ -28,7 +28,7 @@ export default function Calendar() {
 
   let startDay = new Date();
   let end = new Date();
-  end.setDate(startDay.getDate() + 40);
+  end.setDate(startDay.getDate() + 10);
 
   const days: any = getDaysArray(startDay, end);
   // const getTimes = () => {
@@ -85,7 +85,7 @@ export default function Calendar() {
           Select day
         </h5>
         <div className="w-[80%] h-[100px] mx-auto  overflow-x-auto   rounded mt-4">
-          <div className="w-[750px]  flex gap-5 ">
+          <div className="w-[700px]  flex gap-5 ">
             {days.map((e: any) => {
               e.getDate();
               // console.log(e, 'e');
