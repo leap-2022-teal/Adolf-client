@@ -8,6 +8,8 @@ import Link from 'next/link';
 import Footer from '@/components/footer';
 import * as dayjs from 'dayjs';
 import * as isLeapYear from 'dayjs/plugin/isLeapYear';
+import { useRecoilState } from 'recoil';
+import { selectedDateInfo } from '@/pages/atoms';
 
 export default function Calendar() {
   // var new =  dayjs('2018-08-08');
@@ -21,6 +23,7 @@ export default function Calendar() {
   const [orderDate, SetorderDate] = useState<any>();
   const [selectTime, setSelectTime] = useState<any>({});
   const [back, setBack] = useState<any>();
+  const [selectedDate, setSelectedDate] = useRecoilState(selectedDateInfo);
   const { addToOrder, setSPinfo, SPinfo, setUserSelectedDate } =
     useContext(OrderContext);
   const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -50,10 +53,10 @@ export default function Calendar() {
 
   // const getTimes = () => {
   useEffect(() => {
-    if (SPinfo) {
+    if (orgId) {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider/${SPinfo._id}`
+          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider/${orgId}`
         )
         .then((res) => {
           if (res.data.timeTable) {
@@ -177,9 +180,10 @@ export default function Calendar() {
             </div>
             <Footer
               prev={`/order/${orgId}`}
-              onClick={() => setUserSelectedDate(DateTime)}
+              // onClick={() => setSelectedDate(DateTime)}
               next={`/order/${orgId}/summary`}
             />
+            <button onClick={() => setSelectedDate(DateTime)}> save </button>
             {/* <Footer next={'summary'} prev ={""} /> */}
           </div>
         </div>

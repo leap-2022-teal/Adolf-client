@@ -8,7 +8,8 @@ import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { useEffect, useState } from 'react';
 import { textSpanContainsPosition } from 'typescript';
-
+import { useRecoilState } from 'recoil';
+import { OrgInfo, orderInfo } from '@/pages/atoms';
 export default function OrderService() {
   const [sP, setSp] = useState<any>([]);
   const [service, setService] = useState<any>([]);
@@ -17,7 +18,14 @@ export default function OrderService() {
   const { orgId } = router.query;
   const [selectedService, setSelectedService] = useState<any>(undefined);
   // const { addToOrder, order } = useContext(UserContext);
-  const { addToOrder, setSPinfo } = useContext(OrderContext);
+  // const { addToOrder, setSPinfo } = useContext(OrderContext);
+  // const [selectedService, setSelectedService] = useRecoilState(orderInfo);
+  const [UserSelectedService, setUserSelectedService] =
+    useRecoilState(orderInfo);
+  const [selectedSPid, setSelectedSPid] = useRecoilState(OrgInfo);
+  // const [selecteddSPid, setSedmflectedSPid] = useRecoilState(OrgInfo);
+  // console.log('serviceRecoil', UserSelectedService);
+  console.log('sPRecoil', selectedSPid);
   const car =
     'h-[180px] w-[120px] rounded  border-1 border-black bg-gray-100   focus:bg-blue-500  text-gray-500 flex flex-col items-center ';
   const setCar =
@@ -37,7 +45,8 @@ export default function OrderService() {
           const { data, status } = res;
           if (status === 200) {
             setSp(data);
-            setSPinfo(data);
+            // setSPinfo(data);
+            setSelectedSPid(data);
           } else {
             alert('aldaa garlaa');
           }
@@ -152,13 +161,15 @@ export default function OrderService() {
           {/* <button onClick={addToOrder(service.price)}> Next </button> */}
           <Footer
             next={`/order/${orgId}/calendar`}
-            onClick={addToOrder(selectedService)}
+            selectedService={selectedService}
+            // onClick={addToOrder(selectedService)}
           />
           {/* <Link
             className="rounded  ml-[25px] bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center mt-5 "
             href={`/order/${orgId}/calendar`}
             type="button"
-            onClick={addToOrder(selectedService)}
+            onClick={() => setUserSelectedService(selectedService)}
+            // onClick={setSelectedService(selectedService)}
           >
             Next
           </Link> */}

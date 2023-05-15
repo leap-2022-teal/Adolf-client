@@ -7,9 +7,14 @@ import { OrderContext } from '@/context/orderProvider';
 import Link from 'next/link';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import { orderInfo } from '@/pages/atoms';
 
-export default function Footer({ prev, next }: any) {
+export default function Footer({ prev, next, selectedService }: any) {
   const { addToOrder, setSPinfo } = useContext(OrderContext);
+  const [UserSelectedService, setUserSelectedService] =
+    useRecoilState(orderInfo);
+  console.log(UserSelectedService);
   const router = useRouter();
   return (
     <>
@@ -34,6 +39,7 @@ export default function Footer({ prev, next }: any) {
             className="rounded  bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
             href={`/${next}`}
             type="button"
+            onClick={() => setUserSelectedService(selectedService)}
           >
             Next
           </Link>

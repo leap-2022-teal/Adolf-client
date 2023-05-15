@@ -3,7 +3,13 @@ import type { AppProps } from 'next/app';
 import { useContext, useState } from 'react';
 import AppContext from '@/context/AppContext';
 import { OrderProvider } from '@/context/orderProvider';
-
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
 export default function App({ Component, pageProps }: AppProps) {
   function Greeting() {
     <div>
@@ -16,9 +22,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <AppContext.Provider value={{ phone, setPhone }}>
-        <OrderProvider>
-          <Component {...pageProps} />
-        </OrderProvider>
+        <RecoilRoot>
+          <OrderProvider>
+            <Component {...pageProps} />
+          </OrderProvider>
+        </RecoilRoot>
       </AppContext.Provider>
     </>
   );
