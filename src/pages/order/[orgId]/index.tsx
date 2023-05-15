@@ -10,6 +10,11 @@ import { useEffect, useState } from 'react';
 import { textSpanContainsPosition } from 'typescript';
 import { useRecoilState } from 'recoil';
 import { OrgInfo, orderInfo } from '@/pages/atoms';
+import {
+  AiOutlineArrowLeft,
+  AiOutlineArrowRight,
+  AiOutlineHome,
+} from 'react-icons/ai';
 export default function OrderService() {
   const [sP, setSp] = useState<any>([]);
   const [service, setService] = useState<any>([]);
@@ -158,23 +163,28 @@ export default function OrderService() {
               })}
             </div>
           </div>
-          {/* <button onClick={addToOrder(service.price)}> Next </button> */}
-          <Footer
-            next={`/order/${orgId}/calendar`}
-            selectedService={selectedService}
-            // onClick={addToOrder(selectedService)}
-          />
-          {/* <Link
-            className="rounded  ml-[25px] bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center mt-5 "
-            href={`/order/${orgId}/calendar`}
-            type="button"
-            onClick={() => setUserSelectedService(selectedService)}
-            // onClick={setSelectedService(selectedService)}
-          >
-            Next
-          </Link> */}
+          <div>
+            <div className="w-[100%] h-[80px] border-2 border-black mx-auto mt-10 flex justify-center gap-4 items-center">
+              <Link
+                href={`/`}
+                className="rounded   bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
+              >
+                Back
+              </Link>
+              <Link href={`/`}>
+                <AiOutlineHome className="w-[30px] h-[30px] " type="button" />
+              </Link>
+              <Link
+                className="rounded  bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
+                href={`/order/${orgId}/calendar`}
+                type="button"
+                onClick={() => setUserSelectedService(selectedService)}
+              >
+                Next
+              </Link>
+            </div>
+          </div>
         </div>
-        {/* <Link href={`/calendar`}>next</Link> */}
       </MainLayout>
     </UserProvider>
   );

@@ -8,10 +8,7 @@ export default function Summary() {
   console.log({ UserSelectedService, selectedSPid, selectedDate });
   return (
     <>
-      {' '}
-      <div>{UserSelectedService}</div>
-      <div>{selectedSPid}</div>
-      <div>{selectedDate}</div>
+      <h1>Summary</h1>
     </>
   );
 }
