@@ -150,7 +150,10 @@ export default function OrderService() {
             </div>
           </div>
           {/* <button onClick={addToOrder(service.price)}> Next </button> */}
-          <Footer next={`/order/${orgId}/calendar`} />
+          <Footer
+            next={`/order/${orgId}/calendar`}
+            onClick={addToOrder(selectedService)}
+          />
           {/* <Link
             className="rounded  ml-[25px] bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center mt-5 "
             href={`/order/${orgId}/calendar`}
