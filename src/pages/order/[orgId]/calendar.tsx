@@ -5,6 +5,7 @@ import { UserProvider } from '@/context/userProvider';
 import { MainLayout } from '@/components/MainLayout';
 import { OrderContext } from '@/context/orderProvider';
 import Link from 'next/link';
+import Footer from '@/components/footer';
 import * as dayjs from 'dayjs';
 import * as isLeapYear from 'dayjs/plugin/isLeapYear';
 
@@ -15,10 +16,11 @@ export default function Calendar() {
   const [start, setStart] = useState<any>();
   console.log('startsh', start);
   const router = useRouter();
-  const { id } = router.query;
+  const { orgId } = router.query;
   const [selectCalendar, setSelectCalendar] = useState<any>();
   const [orderDate, SetorderDate] = useState<any>();
   const [selectTime, setSelectTime] = useState<any>({});
+  const [back, setBack] = useState<any>();
   const { addToOrder, setSPinfo, SPinfo, setUserSelectedDate } =
     useContext(OrderContext);
   const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -61,6 +63,14 @@ export default function Calendar() {
         });
     }
   }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider`)
+  //     .then((res) => {
+  //       setBack(res.data);
+  //       console.log(res.data);
+  //     });
+  // }, []);
 
   const beginning = Number(start?.dayStart.substring(0, 2));
   const close = Number(start?.dayEnd.substring(0, 2));
@@ -165,6 +175,8 @@ export default function Calendar() {
                 </div>
               ))}
             </div>
+            <Footer prev={`/order/${orgId}`} />
+            {/* <Footer next={'summary'} prev ={""} /> */}
           </div>
           <Link
             className="rounded  ml-[25px] bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center mt-5 "

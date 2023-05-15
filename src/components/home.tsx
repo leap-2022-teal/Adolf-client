@@ -4,6 +4,7 @@ import Map from '@/components/Map';
 import { SPlist } from './SPlist';
 import { UserContext } from '@/context/userProvider';
 import { UserSideBar } from './userSideBar';
+import Footer from './footer';
 export default function HomePage() {
   const user = useContext<any>(UserContext);
   console.log(user);
@@ -21,6 +22,7 @@ export default function HomePage() {
             <CiSearch className="absolute top-1 right-[50px] w-5 h-5 " />
           </div>
         </div>
+
         <SPlist />
       </div>
     </>
