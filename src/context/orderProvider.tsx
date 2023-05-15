@@ -10,9 +10,17 @@ export function OrderProvider({ children }: any) {
   function addToOrder(selectedServiceInfo: any) {
     setServiceOrder(selectedServiceInfo);
   }
-
+  const [UserselectedDate, setSelectedDate] = useState<any>(undefined);
+  // console.log('ppppeee', UserselectedDate);
+  function setUserSelectedDate(date: any) {
+    setSelectedDate(date);
+    // console.log(date);
+  }
+  console.log(UserselectedDate, 'user date');
   return (
-    <OrderContext.Provider value={{ addToOrder, setSPinfo, SPinfo }}>
+    <OrderContext.Provider
+      value={{ addToOrder, setSPinfo, setUserSelectedDate, SPinfo }}
+    >
       {children}
     </OrderContext.Provider>
   );
