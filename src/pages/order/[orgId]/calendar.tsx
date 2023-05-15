@@ -178,18 +178,10 @@ export default function Calendar() {
             <Footer
               prev={`/order/${orgId}`}
               onClick={() => setUserSelectedDate(DateTime)}
+              next={`/order/${orgId}/summary`}
             />
-
             {/* <Footer next={'summary'} prev ={""} /> */}
           </div>
-          {/* <Link
-            className="rounded  ml-[25px] bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center mt-5 "
-            href={`/calendar`}
-            type="button"
-            onClick={() => setUserSelectedDate(DateTime)}
-          >
-            Next
-          </Link> */}
         </div>
       </MainLayout>
     </UserProvider>
