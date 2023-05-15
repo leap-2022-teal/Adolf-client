@@ -6,15 +6,23 @@ import { MainLayout } from '@/components/MainLayout';
 import { OrderContext } from '@/context/orderProvider';
 import Link from 'next/link';
 import Footer from '@/components/footer';
+import * as dayjs from 'dayjs';
+import * as isLeapYear from 'dayjs/plugin/isLeapYear';
+
 export default function Calendar() {
+  // var new =  dayjs('2018-08-08');
+  // var now = dayjs();
+  // console.log(now);
   const [start, setStart] = useState<any>();
   console.log('startsh', start);
   const router = useRouter();
   const { orgId } = router.query;
   const [selectCalendar, setSelectCalendar] = useState<any>();
+  const [orderDate, SetorderDate] = useState<any>();
   const [selectTime, setSelectTime] = useState<any>({});
-  const { addToOrder, setSPinfo, SPinfo } = useContext(OrderContext);
   const [back, setBack] = useState<any>();
+  const { addToOrder, setSPinfo, SPinfo, setUserSelectedDate } =
+    useContext(OrderContext);
   const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const normal =
     ' flex flex-col border-2 text-gray-600 bg-gray-100  w-[50px] h-[80px]  items-center rounded';
@@ -36,20 +44,24 @@ export default function Calendar() {
   let startDay = new Date();
   let end = new Date();
   end.setDate(startDay.getDate() + 10);
-
+  const example = new Date('<YYYY-mm-dd>');
+  console.log(example, 'this');
   const days: any = getDaysArray(startDay, end);
+
   // const getTimes = () => {
   useEffect(() => {
-    axios
-      .get(
-        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider/${SPinfo._id}`
-      )
-      .then((res) => {
-        if (res.data.timeTable) {
-          setStart(res.data.timeTable);
-          console.log(res.data);
-        }
-      });
+    if (SPinfo) {
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider/${SPinfo._id}`
+        )
+        .then((res) => {
+          if (res.data.timeTable) {
+            setStart(res.data.timeTable);
+            console.log(res.data);
+          }
+        });
+    }
   }, []);
   // useEffect(() => {
   //   axios
@@ -90,6 +102,22 @@ export default function Calendar() {
   // const time =setHours(0,0,0,0)
 
   // const times = getTimes();
+  // function selectedDate(date: any) {
+  //   const MD = selectCalendar?.toString().slice(0, 10);
+  //   console.log('date', MD);
+  //   setSelectCalendar(date);
+  // }
+  function orderedDate(date: any) {
+    setSelectCalendar(date);
+    SetorderDate(dayjs(date).format('DD/MM/YYYY'));
+  }
+  // console.log(orderDate, selectTime);
+  const DateTime = [];
+  if (orderDate && selectTime) {
+    DateTime.push(orderDate, selectTime);
+    // console.log('ss', typeof selectTime);
+  }
+  console.log(DateTime);
   return (
     <UserProvider>
       <MainLayout>
@@ -102,25 +130,26 @@ export default function Calendar() {
           </h5>
           <div className="w-[80%] h-[100px] mx-auto  overflow-x-auto   rounded mt-4">
             <div className="w-[700px]  flex gap-5 ">
-              {days.map((e: any, index: number) => {
-                e.getDate();
-                // console.log(e, 'e');
-                let day = weekDays[e.getDay()];
+              {days.map((date: any, index: number) => {
+                date.getDate();
+                // console.log(date, 'e');
+                let day = weekDays[date.getDay()];
 
                 return (
                   <p
                     key={index}
                     className={
                       selectCalendar?.toString().slice(0, 10) ===
-                      e.toString().slice(0, 10)
+                      date.toString().slice(0, 10)
                         ? active
                         : normal
                     }
-                    onClick={() => setSelectCalendar(e)}
+                    // onClick={() => selectedDate(date)}
+                    onClick={() => orderedDate(date)}
                   >
                     <span className="mt-3">{day}</span>
                     <span className=" text-xl font-large font-medium">
-                      {e.getDate()}
+                      {date.getDate()}
                     </span>
                   </p>
                 );
@@ -130,7 +159,7 @@ export default function Calendar() {
           <h5 className="text-slate-500 text-[15px] font-normal ml-10 mb-2 mt-4">
             Select time
           </h5>
-          <div className=" w-[80%] h-screen mx-auto  ">
+          <div className=" w-[80%] mx-auto  ">
             <div className=" grid grid-cols-2 gap-2 ">
               {times?.map((time: any, i: number) => (
                 <div
@@ -149,6 +178,14 @@ export default function Calendar() {
             <Footer prev={`/order/${orgId}`} />
             {/* <Footer next={'summary'} prev ={""} /> */}
           </div>
+          <Link
+            className="rounded  ml-[25px] bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center mt-5 "
+            href={`/calendar`}
+            type="button"
+            onClick={() => setUserSelectedDate(DateTime)}
+          >
+            Next
+          </Link>
         </div>
       </MainLayout>
     </UserProvider>
