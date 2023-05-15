@@ -14,7 +14,7 @@ export default function OrderService() {
   const [service, setService] = useState<any>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const router = useRouter();
-  const { id } = router.query;
+  const { orgId } = router.query;
   const [selectedService, setSelectedService] = useState<any>(undefined);
   // const { addToOrder, order } = useContext(UserContext);
   const { addToOrder, setSPinfo } = useContext(OrderContext);
@@ -25,13 +25,13 @@ export default function OrderService() {
 
   const normal =
     'h-[180px] w-[120px] border-1 border-black rounded bg-gray-100 hover:bg-blue-500 flex flex-col items-center text-gray-500 hover:text-white ';
-  console.log(id);
+  console.log(orgId);
   console.log('service', service);
   useEffect(() => {
-    if (id) {
+    if (orgId) {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider/${id}`
+          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider/${orgId}`
         )
         .then((res) => {
           const { data, status } = res;
@@ -43,7 +43,7 @@ export default function OrderService() {
           }
         });
     }
-  }, [id]);
+  }, [orgId]);
   console.log(selectedService);
   useEffect(() => {
     axios
@@ -150,15 +150,15 @@ export default function OrderService() {
             </div>
           </div>
           {/* <button onClick={addToOrder(service.price)}> Next </button> */}
-          <Link
+          <Footer next={`/order/${orgId}/calendar`} />
+          {/* <Link
             className="rounded  ml-[25px] bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center mt-5 "
-            href={`/calendar`}
+            href={`/order/${orgId}/calendar`}
             type="button"
             onClick={addToOrder(selectedService)}
           >
             Next
-          </Link>
-          <Footer prev={'/'} next={`/calendar`} />
+          </Link> */}
         </div>
         {/* <Link href={`/calendar`}>next</Link> */}
       </MainLayout>

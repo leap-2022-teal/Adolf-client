@@ -10,10 +10,11 @@ export default function Calendar() {
   const [start, setStart] = useState<any>();
   console.log('startsh', start);
   const router = useRouter();
-  const { id } = router.query;
+  const { orgId } = router.query;
   const [selectCalendar, setSelectCalendar] = useState<any>();
   const [selectTime, setSelectTime] = useState<any>({});
   const { addToOrder, setSPinfo, SPinfo } = useContext(OrderContext);
+  const [back, setBack] = useState<any>();
   const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const normal =
     ' flex flex-col border-2 text-gray-600 bg-gray-100  w-[50px] h-[80px]  items-center rounded';
@@ -50,6 +51,14 @@ export default function Calendar() {
         }
       });
   }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider`)
+  //     .then((res) => {
+  //       setBack(res.data);
+  //       console.log(res.data);
+  //     });
+  // }, []);
 
   const beginning = Number(start?.dayStart.substring(0, 2));
   const close = Number(start?.dayEnd.substring(0, 2));
@@ -137,7 +146,8 @@ export default function Calendar() {
                 </div>
               ))}
             </div>
-            <Footer next={'summary'} />
+            <Footer prev={`/order/${orgId}`} />
+            {/* <Footer next={'summary'} prev ={""} /> */}
           </div>
         </div>
       </MainLayout>
