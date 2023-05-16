@@ -9,7 +9,7 @@ import { HiOutlineBell } from 'react-icons/hi';
 import { UserContext } from '@/context/userProvider';
 export function UserSideBar() {
   const [showDashboard, setShowDashboard] = useState<boolean>(false);
-  const [profilePicture, setProfilepicture] = useState('/blank-profile.png');
+
   const user = useContext<any>(UserContext);
   const router = useRouter();
   const onShow =
@@ -42,7 +42,7 @@ export function UserSideBar() {
           >
             <div className="w-[100%] h-[25%] bg-blue-600 ">
               <img
-                src={profilePicture}
+                src={user?.image}
                 className=" w-[65px] h-[65px] rounded-[50%] border-1 border-slate-500 absolute top-[50px] left-10"
               />
               <h2 className="text-white font-normal text-lg absolute top-[125px] left-10">

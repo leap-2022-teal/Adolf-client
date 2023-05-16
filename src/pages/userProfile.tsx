@@ -20,13 +20,16 @@ export default function UserProfile() {
   const [phoneNumber, setUpdatedPhNumber] = useState<any>(
     user?.phoneNumber || undefined
   );
-
+  const [uploading, setUploading] = useState(false);
+  const [image, setImage] = useState<any>('');
   const editedUserInfo = {
     firstName,
     lastName,
     email,
     phoneNumber,
+    image,
   };
+  console.log(editedUserInfo);
   function handleLogin(id: any) {
     axios
       .put(
@@ -40,6 +43,22 @@ export default function UserProfile() {
         }
       });
   }
+  async function handleFileUpload(event: any) {
+    const imageFile = event.target.files[0];
+    console.log(imageFile, 'asdasdasdasdsdjhvdsuhvh');
+    const formData = new FormData();
+    formData.append('image', imageFile);
+    console.log(formData);
+    await fetch(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/upload-image`, {
+      method: 'POST',
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setImage(data);
+      });
+  }
+  console.log(image, 'swwwwqwdq');
   return (
     <>
       <UserProvider>
@@ -49,7 +68,7 @@ export default function UserProfile() {
               <div>
                 <div className="relative w-[110px] h-[110px] rounded-full border-2 border-slate-500 mx-auto">
                   <img
-                    src={profilePicture}
+                    src={user?.image}
                     className="w-[107px] h-[106px] rounded-full"
                     alt=""
                   />
@@ -57,7 +76,8 @@ export default function UserProfile() {
                     <input
                       type="file"
                       className="hidden"
-                      // onChange={handleFileUpload}
+                      name="image"
+                      onChange={handleFileUpload}
                     />
                     <AiFillCamera className="w-5 h-5 text-blue-500 mt-[7px]" />
                   </label>
