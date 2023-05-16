@@ -1,34 +1,114 @@
-import { useState } from 'react';
+import { MainLayout } from '@/components/MainLayout';
+import { UserContext, UserProvider } from '@/context/userProvider';
+import axios from 'axios';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useContext, useState } from 'react';
+import { AiFillCamera } from 'react-icons/ai';
 
 export default function UserProfile() {
+  const user = useContext<any>(UserContext);
+  console.log(user, 'ploop');
+  const [profilePicture, setProfilepicture] = useState('/blank-profile.png');
+  const [firstName, setUpdatedFName] = useState<any>(
+    user?.firstName || undefined
+  );
+  const [lastName, setUpdatedLName] = useState<any>(
+    user?.firstName || undefined
+  );
+  const [email, setUpdatedEmail] = useState<any>(user?.email || undefined);
+  const [phoneNumber, setUpdatedPhNumber] = useState<any>(
+    user?.phoneNumber || undefined
+  );
+
+  const editedUserInfo = {
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+  };
+  function handleLogin(id: any) {
+    axios
+      .put(
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/user/${id}`,
+        editedUserInfo
+      )
+      .then((res) => {
+        const { status } = res;
+        if (status === 200) {
+          alert(' Amjilttai');
+        }
+      });
+  }
   return (
     <>
-      <div>
-        <form action="" className="flex flex-col gap-4">
-          <input type="file" />
+      <UserProvider>
+        <MainLayout>
+          <div className="w-[400px] h-screen mx-auto mt-10">
+            <form action="" className="flex flex-col gap-4 w-[80%]">
+              <div>
+                <div className="relative w-[110px] h-[110px] rounded-full border-2 border-slate-500 mx-auto">
+                  <img
+                    src={profilePicture}
+                    className="w-[107px] h-[106px] rounded-full"
+                    alt=""
+                  />
+                  <label className="w-9 h-9 flex flex-col items-center  bg-white text-blue rounded-full shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white absolute top-[65px] left-[75px]">
+                    <input
+                      type="file"
+                      className="hidden"
+                      // onChange={handleFileUpload}
+                    />
+                    <AiFillCamera className="w-5 h-5 text-blue-500 mt-[7px]" />
+                  </label>
+                </div>
 
-          <div>
-            <label htmlFor="firstName">First Name :</label>
-            <input
-              type="text"
-              id="firstName"
-              className="border-2 border-black"
-            />
+                <h2 className="text-black font-normal text-lg h-6 mt-4 ml-[76px]">
+                  {user?.lastName} {user?.firstName}
+                </h2>
+              </div>
+
+              <input
+                defaultValue={user?.firstName}
+                // value={updatedFName}
+                onChange={(e) => setUpdatedFName(e.target.value)}
+                type="text"
+                className="bg-white rounded-lg border-[1px] border-[#334155] h-[2.5rem] w-[100%] outline-[none] px-[10px] focus:outline-none text-black "
+              />
+
+              <input
+                defaultValue={user?.lastName}
+                // value={updatedLName}
+                onChange={(e) => setUpdatedLName(e.target.value)}
+                type="text"
+                className="bg-white rounded-lg border-[1px] border-[#334155] h-[2.5rem] w-[100%] outline-[none] px-[10px] focus:outline-none text-black"
+              />
+
+              <input
+                defaultValue={user?.email}
+                // value={updatedLName}
+                onChange={(e) => setUpdatedEmail(e.target.value)}
+                type="text"
+                className="bg-white rounded-lg border-[1px] border-[#334155] h-[2.5rem] w-[100%] outline-[none] px-[10px] focus:outline-none text-black"
+              />
+              <input
+                defaultValue={user?.phoneNumber}
+                // value={updatedLName}
+                onChange={(e) => setUpdatedPhNumber(e.target.value)}
+                // value={user?.phoneNumber}
+                type="text"
+                className="bg-white rounded-lg border-[1px] border-[#334155] h-[2.5rem] w-[100%] outline-[none] px-[10px] focus:outline-none text-black"
+              />
+              <input
+                type="submit"
+                onClick={() => handleLogin(user._id)}
+                value={'Save Changes'}
+                className=" text-white h-[2.5rem] w-[100%] bg-sky-500 text:flex rounded-[10px] cursor-pointer  mt-[100px] "
+              />
+            </form>
           </div>
-          <div>
-            <label htmlFor="LastName">Last Name :</label>
-            <input
-              type="text"
-              id="LastName"
-              className="border-2 border-black"
-            />
-          </div>
-          <div>
-            <label htmlFor="phone">Phone Number :</label>
-            <input type="text" id="phone" className="border-2 border-black" />
-          </div>
-        </form>
-      </div>
+        </MainLayout>
+      </UserProvider>
     </>
   );
 }

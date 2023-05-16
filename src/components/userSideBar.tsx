@@ -107,7 +107,7 @@ export function UserSideBar() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="/userProfile"
                     className="flex items-center p-2 hover:text-blue-500 rounded-lg text-black hover:bg-blue-100"
                   >
                     <CgProfile className=" w-7 h-7 text-slate-400 " />
