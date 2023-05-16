@@ -10,6 +10,7 @@ import {
   useRecoilState,
   useRecoilValue,
 } from 'recoil';
+import { UserProvider } from '@/context/userProvider';
 export default function App({ Component, pageProps }: AppProps) {
   function Greeting() {
     <div>
@@ -22,11 +23,13 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <AppContext.Provider value={{ phone, setPhone }}>
-        <RecoilRoot>
-          <OrderProvider>
-            <Component {...pageProps} />
-          </OrderProvider>
-        </RecoilRoot>
+        <UserProvider>
+          <RecoilRoot>
+            <OrderProvider>
+              <Component {...pageProps} />
+            </OrderProvider>
+          </RecoilRoot>
+        </UserProvider>
       </AppContext.Provider>
     </>
   );
