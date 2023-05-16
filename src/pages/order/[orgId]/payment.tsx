@@ -20,11 +20,16 @@ export default function Payment() {
   const selectedDate = useRecoilValue(selectedDateInfo);
   const user = useContext<any>(UserContext);
 
-  const order = [UserSelectedService._id, selectedSPid._id, selectedDate];
+  const order = [
+    user._id,
+    selectedSPid._id,
+    UserSelectedService._id,
+    selectedDate,
+  ];
   console.log(order, 'ss');
   function sendOrder() {
     axios
-      .post(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/order`, order)
+      .post(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/booking`, order)
       .then((res) => {
         const { status } = res;
         if (status === 201) {
@@ -54,7 +59,7 @@ export default function Payment() {
               className="rounded  bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
               href={`/order/${orgId}/payment`}
               type="button"
-              onClick={() => sendOrder()}
+              onClick={sendOrder}
             >
               Төлбөр
             </Link>
