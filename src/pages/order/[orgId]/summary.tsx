@@ -54,19 +54,19 @@ export default function Summary() {
           <div className="p-2 flex gap-8 ">
             <FiClock className="w-5 h-5 ml-1 mt-3" />
             <div>
-              <h5 className="font-semibold">24 May 2023</h5>
-              <p className="text-slate-500 ">09:30 am</p>
+              <h5 className="font-semibold">{selectedDate[0]}</h5>
+              <p className="text-slate-500 ">{selectedDate[1]}</p>
             </div>
           </div>
           <div>
             <h5 className="flex justify-between p-2  mt-5 mb-5 font-semibold">
-              <span>Buten</span>
-              <span>40000₮</span>
+              <span>{UserSelectedService.name}</span>
+              <span>{UserSelectedService.price}₮</span>
             </h5>
           </div>
           <div className="flex justify-between p-2 font-semibold pt-5 ">
             <span>Total</span>
-            <span>40000₮</span>
+            <span>{UserSelectedService.price}₮</span>
           </div>
         </div>
       </div>
