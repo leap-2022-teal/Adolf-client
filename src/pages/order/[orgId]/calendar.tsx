@@ -8,7 +8,13 @@ import Link from 'next/link';
 import Footer from '@/components/footer';
 import * as dayjs from 'dayjs';
 import * as isLeapYear from 'dayjs/plugin/isLeapYear';
-
+import { useRecoilState } from 'recoil';
+import { selectedDateInfo } from '@/pages/atoms';
+import {
+  AiOutlineArrowLeft,
+  AiOutlineArrowRight,
+  AiOutlineHome,
+} from 'react-icons/ai';
 export default function Calendar() {
   // var new =  dayjs('2018-08-08');
   // var now = dayjs();
@@ -21,6 +27,7 @@ export default function Calendar() {
   const [orderDate, SetorderDate] = useState<any>();
   const [selectTime, setSelectTime] = useState<any>({});
   const [back, setBack] = useState<any>();
+  const [selectedDate, setSelectedDate] = useRecoilState(selectedDateInfo);
   const { addToOrder, setSPinfo, SPinfo, setUserSelectedDate } =
     useContext(OrderContext);
   const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -50,10 +57,10 @@ export default function Calendar() {
 
   // const getTimes = () => {
   useEffect(() => {
-    if (SPinfo) {
+    if (orgId) {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider/${SPinfo._id}`
+          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider/${orgId}`
         )
         .then((res) => {
           if (res.data.timeTable) {
@@ -63,14 +70,6 @@ export default function Calendar() {
         });
     }
   }, []);
-  // useEffect(() => {
-  //   axios
-  //     .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider`)
-  //     .then((res) => {
-  //       setBack(res.data);
-  //       console.log(res.data);
-  //     });
-  // }, []);
 
   const beginning = Number(start?.dayStart.substring(0, 2));
   const close = Number(start?.dayEnd.substring(0, 2));
@@ -175,15 +174,47 @@ export default function Calendar() {
                 </div>
               ))}
             </div>
-            <Footer
-              prev={`/order/${orgId}`}
-              onClick={() => setUserSelectedDate(DateTime)}
-              next={`/order/${orgId}/summary`}
-            />
-            {/* <Footer next={'summary'} prev ={""} /> */}
+          </div>
+          <div>
+            <div className="w-[100%] h-[80px] border-2 border-black mx-auto mt-10 flex justify-center gap-4 items-center">
+              {/* <div
+            className="rounded   bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
+            onClick={() => router.back}
+          >
+            Back
+          </div> */}
+              <Link
+                href={`/order/${orgId}`}
+                className="rounded   bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
+              >
+                Back
+              </Link>
+              <Link href={`/`}>
+                <AiOutlineHome className="w-[30px] h-[30px] " type="button" />
+              </Link>
+              <Link
+                className="rounded  bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
+                href={`/order/${orgId}/summary`}
+                type="button"
+                onClick={() => setSelectedDate(DateTime)}
+              >
+                Next
+              </Link>
+            </div>
           </div>
         </div>
       </MainLayout>
     </UserProvider>
   );
+}
+// onClick={() => setSelectedDate(DateTime)}
+{
+  /* <Footer
+prev={`/order/${orgId}`}
+next={`/order/${orgId}/summary`}
+/>
+<button onClick={() => setSelectedDate(DateTime)}> save </button> */
+}
+{
+  /* <Footer next={'summary'} prev ={""} /> */
 }
