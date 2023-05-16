@@ -1,4 +1,5 @@
 import { MainLayout } from '@/components/MainLayout';
+import Test from '@/components/test';
 import { UserContext, UserProvider } from '@/context/userProvider';
 import { OrgInfo, orderInfo, selectedDateInfo } from '@/pages/atoms';
 import axios from 'axios';
@@ -18,12 +19,12 @@ export default function Payment() {
   const selectedSPid = useRecoilValue(OrgInfo);
   const selectedDate = useRecoilValue(selectedDateInfo);
   const user = useContext<any>(UserContext);
-  console.log({ user });
+
+  const order = [UserSelectedService._id, selectedSPid._id, selectedDate];
+  console.log(order, 'ss');
   function sendOrder() {
     axios
-      .post(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/order`, {
-        UserSelectedService,
-      })
+      .post(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/order`, order)
       .then((res) => {
         const { status } = res;
         if (status === 201) {
@@ -36,7 +37,9 @@ export default function Payment() {
       <UserProvider>
         <MainLayout>
           <h1>Payment</h1>
+          {/* <Test /> */}
           <h1>{user?.phoneNumber}</h1>
+          <h2>{UserSelectedService._id}</h2>
           <div className="w-[100%] h-[80px] border-2 border-black mx-auto mt-10 flex justify-center gap-4 items-center">
             <Link
               href={`/order/${orgId}/summary`}
