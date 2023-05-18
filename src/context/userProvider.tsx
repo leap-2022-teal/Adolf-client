@@ -1,18 +1,19 @@
+import Login from '@/pages/login';
 import axios from 'axios';
+import { Router, useRouter } from 'next/router';
 import { useEffect, useState, createContext } from 'react';
 export const UserContext = createContext<any>(undefined);
 export function UserProvider({ children }: any) {
   const user = CurrentUser();
 
-  // const [order, setOrder] = useState<any>(undefined);
-  // console.log('orderid', order);
-  // function addToOrder(id: any) {
-  //   setOrder(id);
-  // }
+  if (!user) {
+    <Login />;
+  }
   return <UserContext.Provider value={user}> {children}</UserContext.Provider>;
 }
 
 export function CurrentUser() {
+  const router = useRouter();
   const [user, setUser] = useState<any>();
   console.log('user ni', user);
   useEffect(() => {
@@ -26,6 +27,8 @@ export function CurrentUser() {
         setUser(res.data);
       })
       .catch((e) => {
+        localStorage.removeItem('loginToken');
+        router.push('/login');
         setUser(null);
       });
   }, []);
