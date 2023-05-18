@@ -6,7 +6,7 @@ export function SPlist() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider`)
+      .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/org`)
       .then((res) => {
         setspList(res.data);
         console.log(res.data);

@@ -59,9 +59,7 @@ export default function Calendar() {
   useEffect(() => {
     if (orgId) {
       axios
-        .get(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider/${orgId}`
-        )
+        .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/org/${orgId}`)
         .then((res) => {
           if (res.data.timeTable) {
             setStart(res.data.timeTable);

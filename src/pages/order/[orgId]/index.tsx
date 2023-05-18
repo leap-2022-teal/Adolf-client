@@ -44,7 +44,7 @@ export default function OrderService() {
     if (orgId) {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider/${orgId}`
+          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/org/${orgId}`
         )
         .then((res) => {
           const { data, status } = res;

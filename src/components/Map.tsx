@@ -54,9 +54,7 @@ export default function Map() {
   console.log(selectedElement);
   function loadData() {
     axios
-      .get(
-        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceProvider/getData`
-      )
+      .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/org/getData`)
       .then((res) => {
         const { data, status } = res;
         if (status === 200) {
