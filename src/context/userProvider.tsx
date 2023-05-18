@@ -7,7 +7,7 @@ export function UserProvider({ children }: any) {
   const user = CurrentUser();
 
   if (!user) {
-    <Login />;
+    return <Login />;
   }
   return <UserContext.Provider value={user}> {children}</UserContext.Provider>;
 }
