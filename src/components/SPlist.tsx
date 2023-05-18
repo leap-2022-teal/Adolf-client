@@ -31,7 +31,7 @@ export function SPlist() {
             <p className=" font-normal text-gray-400">{spList.phoneNumber}</p>
             <p className="mb-3 font-normal text-gray-400">
               Mon - Sun <span> </span>
-              {spList.timeTable.dayStart} - {spList.timeTable.dayEnd}
+              {spList?.timeTable?.dayStart} - {spList?.timeTable?.dayEnd}
             </p>
             <a
               href={`/order/${spList._id}`}

@@ -43,9 +43,7 @@ export default function OrderService() {
   useEffect(() => {
     if (orgId) {
       axios
-        .get(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/org/${orgId}`
-        )
+        .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/org/${orgId}`)
         .then((res) => {
           const { data, status } = res;
           if (status === 200) {
