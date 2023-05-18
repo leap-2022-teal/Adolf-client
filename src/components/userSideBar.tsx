@@ -13,9 +13,8 @@ export function UserSideBar() {
   const user = useContext<any>(UserContext);
   const router = useRouter();
   const onShow =
-    'fixed top-0 ml-[-16px] mt-[-16px] left-0 z-40 h-screen p-4 overflow-y-auto transition-transform-translate-x-full bg-white max-w-[400px] w-[80%]  ';
-  const onHide =
-    'fixed top-0 ml-[-16px] mt-[-16px] left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white ';
+    'fixed top-0 ml-[-16px] mt-[-16px] z-40 h-screen p-4 overflow-y-auto transition-transform-translate-x-full bg-white max-w-[400px] w-[80%]  ';
+  const onHide = 'hidden';
   const hide = 'hidden';
   function handleSignOut() {
     localStorage.removeItem('loginToken');
@@ -24,10 +23,10 @@ export function UserSideBar() {
   }
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex justify-between max-w-[500px] mx-auto">
         <div>
           <BsList
-            className="w-[30px] h-[30px] ml-4"
+            className="w-[30px] h-[30px] ml-4 "
             type="button"
             data-drawer-target="drawer-navigation"
             data-drawer-show="drawer-navigation"
@@ -40,13 +39,13 @@ export function UserSideBar() {
             className={showDashboard ? onShow : onHide}
             aria-labelledby="drawer-navigation-label"
           >
-            <div className="w-[100%] h-[25%] bg-blue-600 ">
+            <div className="w-[500px] border-2 h-[25%] bg-blue-600 relative ">
               <img
                 src={user?.image}
-                className=" w-[65px] h-[65px] rounded-[50%] border-1 border-slate-500 absolute top-[50px] left-10"
+                className=" w-[65px] h-[65px] rounded-[50%] border-1 border-slate-500 absolute top-[50px] border-2 border-white left-10"
               />
               <h2 className="text-white font-normal text-lg absolute top-[125px] left-10">
-                {user?.lastName} {user?.firstName}
+                {user?.firstName} {user?.lastName}
               </h2>
               <span className="text-slate-300 text-[11px] font-normal absolute top-[150px] left-10">
                 {user?.phoneNumber}
@@ -57,7 +56,7 @@ export function UserSideBar() {
               type="button"
               data-drawer-hide="drawer-navigation"
               aria-controls="drawer-navigation"
-              className="text-white bg-transparent hover:bg-blue-500 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              className="text-white bg-transparent hover:bg-blue-500 hover:text-gray-900 rounded-lg text-sm absolute top-6 right-2 inline-flex items-center "
             >
               <svg
                 aria-hidden="true"

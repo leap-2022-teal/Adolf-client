@@ -3,11 +3,13 @@ import { UserContext, UserProvider } from '@/context/userProvider';
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { AiFillCamera } from 'react-icons/ai';
 
 export default function UserProfile() {
   const user = useContext<any>(UserContext);
+  const router = useRouter();
   console.log(user, 'ploop');
   const [profilePicture, setProfilepicture] = useState('/blank-profile.png');
   const [firstName, setUpdatedFName] = useState<any>(
@@ -30,7 +32,8 @@ export default function UserProfile() {
     image,
   };
   console.log(editedUserInfo);
-  function handleLogin(id: any) {
+  function handleUpdate({ e, id }: any) {
+    e.preventDefault();
     axios
       .put(
         `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/user/${id}`,
@@ -40,6 +43,7 @@ export default function UserProfile() {
         const { status } = res;
         if (status === 200) {
           alert(' Amjilttai');
+          router.push('/');
         }
       });
   }
@@ -64,9 +68,9 @@ export default function UserProfile() {
       <UserProvider>
         <MainLayout>
           <div className="w-[400px] h-screen mx-auto mt-10">
-            <form action="" className="flex flex-col gap-4 w-[80%]">
-              <div>
-                <div className="relative w-[110px] h-[110px] rounded-full border-2 border-slate-500 mx-auto">
+            <form action="" className="flex flex-col gap-4 w-[100%]">
+              <div className="max-w-[500px]  h-[200px] rounded-t-2xl border-2">
+                <div className="relative w-[110px] h-[110px] rounded-full border-2 border-white mx-auto mt-4 ">
                   <img
                     src={user?.image}
                     className="w-[107px] h-[106px] rounded-full"
@@ -83,8 +87,8 @@ export default function UserProfile() {
                   </label>
                 </div>
 
-                <h2 className="text-black font-normal text-lg h-6 mt-4 ml-[76px]">
-                  {user?.lastName} {user?.firstName}
+                <h2 className="text-black font-semibold text-lg h-6 mt-4 flex gap-2 justify-center ">
+                  <span>{user?.firstName}</span> <span>{user?.lastName}</span>
                 </h2>
               </div>
 
@@ -121,9 +125,9 @@ export default function UserProfile() {
               />
               <input
                 type="submit"
-                onClick={() => handleLogin(user._id)}
+                onClick={(e) => handleUpdate({ e, id: user._id })}
                 value={'Save Changes'}
-                className=" text-white h-[2.5rem] w-[100%] bg-sky-500 text:flex rounded-[10px] cursor-pointer  mt-[100px] "
+                className=" text-white h-[2.5rem] w-[100%] bg-blue-600 text:flex rounded-[10px] cursor-pointer  mt-[100px] "
               />
             </form>
           </div>
