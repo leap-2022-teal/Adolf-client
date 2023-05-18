@@ -1,20 +1,25 @@
 import Login from '@/pages/login';
 import axios from 'axios';
+import { redirect } from 'next/navigation';
 import { Router, useRouter } from 'next/router';
 import { useEffect, useState, createContext } from 'react';
 export const UserContext = createContext<any>(undefined);
 export function UserProvider({ children }: any) {
   const user = CurrentUser();
+  const router = useRouter();
 
-  if (!user) {
-    return <Login />;
-  }
+  // if (!user && user === null && router.pathname !== '/registrationNumber') {
+  // router.push('/login', '', { scroll: true });
+  // return <Login />;
+  // return redirect('/login');
+  // }
+  console.log(router);
   return <UserContext.Provider value={user}> {children}</UserContext.Provider>;
 }
 
 export function CurrentUser() {
   const router = useRouter();
-  const [user, setUser] = useState<any>();
+  const [user, setUser] = useState<any>(undefined);
   console.log('user ni', user);
   useEffect(() => {
     const token = localStorage.getItem('loginToken');
@@ -27,8 +32,8 @@ export function CurrentUser() {
         setUser(res.data);
       })
       .catch((e) => {
-        localStorage.removeItem('loginToken');
-        router.push('/login');
+        // localStorage.removeItem('loginToken');
+        // window.location.reload();
         setUser(null);
       });
   }, []);

@@ -3,10 +3,12 @@ import { UserContext, UserProvider } from '@/context/userProvider';
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { AiFillCamera } from 'react-icons/ai';
 
 export default function UserProfile() {
+  const router = useRouter();
   const user = useContext<any>(UserContext);
   console.log(user, 'ploop');
   const [profilePicture, setProfilepicture] = useState('/blank-profile.png');
@@ -59,6 +61,10 @@ export default function UserProfile() {
       });
   }
   console.log(image, 'swwwwqwdq');
+
+  if (!user && user === null) {
+    router.replace('/login');
+  }
   return (
     <>
       <UserProvider>
