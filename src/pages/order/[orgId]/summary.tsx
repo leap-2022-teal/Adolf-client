@@ -13,6 +13,7 @@ import { IoLocationOutline } from 'react-icons/io5';
 import { FiClock } from 'react-icons/fi';
 import { UserProvider } from '@/context/userProvider';
 import { MainLayout } from '@/components/MainLayout';
+import Image from 'next/image';
 export default function Summary() {
   const UserSelectedService = useRecoilValue(orderInfo);
   const selectedSPid = useRecoilValue(OrgInfo);
@@ -42,8 +43,8 @@ export default function Summary() {
       <UserProvider>
         <MainLayout>
           {/* <h1>Summary</h1> */}
-          <div className="w-[400px] h-[360px] mx-auto bg-zinc-50 mt-10 rounded">
-            <div className="w-[90%]  divide-y  divide-slate-200 h-screen mx-auto">
+          <div className="max-w-[400px] h-[360px] mx-auto bg-zinc-50 mt-10 rounded">
+            <div className="w-[90%]  divide-y  divide-slate-200 mx-auto">
               <h5 className="font-semibold text-[30px] ml-10 p-2">
                 Таны захиалга
               </h5>
@@ -62,7 +63,9 @@ export default function Summary() {
                 </div>
               </div>
               <div>
-                <span className="text-grey-900">Үйлчилгээний төрөл</span>
+                <span className="text-grey-900 font-bold p-2">
+                  Үйлчилгээний төрөл
+                </span>
                 <h5 className="flex justify-between p-2 mb-5 font-semibold">
                   <span>{UserSelectedService.name}</span>
                   <span>
@@ -77,9 +80,7 @@ export default function Summary() {
                 </span>
               </div>
             </div>
-          </div>
-          <div>
-            <div className="w-[100%] h-[80px] border-2 border-black mx-auto mt-10 flex justify-center gap-4 items-center">
+            <div className="max-w-[450px] h-[80px]  mx-auto mt-10 flex justify-around gap-4 items-center ">
               <Link
                 href={`/order/${orgId}/calendar`}
                 className="rounded   bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
@@ -87,7 +88,12 @@ export default function Summary() {
                 Буцах
               </Link>
               <Link href={`/`}>
-                <AiOutlineHome className="w-[30px] h-[30px] " type="button" />
+                <Image
+                  src="/home-button.png "
+                  width={42}
+                  height={42}
+                  alt="button"
+                />
               </Link>
               <Link
                 className="rounded  bg-blue-500 w-[120px] h-[40px] text-white  flex justify-center items-center  "
