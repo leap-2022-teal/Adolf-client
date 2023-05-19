@@ -3,6 +3,7 @@ import Test from '@/components/test';
 import { UserContext, UserProvider } from '@/context/userProvider';
 import { OrgInfo, orderInfo, selectedDateInfo } from '@/pages/atoms';
 import axios from 'axios';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
@@ -41,26 +42,33 @@ export default function Payment() {
     <>
       <UserProvider>
         <MainLayout>
-          <h1>Та Төлбөрөө төлснөөр таны захиалга баталгаажих болно</h1>
+          <div className="max-w-[400px] flex flex-col  mx-auto">
+            <h1>Та Төлбөрөө төлснөөр таны захиалга баталгаажих болно.</h1>
 
-          <div className="w-[100%] h-[80px] border-2 border-black mx-auto mt-10 flex justify-center gap-4 items-center">
-            <Link
-              href={`/order/${orgId}/summary`}
-              className="rounded   bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
-            >
-              Буцах
-            </Link>
-            <Link href={`/`}>
-              <AiOutlineHome className="w-[30px] h-[30px] " type="button" />
-            </Link>
-            <Link
-              className="rounded  bg-blue-500 w-[120px] h-[40px] text-white  flex justify-center items-center  "
-              href={`/order/${orgId}/payment`}
-              type="button"
-              onClick={sendOrder}
-            >
-              Төлбөр төлөх
-            </Link>
+            <div className="w-[100%] h-[80px]  mx-auto mt-10 flex justify-around  items-center">
+              <Link
+                href={`/order/${orgId}/summary`}
+                className="rounded   bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
+              >
+                Буцах
+              </Link>
+              <Link href={`/`}>
+                <Image
+                  src="/home-button.png "
+                  width={42}
+                  height={42}
+                  alt="button"
+                />
+              </Link>
+              <Link
+                className="rounded  bg-blue-500 w-[120px] h-[40px] text-white  flex justify-center items-center  "
+                href={`/order/${orgId}/payment`}
+                type="button"
+                onClick={sendOrder}
+              >
+                Төлбөр төлөх
+              </Link>
+            </div>
           </div>
         </MainLayout>
       </UserProvider>

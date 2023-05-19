@@ -22,7 +22,7 @@ export function UserSideBar() {
   }
   return (
     <>
-      <div className="flex justify-between max-w-[500px] mx-auto">
+      <div className="flex justify-between max-w-[500px] mx-auto mt-5">
         <div>
           <BsList
             className="w-[30px] h-[30px] ml-4 "

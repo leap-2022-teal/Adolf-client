@@ -6,7 +6,7 @@ import { MainLayout } from '@/components/MainLayout';
 import { OrderContext } from '@/context/orderProvider';
 import Link from 'next/link';
 import Footer from '@/components/footer';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import * as isLeapYear from 'dayjs/plugin/isLeapYear';
 import { useRecoilState } from 'recoil';
 import { selectedDateInfo } from '@/pages/atoms';
@@ -15,6 +15,7 @@ import {
   AiOutlineArrowRight,
   AiOutlineHome,
 } from 'react-icons/ai';
+import Image from 'next/image';
 export default function Calendar() {
   // var new =  dayjs('2018-08-08');
   // var now = dayjs();
@@ -30,7 +31,7 @@ export default function Calendar() {
   const [selectedDate, setSelectedDate] = useRecoilState(selectedDateInfo);
   const { addToOrder, setSPinfo, SPinfo, setUserSelectedDate } =
     useContext(OrderContext);
-  const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const weekDays = ['Ням', 'Дав', 'Мяг', 'Лха', 'Пүр', 'Баа', 'Бям'];
   const normal =
     ' flex flex-col border-2 text-gray-600 bg-gray-100  w-[50px] h-[80px]  items-center rounded';
   const active =
@@ -109,7 +110,7 @@ export default function Calendar() {
     SetorderDate(dayjs(date).format('DD/MM/YYYY'));
   }
   // console.log(orderDate, selectTime);
-  const DateTime = [];
+  const DateTime: any[] = [];
   if (orderDate && selectTime) {
     DateTime.push(orderDate, selectTime);
     // console.log('ss', typeof selectTime);
@@ -174,13 +175,7 @@ export default function Calendar() {
             </div>
           </div>
           <div>
-            <div className="w-[100%] h-[80px] border-2 border-black mx-auto mt-10 flex justify-center gap-4 items-center">
-              {/* <div
-            className="rounded   bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
-            onClick={() => router.back}
-          >
-            Back
-          </div> */}
+            <div className="w-[85%] h-[80px]  mx-auto mt-10 flex justify-around gap-4 items-center">
               <Link
                 href={`/order/${orgId}`}
                 className="rounded   bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
@@ -188,7 +183,13 @@ export default function Calendar() {
                 Буцах
               </Link>
               <Link href={`/`}>
-                <AiOutlineHome className="w-[30px] h-[30px] " type="button" />
+                {/* <AiOutlineHome className="w-[30px] h-[30px] " type="button" /> */}
+                <Image
+                  src="/home-button.png "
+                  width={42}
+                  height={42}
+                  alt="button"
+                />
               </Link>
               <Link
                 className="rounded  bg-blue-500 w-[120px] h-[40px] text-white  flex justify-center items-center  "

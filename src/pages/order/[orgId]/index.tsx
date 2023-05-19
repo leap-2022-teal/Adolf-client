@@ -15,6 +15,7 @@ import {
   AiOutlineArrowRight,
   AiOutlineHome,
 } from 'react-icons/ai';
+import Image from 'next/image';
 export default function OrderService() {
   const [sP, setSp] = useState<any>([]);
   const [service, setService] = useState<any>([]);
@@ -163,7 +164,7 @@ export default function OrderService() {
             </div>
           </div>
           <div>
-            <div className="w-[100%] h-[80px] border-2 border-black mx-auto mt-10 flex justify-center gap-4 items-center">
+            <div className="w-[100%] h-[80px]  mx-auto mt-10 flex justify-around gap-4 items-center">
               <Link
                 href={`/`}
                 className="rounded   bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
@@ -171,7 +172,12 @@ export default function OrderService() {
                 Буцах
               </Link>
               <Link href={`/`}>
-                <AiOutlineHome className="w-[30px] h-[30px] " type="button" />
+                <Image
+                  src="/home-button.png "
+                  width={42}
+                  height={42}
+                  alt="button"
+                />
               </Link>
               <Link
                 className="rounded  bg-blue-500 w-[120px] h-[40px] text-white  flex justify-center items-center  "
