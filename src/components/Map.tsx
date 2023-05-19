@@ -8,7 +8,8 @@ import { BiCurrentLocation } from 'react-icons/bi';
 // import {img} from './people.png'
 const containerStyle = {
   height: '300px',
-  width: '100%',
+  width: '90%',
+  margin: 'auto',
 };
 const center = {
   lat: 47.92123,

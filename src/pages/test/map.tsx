@@ -4,6 +4,7 @@ import { getDistance } from 'geolib';
 import axios from 'axios';
 import { InfoWindowF } from '@react-google-maps/api';
 import { isVisible } from 'ckeditor5/src/utils';
+import { AiFillCar } from 'react-icons/ai';
 
 // import {img} from './people.png'
 const containerStyle = {
@@ -65,7 +66,7 @@ export default function Maps() {
   console.log(lists);
 
   return (
-    <div className="w-[800px] h-[400px]">
+    <div>
       {/* <GoogleMap zoom={12} center={center} mapContainerStyle={containerStyle}> */}
       <GoogleMap zoom={12} center={center} mapContainerStyle={containerStyle}>
         {lists.map((list: any) => (
@@ -84,6 +85,7 @@ export default function Maps() {
                 scale: 7,
               }}
             />
+
             {visible === list._id ? (
               <InfoWindowF
                 position={
