@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { AiFillCamera } from 'react-icons/ai';
+import { AiOutlineHome } from 'react-icons/ai';
 
 export default function UserProfile() {
   const router = useRouter();
@@ -130,10 +131,13 @@ export default function UserProfile() {
               <input
                 type="submit"
                 onClick={(e) => handleUpdate({ e, id: user._id })}
-                value={'Save Changes'}
+                value={'Хадгалах'}
                 className=" text-white h-[2.5rem] w-[100%] bg-blue-600 text:flex rounded-[10px] cursor-pointer  mt-[100px] "
               />
             </form>
+            <Link href={`/`} className="mx-auto">
+              <AiOutlineHome className="w-[30px] h-[30px] " type="button" />
+            </Link>
           </div>
         </MainLayout>
       </UserProvider>
