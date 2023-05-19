@@ -3,6 +3,8 @@ import axios from 'axios';
 import { redirect } from 'next/navigation';
 import { Router, useRouter } from 'next/router';
 import { useEffect, useState, createContext } from 'react';
+import RegistrationNumber from '../pages/registrationNumber';
+import RegistrationInfo from '@/pages/registrationInfo';
 export const UserContext = createContext<any>(undefined);
 export function UserProvider({ children }: any) {
   const user = CurrentUser();
@@ -13,6 +15,11 @@ export function UserProvider({ children }: any) {
   }
 
   if (user === null) {
+    if (router.pathname === '/registrationNumber') {
+      return <RegistrationNumber />;
+    } else if (router.pathname === '/registrationInfo') {
+      return <RegistrationInfo />;
+    }
     return <Login />;
   }
 
