@@ -13,7 +13,11 @@ export function UserProvider({ children }: any) {
   // return <Login />;
   // return redirect('/login');
   // }
-  console.log(router);
+  // console.log(router);
+  // if (!user || user === null || user === undefined) {
+  //   return redirect('/login');
+  // }
+
   return <UserContext.Provider value={user}> {children}</UserContext.Provider>;
 }
 
@@ -32,7 +36,7 @@ export function CurrentUser() {
         setUser(res.data);
       })
       .catch((e) => {
-        // localStorage.removeItem('loginToken');
+        localStorage.removeItem('loginToken');
         // window.location.reload();
         setUser(null);
       });
