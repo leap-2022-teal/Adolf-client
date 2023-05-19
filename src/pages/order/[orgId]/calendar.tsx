@@ -120,10 +120,10 @@ export default function Calendar() {
       <MainLayout>
         <div className="w-[400px] h-screen  mx-auto">
           <h1 className="mb-2 text-xl font-large font-medium text-slate-700 ml-8 mt-5">
-            Appointment date
+            Захиалгын огноо сонгох
           </h1>
           <h5 className="text-slate-500 text-[15px] font-normal ml-10 mb-2 mt-10">
-            Select day
+            Та өдрөө сонгоно уу!!
           </h5>
           <div className="w-[80%] h-[100px] mx-auto  overflow-x-auto   rounded mt-4">
             <div className="w-[700px]  flex gap-5 ">
@@ -154,7 +154,7 @@ export default function Calendar() {
             </div>
           </div>
           <h5 className="text-slate-500 text-[15px] font-normal ml-10 mb-2 mt-4">
-            Select time
+            Цаг сонгох
           </h5>
           <div className=" w-[80%] mx-auto  ">
             <div className=" grid grid-cols-2 gap-2 ">
@@ -185,18 +185,18 @@ export default function Calendar() {
                 href={`/order/${orgId}`}
                 className="rounded   bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
               >
-                Back
+                Буцах
               </Link>
               <Link href={`/`}>
                 <AiOutlineHome className="w-[30px] h-[30px] " type="button" />
               </Link>
               <Link
-                className="rounded  bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
+                className="rounded  bg-blue-500 w-[120px] h-[40px] text-white  flex justify-center items-center  "
                 href={`/order/${orgId}/summary`}
                 type="button"
                 onClick={() => setSelectedDate(DateTime)}
               >
-                Next
+                Үргэлжлүүлэх
               </Link>
             </div>
           </div>

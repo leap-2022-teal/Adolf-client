@@ -82,7 +82,7 @@ export function UserSideBar() {
                   >
                     <BsCarFrontFill className=" w-7 h-7 text-slate-400 " />
 
-                    <span className="ml-3">Vehicles</span>
+                    <span className="ml-3">Машины мэдээлэл</span>
                   </a>
                 </li>
                 <li>
@@ -92,7 +92,7 @@ export function UserSideBar() {
                   >
                     <BiCalendar className=" w-7 h-7 text-slate-400 " />
 
-                    <span className="ml-3">Bookings</span>
+                    <span className="ml-3">Захиалгууд</span>
                   </a>
                 </li>
                 <li>
@@ -102,7 +102,7 @@ export function UserSideBar() {
                   >
                     <CiCreditCard1 className=" w-7 h-7 text-slate-400 " />
 
-                    <span className="ml-3">Payment Methods</span>
+                    <span className="ml-3">Төлбөрийн систем</span>
                   </a>
                 </li>
                 <li>
@@ -112,7 +112,7 @@ export function UserSideBar() {
                   >
                     <CgProfile className=" w-7 h-7 text-slate-400 " />
 
-                    <span className="ml-3">My Profile</span>
+                    <span className="ml-3"> Тохиргоо</span>
                   </a>
                 </li>
                 <li>
@@ -123,7 +123,7 @@ export function UserSideBar() {
                     <VscSignOut className=" w-7 h-7 text-slate-400 " />
 
                     <a onClick={handleSignOut} className="ml-3">
-                      Sign Out
+                      Гарах
                     </a>
                   </div>
                 </li>

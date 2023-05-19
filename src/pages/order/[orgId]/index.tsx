@@ -21,6 +21,7 @@ export default function OrderService() {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const router = useRouter();
   const { orgId } = router.query;
+  var numeral = require('numeral');
   const [selectedService, setSelectedService] = useState<any>(undefined);
   // const { addToOrder, order } = useContext(UserContext);
   // const { addToOrder, setSPinfo } = useContext(OrderContext);
@@ -65,7 +66,7 @@ export default function OrderService() {
         console.log(res.data);
       });
   }, []);
-  if (!sP) return <div>Loading...</div>;
+  if (!sP) return <div>Уншиж байна...</div>;
   function handleSave(id: any) {
     const selectedServiceInfo = service.find((one: any) => one._id === id);
     console.log('enebna', selectedServiceInfo);
@@ -82,7 +83,7 @@ export default function OrderService() {
           </div>
           <p>{service.price}</p>
           <h5 className="text-slate-500 text-[15px] font-car ml-5 mb-2">
-            Select vehicle
+            Машины төрөл сонгох
           </h5>
           <div className="w-[90%] h-[200px] mx-auto  overflow-x-auto  rounded ">
             <div className="w-[600px]  flex gap-5 ">
@@ -132,7 +133,7 @@ export default function OrderService() {
             </div>
           </div>
           <h5 className="text-slate-500 text-[15px] font-normal ml-5 mb-2">
-            Select package
+            Үйлчилгээ сонгох
           </h5>
           <div className="w-[90%] h-[200px] mx-auto  overflow-x-auto  rounded mt-4 ">
             <div className="w-[400px]  flex gap-5 ">
@@ -154,7 +155,7 @@ export default function OrderService() {
                       <h5 className="text-xl font-large font-medium ">
                         {service.name}
                       </h5>
-                      <p>{service.price}₮</p>
+                      <p>{numeral(service.price).format('0,0 ')} ₮</p>
                     </div>
                   );
                 }
@@ -167,18 +168,18 @@ export default function OrderService() {
                 href={`/`}
                 className="rounded   bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
               >
-                Back
+                Буцах
               </Link>
               <Link href={`/`}>
                 <AiOutlineHome className="w-[30px] h-[30px] " type="button" />
               </Link>
               <Link
-                className="rounded  bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
+                className="rounded  bg-blue-500 w-[120px] h-[40px] text-white  flex justify-center items-center  "
                 href={`/order/${orgId}/calendar`}
                 type="button"
                 onClick={() => setUserSelectedService(selectedService)}
               >
-                Next
+                Үргэлжлүүлэх
               </Link>
             </div>
           </div>

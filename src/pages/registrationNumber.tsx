@@ -11,14 +11,14 @@ export default function RegistrationNumber() {
           <img src="/car-wash.png" alt="logo" />
         </div>
         <h1 className="text-black  flex justify-center my-[10px] tracking-[0.5px] text-[22px] font-medium">
-          Let&apos;s get started
+          Бүртгүүлэх
         </h1>
         <span className="flex justify-center mt-[-30px] text-slate-500 text-[11px] font-light ">
-          We will send a verification code on your phone number.
+          Бид таны утасны дугаар луу баталгаажуулалтын код явуулах болно
         </span>
         <input
           type="text"
-          placeholder="Phone number"
+          placeholder="Утасны дугаар"
           value={context.phone}
           maxLength={8}
           onChange={(e) => context.setPhone(e.target.value)}
@@ -28,16 +28,16 @@ export default function RegistrationNumber() {
           href="/registrationInfo"
           className=" text-white h-[2.5rem] w-[80%] bg-sky-600 text:flex rounded-[10px] cursor-pointer "
         >
-          <span className="flex justify-center pt-[6px]"> Continue</span>
+          <span className="flex justify-center pt-[6px]"> Үргэлжлүүлэх</span>
         </Link>
 
         <a
           href="/login"
           className="my-[10px] text-[13px] tracking-[0.1rem] text-sky-500  mt-[40px]"
         >
-          <span className="text-slate-400">Already have an account?</span>
+          <span className="text-slate-400">Та аль хэдийн бүртгэлтэй юу?</span>
           <span> </span>
-          Sign in
+          Нэвтрэх
         </a>
       </div>
     </>
