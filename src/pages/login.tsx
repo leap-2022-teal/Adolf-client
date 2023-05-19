@@ -33,7 +33,7 @@ export default function Login() {
           // window.location.reload();
           // router.push('/');
           alert('Амжилттай нэвтэрлээ');
-          router.push('/');
+          window.location.reload();
         } else {
           alert(`Error: ${status}`);
         }

@@ -18,8 +18,7 @@ export function UserSideBar() {
   const hide = 'hidden';
   function handleSignOut() {
     localStorage.removeItem('loginToken');
-    router.push('/login');
-    return <>some</>;
+    window.location.reload();
   }
   return (
     <>

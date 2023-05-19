@@ -8,15 +8,13 @@ export function UserProvider({ children }: any) {
   const user = CurrentUser();
   const router = useRouter();
 
-  // if (!user && user === null && router.pathname !== '/registrationNumber') {
-  // router.push('/login', '', { scroll: true });
-  // return <Login />;
-  // return redirect('/login');
-  // }
-  // console.log(router);
-  // if (!user || user === null || user === undefined) {
-  //   return redirect('/login');
-  // }
+  if (user === undefined) {
+    return <div>Loading...</div>;
+  }
+
+  if (user === null) {
+    return <Login />;
+  }
 
   return <UserContext.Provider value={user}> {children}</UserContext.Provider>;
 }
