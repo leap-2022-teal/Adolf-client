@@ -1,4 +1,4 @@
-import { OrgInfo, orderInfo, selectedDateInfo } from '@/pages/atoms';
+import { OrgInfo, orderInfo, selectedDateInfo } from '@/components/atoms';
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
 import {

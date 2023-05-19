@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
-import { orderInfo } from '@/pages/atoms';
+import { orderInfo } from '@/components/atoms';
 
 export default function Footer({ prev, next, selectedService }: any) {
   const { addToOrder, setSPinfo } = useContext(OrderContext);

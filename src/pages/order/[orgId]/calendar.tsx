@@ -9,7 +9,7 @@ import Footer from '@/components/footer';
 import dayjs from 'dayjs';
 import * as isLeapYear from 'dayjs/plugin/isLeapYear';
 import { useRecoilState } from 'recoil';
-import { selectedDateInfo } from '@/pages/atoms';
+import { selectedDateInfo } from '@/components/atoms';
 import {
   AiOutlineArrowLeft,
   AiOutlineArrowRight,

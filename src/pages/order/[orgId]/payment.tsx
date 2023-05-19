@@ -1,7 +1,7 @@
 import { MainLayout } from '@/components/MainLayout';
 import Test from '@/components/test';
 import { UserContext, UserProvider } from '@/context/userProvider';
-import { OrgInfo, orderInfo, selectedDateInfo } from '@/pages/atoms';
+import { OrgInfo, orderInfo, selectedDateInfo } from '@/components/atoms';
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';

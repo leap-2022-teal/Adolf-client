@@ -9,7 +9,7 @@ import { useContext } from 'react';
 import { useEffect, useState } from 'react';
 import { textSpanContainsPosition } from 'typescript';
 import { useRecoilState } from 'recoil';
-import { OrgInfo, orderInfo } from '@/pages/atoms';
+import { OrgInfo, orderInfo } from '@/components/atoms';
 import {
   AiOutlineArrowLeft,
   AiOutlineArrowRight,
