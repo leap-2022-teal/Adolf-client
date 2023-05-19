@@ -4,7 +4,7 @@ import { getDistance } from 'geolib';
 import axios from 'axios';
 import { InfoWindowF } from '@react-google-maps/api';
 import { isVisible } from 'ckeditor5/src/utils';
-
+import { BiCurrentLocation } from 'react-icons/bi';
 // import {img} from './people.png'
 const containerStyle = {
   height: '300px',
@@ -32,7 +32,7 @@ export default function Map() {
   useEffect(() => {
     loadData();
   }, []);
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return <div>Уншиж байна...</div>;
   function findCoordinate() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((positions) => {
@@ -109,7 +109,7 @@ export default function Map() {
                       }
                     )
                   ) : (
-                    <h1>Share your location! </h1>
+                    <h1>Та өөрийн байршлаа тогтооно уу !!</h1>
                   )}
                 </div>
               </InfoWindowF>
@@ -131,7 +131,10 @@ export default function Map() {
           }
         ></MarkerF>
       </GoogleMap>
-      <button onClick={() => findCoordinate()}>share location</button>
+      <button onClick={() => findCoordinate()}>
+        {' '}
+        Байршил тогтоох! <BiCurrentLocation className="text-4xl" />
+      </button>
     </div>
   );
 }
