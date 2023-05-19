@@ -10,7 +10,6 @@ import { AiFillCamera } from 'react-icons/ai';
 export default function UserProfile() {
   const router = useRouter();
   const user = useContext<any>(UserContext);
-  const router = useRouter();
   console.log(user, 'ploop');
   const [profilePicture, setProfilepicture] = useState('/blank-profile.png');
   const [firstName, setUpdatedFName] = useState<any>(
