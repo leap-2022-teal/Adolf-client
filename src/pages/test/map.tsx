@@ -5,7 +5,7 @@ import axios from 'axios';
 import { InfoWindowF } from '@react-google-maps/api';
 import { isVisible } from 'ckeditor5/src/utils';
 import { AiFillCar } from 'react-icons/ai';
-
+import Script from 'next/script';
 // import {img} from './people.png'
 const containerStyle = {
   height: '100vh',
@@ -17,7 +17,7 @@ const center = {
 };
 
 export default function Maps() {
-  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>;
+  <Script src="http://maps.googleapis.com/maps/api/js?sensor=false"></Script>;
   const [userLoc, setUserLoc] = useState<any>(null);
   const [markerLoc, setMarkerLoc] = useState<any>({});
   const [lists, setLists] = useState<any>([]);

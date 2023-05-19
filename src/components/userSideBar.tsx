@@ -7,6 +7,7 @@ import { VscSignOut } from 'react-icons/vsc';
 import { useRouter } from 'next/router';
 import { HiOutlineBell } from 'react-icons/hi';
 import { UserContext } from '@/context/userProvider';
+import Link from 'next/link';
 export function UserSideBar() {
   const [showDashboard, setShowDashboard] = useState<boolean>(false);
 
@@ -74,14 +75,14 @@ export function UserSideBar() {
             <div className="py-4 overflow-y-auto">
               <ul className="space-y-4 font-medium">
                 <li>
-                  <a
+                  <Link
                     href="#"
                     className="flex items-center p-2 hover:text-blue-500 rounded-lg text-black hover:bg-blue-100"
                   >
                     <BsCarFrontFill className=" w-7 h-7 text-slate-400 " />
 
                     <span className="ml-3">Машины мэдээлэл</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a
@@ -104,14 +105,14 @@ export function UserSideBar() {
                   </a>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/userProfile"
                     className="flex items-center p-2 hover:text-blue-500 rounded-lg text-black hover:bg-blue-100"
                   >
                     <CgProfile className=" w-7 h-7 text-slate-400 " />
 
                     <span className="ml-3"> Тохиргоо</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <div

@@ -3,12 +3,13 @@ import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
 import { getDistance } from 'geolib';
 import axios from 'axios';
 import { InfoWindowF } from '@react-google-maps/api';
+import Script from 'next/script';
 const center = {
   lat: 47.92123,
   lng: 106.918556,
 };
 export default function LocationAvah() {
-  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>;
+  <Script src="http://maps.googleapis.com/maps/api/js?sensor=false"></Script>;
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: 'AIzaSyBtqzOp_Nbaz-txtDb4ijwHpz3MRxVXj7c',
   });
@@ -49,10 +50,10 @@ export default function LocationAvah() {
     <>
       {' '}
       <button onClick={() => getUserLoc()}>
-        //Odoo baigaa bairshil ashiglah//
+        {/* //Odoo baigaa bairshil ashiglah// */}
       </button>
       <button onClick={() => setMapVisible(true)}>
-        //Gazriin zurag deer bairshil zaah//
+        {/* //Gazriin zurag deer bairshil zaah// */}
       </button>
       {mapVisible === true ? (
         <>
@@ -84,7 +85,7 @@ export default function LocationAvah() {
           lat: {bairshil.lat}, lng: {bairshil.lng}
         </div>
       )}
-      <button onClick={() => save()}>//Enehuu bairshliig hadgalah//</button>
+      <button onClick={() => save()}>Enehuu bairshliig hadgalah</button>
     </>
   );
 }

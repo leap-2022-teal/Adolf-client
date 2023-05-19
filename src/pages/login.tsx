@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
@@ -83,12 +84,12 @@ export default function Login() {
             )}
           </div>
         </div>
-        <a
+        <Link
           href="#"
           className=" text-sky-500 text-[10px] ml-[200px] mt-[-10px]  "
         >
           Нууц үг мартсан ?
-        </a>
+        </Link>
         <button
           className=" text-white h-[2.5rem] w-[80%] bg-sky-600  rounded-[10px] cursor-pointer "
           onClick={handleLogin}
@@ -98,14 +99,14 @@ export default function Login() {
       </div>
 
       <div className="flex gap-[20px] justify-center ">
-        <a
+        <Link
           href="/registrationNumber"
           className="my-[10px] text-[13px] tracking-[0.1rem] text-sky-500  mt-[40px]"
         >
           <span className="text-slate-400"> Бүртгэл байхгүй бол?</span>
           <span> </span>
           Бүртгүүлэх
-        </a>
+        </Link>
       </div>
     </div>
   );

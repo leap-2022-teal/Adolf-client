@@ -6,6 +6,7 @@ import { InfoWindowF } from '@react-google-maps/api';
 import { isVisible } from 'ckeditor5/src/utils';
 import { BiCurrentLocation } from 'react-icons/bi';
 // import {img} from './people.png'
+import Script from 'next/script';
 const containerStyle = {
   height: '300px',
   width: '90%',
@@ -17,7 +18,7 @@ const center = {
 };
 
 export default function Map() {
-  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>;
+  <Script src="http://maps.googleapis.com/maps/api/js?sensor=false"></Script>;
   const [userLoc, setUserLoc] = useState<any>(null);
   const [markerLoc, setMarkerLoc] = useState<any>({});
   const [lists, setLists] = useState<any>([]);
