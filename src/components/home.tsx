@@ -23,7 +23,7 @@ export default function HomePage() {
         </div>
         <Map />
 
-        <SPlist />
+        {/* <SPlist /> */}
       </div>
     </>
   );

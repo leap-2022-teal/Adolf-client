@@ -5,8 +5,9 @@ import axios from 'axios';
 import { InfoWindowF } from '@react-google-maps/api';
 import { isVisible } from 'ckeditor5/src/utils';
 import { BiCurrentLocation } from 'react-icons/bi';
-// import {img} from './people.png'
 import Script from 'next/script';
+import mapIcon from '../image/map-marker-area-line.svg';
+import { SPlist } from './SPlist';
 const containerStyle = {
   height: '300px',
   width: '90%',
@@ -26,14 +27,20 @@ export default function Map() {
   const [selectedElement, setSelectedElement] = useState<any>(null);
   const [activeMarker, setActiveMarker] = useState<any>(null);
   const [visible, setVisible] = useState<string>();
+  const [sortedLists, setSortedLists] = useState<any[]>([]);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: 'AIzaSyBtqzOp_Nbaz-txtDb4ijwHpz3MRxVXj7c',
   });
 
   useEffect(() => {
-    loadData();
+    findCoordinate();
   }, []);
+  useEffect(() => {
+    if (userLoc) {
+      loadDatas();
+    }
+  }, [userLoc]);
   if (!isLoaded) return <div>Уншиж байна...</div>;
   function findCoordinate() {
     if (navigator.geolocation) {
@@ -51,22 +58,68 @@ export default function Map() {
   function handleClick(list: any) {
     setSelectedElement(list);
     setVisible(list._id);
-    console.log(visible);
   }
-  console.log(selectedElement);
-  function loadData() {
+  // function loadData() {
+  //   axios
+  //     .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/org`)
+  //     .then((res) => {
+  //       const { data, status } = res;
+  //       if (status === 200) {
+  //         setLists(data);
+  //       } else {
+  //         alert({ status });
+  //       }
+  //     });
+  // }
+  function loadDatas() {
     axios
-      .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/org/getData`)
+      .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/org`)
       .then((res) => {
         const { data, status } = res;
         if (status === 200) {
-          setLists(data);
+          const sortedData = data.map((list: any) => {
+            let distance = null;
+            if (
+              userLoc &&
+              list.address &&
+              list.address.location &&
+              list.address.location.coordinates
+            ) {
+              const { lat, lng } = userLoc;
+              const { coordinates } = list.address.location;
+              distance = getDistance(
+                { latitude: lat, longitude: lng },
+                {
+                  latitude: parseFloat(coordinates[0]),
+                  longitude: parseFloat(coordinates[1]),
+                }
+              );
+            }
+
+            return { ...list, distance };
+          });
+          sortedData.sort((a: any, b: any) => a.distance - b.distance); // Fixed property name here
+          setLists(sortedData);
+          setSortedLists(sortedData);
         } else {
-          alert({ status });
+          alert(status);
         }
+      })
+      .catch((error) => {
+        console.log(error); // Handle or log any errors that occur during the API request
       });
   }
-  console.log(lists);
+  console.log({ sortedLists });
+
+  console.log({ userLoc });
+  // const distance = geolib.orderByDistance(
+  //   { latitude: 51.515, longitude: 7.453619 },
+  //   [
+  //     { latitude: 52.516272, longitude: 13.377722 },
+  //     { latitude: 51.518, longitude: 7.45425 },
+  //     { latitude: 51.503333, longitude: -0.119722 },
+  //   ]
+  // );
 
   return (
     <div>
@@ -84,8 +137,10 @@ export default function Map() {
                 )
               }
               icon={{
-                path: google.maps.SymbolPath.CIRCLE,
-                scale: 7,
+                path: mapIcon,
+                scale: 4,
+                // path: 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png',
+                // scale: 7,
               }}
             />
             {visible === list._id ? (
@@ -121,8 +176,8 @@ export default function Map() {
         <MarkerF
           position={userLoc}
           icon={{
-            path: google.maps.SymbolPath.BACKWARD_OPEN_ARROW,
-            scale: 7,
+            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+            scale: 5,
           }}
           draggable={true}
           onDrag={(center: any) =>
@@ -137,6 +192,8 @@ export default function Map() {
         {' '}
         Байршил тогтоох! <BiCurrentLocation className="text-4xl" />
       </button>
+
+      <SPlist spList={lists} />
     </div>
   );
 }
