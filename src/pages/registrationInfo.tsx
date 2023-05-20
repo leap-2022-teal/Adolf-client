@@ -81,7 +81,7 @@ export default function RegistrationInfo() {
             console.log(status);
             if (status === 201) {
               alert('Амжилттай бүргэгдлээ');
-              router.push('/login');
+              router.push('/');
             }
           })
           .catch((err) => {

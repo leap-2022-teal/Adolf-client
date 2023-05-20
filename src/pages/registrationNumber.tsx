@@ -32,7 +32,7 @@ export default function RegistrationNumber() {
         </Link>
 
         <Link
-          href="/login"
+          href="/"
           className="my-[10px] text-[13px] tracking-[0.1rem] text-sky-500  mt-[40px]"
         >
           <span className="text-slate-400">Та аль хэдийн бүртгэлтэй юу?</span>
