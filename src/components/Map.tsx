@@ -17,7 +17,10 @@ const center = {
   lat: 47.92123,
   lng: 106.918556,
 };
-
+interface Coordinates {
+  lat: number;
+  lng: number;
+}
 export default function Map() {
   <Script src="http://maps.googleapis.com/maps/api/js?sensor=false"></Script>;
   const [userLoc, setUserLoc] = useState<any>(null);
@@ -28,7 +31,11 @@ export default function Map() {
   const [activeMarker, setActiveMarker] = useState<any>(null);
   const [visible, setVisible] = useState<string>();
   const [sortedLists, setSortedLists] = useState<any[]>([]);
-
+  const [mapCenter, setMapCenter] = useState<Coordinates>({
+    lat: 47.92307127568066,
+    lng: 106.96024750913087,
+  });
+  const [mapZoom, setMapZoom] = useState<number>(12);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: 'AIzaSyBtqzOp_Nbaz-txtDb4ijwHpz3MRxVXj7c',
   });
@@ -39,6 +46,8 @@ export default function Map() {
   useEffect(() => {
     if (userLoc) {
       loadDatas();
+      setMapCenter(userLoc);
+      setMapZoom(16);
     }
   }, [userLoc]);
   if (!isLoaded) return <div>Уншиж байна...</div>;
@@ -124,7 +133,11 @@ export default function Map() {
   return (
     <div>
       {/* <GoogleMap zoom={12} center={center} mapContainerStyle={containerStyle}> */}
-      <GoogleMap zoom={12} center={center} mapContainerStyle={containerStyle}>
+      <GoogleMap
+        zoom={mapZoom}
+        center={mapCenter}
+        mapContainerStyle={containerStyle}
+      >
         {lists.map((list: any) => (
           <>
             <MarkerF
