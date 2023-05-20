@@ -3,8 +3,13 @@ import { MainLayout } from '@/components/MainLayout';
 import { CurrentUser, UserProvider } from '@/context/userProvider';
 import { Inter } from 'next/font/google';
 import Login from './login';
-
-const inter = Inter({ subsets: ['latin'] });
+import { Roboto } from 'next/font/google';
+// const inter = Inter({ subsets: ['latin'] });
+const roboto = Roboto({
+  weight: '500',
+  subsets: ['latin'],
+  style: 'italic',
+});
 
 export default function Home({ children }: any) {
   const user = CurrentUser();
@@ -13,7 +18,7 @@ export default function Home({ children }: any) {
 
   return (
     <UserProvider>
-      <MainLayout>
+      <MainLayout className={roboto.className}>
         <HomePage />
         {children}
       </MainLayout>

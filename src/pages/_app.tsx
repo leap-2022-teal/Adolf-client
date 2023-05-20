@@ -11,6 +11,7 @@ import {
   useRecoilValue,
 } from 'recoil';
 import { UserProvider } from '@/context/userProvider';
+
 export default function App({ Component, pageProps }: AppProps) {
   function Greeting() {
     <div>
