@@ -4,29 +4,32 @@ import { useEffect, useState } from 'react';
 import { BiCalendar } from 'react-icons/bi';
 import { BsTelephoneFill } from 'react-icons/bs';
 import { MdLocationPin } from 'react-icons/md';
-export function SPlist() {
-  const [spList, setspList] = useState<any>();
+export function SPlist(spList: any) {
+  // const [spList, setspList] = useState<any>();
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/org`)
-      .then((res) => {
-        setspList(res.data);
-        console.log(res.data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/org`)
+  //     .then((res) => {
+  //       setspList(res.data);
+  //       console.log(res.data);
+  //     });
+  // }, []);
+  console.log(spList);
+  // console.log({ spListuud: spList });
   return (
     <>
       <div className="w-[100%] flex flex-col h-[400px] overflow-y-auto gap-4">
-        {spList?.map((spList: any, index: number) => (
+        {spList?.spList?.map((spList: any, index: number) => (
           <Link
             href={`/order/${spList._id}`}
             key={index}
             className="w-[90%] mx-auto p-6 odd:bg-blue-100  even:bg-slate-50 border border-gray-200 rounded-lg shadow cursor-pointer"
           >
             <a href="#">
-              <h5 className="mb-2 text-xl font-large font-medium text-blue-500">
-                {spList.name}
+              <h5 className="flex justify-between mb-2 text-xl font-large font-medium text-blue-500">
+                <div>{spList.name}</div>
+                <div>{spList.distance}м</div>
               </h5>
             </a>
             <p className="font-normal text-gray-400 flex gap-3">
