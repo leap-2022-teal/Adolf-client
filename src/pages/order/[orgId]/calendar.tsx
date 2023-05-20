@@ -33,10 +33,10 @@ export default function Calendar() {
     useContext(OrderContext);
   const weekDays = ['Ням', 'Дав', 'Мяг', 'Лха', 'Пүр', 'Баа', 'Бям'];
   const normal =
-    ' flex flex-col border-2 text-gray-600 bg-gray-100  w-[50px] h-[80px]  items-center rounded';
+    ' flex flex-col border-2 text-gray-600 bg-gray-100  w-[50px] h-[80px]  items-center rounded cursor-pointer';
   const active =
     ' flex flex-col border-2 text-white bg-blue-500  w-[50px] h-[80px]  items-center rounded';
-  const normalTime = 'rounded bg-gray-100 h-8 text-gray-600  ';
+  const normalTime = 'rounded bg-gray-100 h-8 text-gray-600 cursor-pointer  ';
   const activeTime = 'rounded bg-blue-500 h-8 text-white  ';
   const getDaysArray = function (s: any, e: any) {
     for (

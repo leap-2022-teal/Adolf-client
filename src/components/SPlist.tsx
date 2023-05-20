@@ -22,7 +22,7 @@ export function SPlist() {
           <Link
             href={`/order/${spList._id}`}
             key={index}
-            className="w-[90%] mx-auto p-6 odd:bg-blue-100  even:bg-slate-50 border border-gray-200 rounded-lg shadow "
+            className="w-[90%] mx-auto p-6 odd:bg-blue-100  even:bg-slate-50 border border-gray-200 rounded-lg shadow cursor-pointer"
           >
             <a href="#">
               <h5 className="mb-2 text-xl font-large font-medium text-blue-500">
