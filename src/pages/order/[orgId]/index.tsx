@@ -34,12 +34,12 @@ export default function OrderService() {
   // console.log('serviceRecoil', UserSelectedService);
   console.log('sPRecoil', selectedSPid);
   const car =
-    'h-[180px] w-[120px] rounded  border-1 border-black bg-gray-100   focus:bg-blue-500  text-gray-500 flex flex-col items-center ';
+    'h-[180px] w-[120px] rounded  border-1 border-black bg-gray-100   focus:bg-blue-500  text-gray-500 flex flex-col items-center cursor-pointer ';
   const setCar =
     'h-[180px] w-[120px] rounded  border-1 border-black  bg-blue-500 text-white flex flex-col items-center ';
 
   const normal =
-    'h-[180px] w-[120px] border-1 border-black rounded bg-gray-100 hover:bg-blue-500 flex flex-col items-center text-gray-500 hover:text-white ';
+    'h-[180px] w-[120px] border-1 border-black rounded bg-gray-100 hover:bg-blue-500 flex flex-col items-center text-gray-500 hover:text-white cursor-pointer ';
   console.log(orgId);
   console.log('service', service);
   useEffect(() => {
@@ -146,7 +146,7 @@ export default function OrderService() {
                       className={normal}
                       onClick={(e) => handleSave(service._id)}
                     >
-                      <div className="w-[90%] h-[90px] mt-1  rounded mx-auto from-slate-400">
+                      <div className="w-[90%] h-[90px] mt-1  rounded mx-auto from-slate-400 ">
                         <img
                           src="/car-wash.png"
                           className="w-[100px] h-[80px] mx-auto"

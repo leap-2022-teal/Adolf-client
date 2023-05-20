@@ -26,7 +26,7 @@ export function UserSideBar() {
       <div className="flex justify-between max-w-[500px] mx-auto mt-5">
         <div>
           <BsList
-            className="w-[30px] h-[30px] ml-4 "
+            className="w-[30px] h-[30px] ml-4 cursor-pointer "
             type="button"
             data-drawer-target="drawer-navigation"
             data-drawer-show="drawer-navigation"
@@ -117,7 +117,7 @@ export function UserSideBar() {
                 <li>
                   <div
                     // href="#"
-                    className="flex items-center p-2 hover:text-red-500 rounded-lg text-black hover:bg-red-50 "
+                    className="flex items-center p-2 hover:text-red-500 rounded-lg text-black hover:bg-red-50 cursor-pointer "
                   >
                     <VscSignOut className=" w-7 h-7 text-slate-400 " />
 
@@ -132,7 +132,7 @@ export function UserSideBar() {
         </div>
 
         <div>
-          <HiOutlineBell className=" w-[25px] h-[30px] mr-4" />
+          <HiOutlineBell className=" w-[25px] h-[30px] mr-4 cursor-pointer" />
         </div>
       </div>
     </>
