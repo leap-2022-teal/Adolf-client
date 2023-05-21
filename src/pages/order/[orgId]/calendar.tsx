@@ -16,6 +16,9 @@ import {
   AiOutlineHome,
 } from 'react-icons/ai';
 import Image from 'next/image';
+import { Example } from '@/context/StepperContext';
+import StepperComponents from '@/components/stepper';
+import AppContext from '@/context/AppContext';
 export default function Calendar() {
   // var new =  dayjs('2018-08-08');
   // var now = dayjs();
@@ -38,6 +41,7 @@ export default function Calendar() {
     ' flex flex-col border-2 text-white bg-blue-500  w-[50px] h-[80px]  items-center rounded';
   const normalTime = 'rounded bg-gray-100 h-8 text-gray-600 cursor-pointer  ';
   const activeTime = 'rounded bg-blue-500 h-8 text-white  ';
+  const step = useContext<any>(AppContext);
   const getDaysArray = function (s: any, e: any) {
     for (
       var a = [], d = new Date(s);
@@ -116,10 +120,16 @@ export default function Calendar() {
     // console.log('ss', typeof selectTime);
   }
   console.log(DateTime);
+
+  const handleClick = () => {
+    setSelectedDate(DateTime);
+    step?.handleNext();
+  };
   return (
     <UserProvider>
       <MainLayout>
         <div className="w-[400px] h-screen  mx-auto">
+          <StepperComponents />
           <h1 className="mb-2 text-xl font-large font-medium text-slate-700 ml-8 mt-5">
             Захиалгын огноо сонгох
           </h1>
@@ -179,6 +189,7 @@ export default function Calendar() {
               <Link
                 href={`/order/${orgId}`}
                 className="rounded   bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
+                onClick={step?.handlePrev}
               >
                 Буцах
               </Link>
@@ -195,7 +206,7 @@ export default function Calendar() {
                 className="rounded  bg-blue-500 w-[120px] h-[40px] text-white  flex justify-center items-center  "
                 href={`/order/${orgId}/summary`}
                 type="button"
-                onClick={() => setSelectedDate(DateTime)}
+                onClick={handleClick}
               >
                 Үргэлжлүүлэх
               </Link>

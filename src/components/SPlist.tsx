@@ -4,7 +4,12 @@ import { useEffect, useState } from 'react';
 import { BiCalendar } from 'react-icons/bi';
 import { BsTelephoneFill } from 'react-icons/bs';
 import { MdLocationPin } from 'react-icons/md';
+import Example from './stepper';
+import { useContext } from 'react';
+import AppContext from '@/context/AppContext';
+import StepperComponents from './stepper';
 export function SPlist(spList: any) {
+  const step = useContext<any>(AppContext);
   // const [spList, setspList] = useState<any>();
 
   // useEffect(() => {
@@ -19,9 +24,12 @@ export function SPlist(spList: any) {
   // console.log({ spListuud: spList });
   return (
     <>
+      <StepperComponents />
+
       <div className="w-[100%] flex flex-col h-[400px] overflow-y-auto gap-4">
         {spList?.spList?.map((spList: any, index: number) => (
           <Link
+            onClick={step?.handleNext}
             href={`/order/${spList._id}`}
             key={index}
             className="w-[90%] mx-auto p-6 odd:bg-blue-100  even:bg-slate-50 border border-gray-200 rounded-lg shadow cursor-pointer"
