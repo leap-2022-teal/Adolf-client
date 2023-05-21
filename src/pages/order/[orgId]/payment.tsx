@@ -27,9 +27,8 @@ export default function Payment() {
   const totalPrice = useRecoilValue(totalPriceSelector);
   const user = useContext<any>(UserContext);
 
-  const extraServices: string[] = UserSelectedService.selectedExtraService.map(
-    (obj: any) => obj._id
-  );
+  const extraServices: string[] =
+    UserSelectedService?.selectedExtraService?.map((obj: any) => obj._id);
   const order = [
     user._id,
     selectedSPid._id,
