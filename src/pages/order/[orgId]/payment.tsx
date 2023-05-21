@@ -27,13 +27,17 @@ export default function Payment() {
   const totalPrice = useRecoilValue(totalPriceSelector);
   const user = useContext<any>(UserContext);
 
+  const extraServices: string[] = UserSelectedService.selectedExtraService.map(
+    (obj: any) => obj._id
+  );
   const order = [
     user._id,
     selectedSPid._id,
-    UserSelectedService._id,
+    UserSelectedService.selectedService._id,
+    extraServices,
     selectedDate,
+    totalPrice,
   ];
-  console.log(order, 'ss');
   function sendOrder() {
     axios
       .post(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/booking`, order)
