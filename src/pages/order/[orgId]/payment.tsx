@@ -1,7 +1,12 @@
 import { MainLayout } from '@/components/MainLayout';
 import Test from '@/components/test';
 import { UserContext, UserProvider } from '@/context/userProvider';
-import { OrgInfo, orderInfo, selectedDateInfo } from '@/components/atoms';
+import {
+  OrgInfo,
+  orderInfo,
+  selectedDateInfo,
+  totalPriceSelector,
+} from '@/components/atoms';
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,6 +24,7 @@ export default function Payment() {
   const UserSelectedService = useRecoilValue(orderInfo);
   const selectedSPid = useRecoilValue(OrgInfo);
   const selectedDate = useRecoilValue(selectedDateInfo);
+  const totalPrice = useRecoilValue(totalPriceSelector);
   const user = useContext<any>(UserContext);
 
   const order = [
