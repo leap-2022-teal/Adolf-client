@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { selector, atom } from 'recoil';
 import { useEffect } from 'react';
 import { recoilPersist } from 'recoil-persist';
 const { persistAtom } = recoilPersist();
@@ -35,6 +35,30 @@ export const selectedDateInfo = atom({
   default: null,
   // effects: [localStorageEffect('selectedDateInfo')],
   effects_UNSTABLE: [persistAtom],
+});
+// export const totalPrice = atom({
+//   key: 'totalPrice',
+//   get: ({get}) => ({
+
+//   }),
+//   default: null,
+//   effects_UNSTABLE: [persistAtom],
+// })
+export const totalPriceSelector = selector({
+  key: 'totalPrice',
+  get: ({ get }) => {
+    const UserSelectedService = get(orderInfo);
+    let totalPrice = UserSelectedService.selectedService.price;
+
+    if (UserSelectedService.selectedExtraService) {
+      totalPrice += UserSelectedService.selectedExtraService.reduce(
+        (sum: number, service: any) => sum + service.price,
+        0
+      );
+    }
+
+    return totalPrice;
+  },
 });
 
 // function CallLocal() {

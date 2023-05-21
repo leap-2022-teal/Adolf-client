@@ -15,7 +15,7 @@ export function SPlist(spList: any) {
   //       console.log(res.data);
   //     });
   // }, []);
-  console.log(spList);
+  console.log({ spListuud: spList });
   // console.log({ spListuud: spList });
   return (
     <>
@@ -28,7 +28,7 @@ export function SPlist(spList: any) {
           >
             <a href="#">
               <h5 className="flex justify-between mb-2 text-xl font-large font-medium text-blue-500">
-                <div>{spList.name}</div>
+                <div>{spList.orgName}</div>
                 <div>{spList.distance}м</div>
               </h5>
             </a>
