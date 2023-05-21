@@ -169,7 +169,7 @@ export default function Map() {
                 }}
               >
                 <div>
-                  <h1>{list.name}</h1>
+                  <h1 className="font-bold">{list.orgName}</h1>
                   {userLoc !== null ? (
                     getDistance(
                       { latitude: userLoc.lat, longitude: userLoc.lng },
