@@ -1,4 +1,9 @@
-import { OrgInfo, orderInfo, selectedDateInfo } from '@/components/atoms';
+import {
+  OrgInfo,
+  orderInfo,
+  selectedDateInfo,
+  totalPriceSelector,
+} from '@/components/atoms';
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
 import {
@@ -18,6 +23,8 @@ export default function Summary() {
   const UserSelectedService = useRecoilValue(orderInfo);
   const selectedSPid = useRecoilValue(OrgInfo);
   const selectedDate = useRecoilValue(selectedDateInfo);
+
+  const totalPrice = useRecoilValue(totalPriceSelector);
   const [sP, setSp] = useState<any>([]);
   const router = useRouter();
   const { orgId } = router.query;
@@ -67,16 +74,39 @@ export default function Summary() {
                   Үйлчилгээний төрөл
                 </span>
                 <h5 className="flex justify-between p-2 mb-5 font-semibold">
-                  <span>{UserSelectedService.name}</span>
+                  <span>{UserSelectedService.selectedService.name}</span>
                   <span>
-                    {numeral(UserSelectedService.price).format('0,0 ')} ₮
+                    {numeral(UserSelectedService.selectedService.price).format(
+                      '0,0 '
+                    )}{' '}
+                    ₮
                   </span>
                 </h5>
+                {UserSelectedService.selectedExtraService && (
+                  <>
+                    <span className="text-grey-900 font-bold p-2">
+                      Нэмэлт үйлчилгээ
+                    </span>
+                    {UserSelectedService.selectedExtraService.map(
+                      (one: any) => {
+                        return (
+                          <>
+                            <h5 className="flex justify-between p-2 mb-5 font-semibold">
+                              <span>{one.name}</span>
+                              <span>{numeral(one.price).format('0,0 ')} ₮</span>
+                            </h5>
+                          </>
+                        );
+                      }
+                    )}
+                  </>
+                )}
               </div>
               <div className="flex justify-between p-2 font-semibold pt-5 ">
-                <span>Нийт төлбөр</span>
+                <span>Total</span>
                 <span>
-                  {numeral(UserSelectedService.price).format('0,0 ')} ₮
+                  {/* {numeral(UserSelectedService.price).format('0,0 ')} ₮ */}
+                  {numeral(totalPrice).format('0,0 ')} ₮
                 </span>
               </div>
             </div>
