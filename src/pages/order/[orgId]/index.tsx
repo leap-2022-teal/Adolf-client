@@ -35,6 +35,7 @@ export default function OrderService() {
   const [selectedSPid, setSelectedSPid] = useRecoilState(OrgInfo);
   const [extraService, setExtraService] = useState<any>([]);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [show, setShow] = useState<any>();
   // const [selecteddSPid, setSedmflectedSPid] = useRecoilState(OrgInfo);
   // console.log('serviceRecoil', UserSelectedService);
   const car =
@@ -83,6 +84,7 @@ export default function OrderService() {
     const selectedServiceInfo = service.find((one: any) => one._id === id);
     console.log('enebna', selectedServiceInfo);
     setSelectedService(selectedServiceInfo);
+    setShow(id);
   }
 
   // function handleSaveExtra(id: any) {
@@ -175,9 +177,7 @@ export default function OrderService() {
                     return (
                       <div
                         key={service._id}
-                        className={
-                          selectedService === service._id ? setCar : normal
-                        }
+                        className={show === service._id ? setCar : car}
                         onClick={(e) => handleSave(service._id)}
                       >
                         <div className="w-[90%] h-[90px] mt-1  rounded mx-auto from-slate-400  ">
