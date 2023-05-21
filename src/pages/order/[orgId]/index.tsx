@@ -36,6 +36,8 @@ export default function OrderService() {
   const [extraService, setExtraService] = useState<any>([]);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [show, setShow] = useState<any>();
+  const [checkedValues, setCheckedValues] = useState<any>(true);
+
   // const [selecteddSPid, setSedmflectedSPid] = useRecoilState(OrgInfo);
   // console.log('serviceRecoil', UserSelectedService);
   const car =
@@ -68,7 +70,6 @@ export default function OrderService() {
       .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/service`)
       .then((res) => {
         setService(res.data);
-        console.log(res.data);
       });
   }, []);
   useEffect(() => {
@@ -76,7 +77,6 @@ export default function OrderService() {
       .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceExtra`)
       .then((res) => {
         setExtraService(res.data);
-        console.log(res.data);
       });
   }, []);
   if (!sP) return <div>Уншиж байна...</div>;
@@ -104,6 +104,15 @@ export default function OrderService() {
       ]);
     }
     setSelectedExtraService(selectedServices);
+  };
+  const checkHandle = (id: any) => {
+    if (id === 'Суудал') {
+      if (checkedValues === true) {
+        console.log(id, 'eniig haraa');
+      }
+
+      setCheckedValues(!checkedValues);
+    }
   };
   console.log({ selectedServices });
   return (
@@ -201,26 +210,40 @@ export default function OrderService() {
           <h5 className="text-slate-500 text-[15px] font-normal ml-5 mb-2">
             Нэмэлт үйлчилгээ
           </h5>
-          <div className="w-[90%] h-[200px] mx-auto  overflow-x-auto  rounded mt-4 ">
-            <div className="w-[400px]  flex gap-5 ">
+          <div className="w-[90%] h-[200px] mx-auto  overflow-x-auto  rounded mt-4 border-y  border-t-slate-200">
+            <div className="flex flex-col gap-2 divide-y  divide-slate-200   ">
               {extraService.map((service: any, index: number) => {
                 if (service.orgId === orgId) {
                   if (service.carCategory === selectedCategory) {
                     if (selectedService?.name !== 'Иж бүрэн') {
                       return (
-                        <div
+                        <label
+                          htmlFor={service.name}
                           key={service._id}
-                          className={
-                            selectedService === service._id ? setCar : normal
-                          }
-                          onClick={(e) => handleSaveExtra(service._id)}
+                          className="max-w-[500px] h-[100px] relative "
+
+                          // onClick={(e) => handleSaveExtra(service._id)}
                         >
-                          <div className="w-[90%] h-[90px] mt-1  rounded mx-auto from-slate-400  ">
-                            {service.name}
+                          <div className=" flex items-center gap-4 mt-1  ">
+                            <input
+                              id={service.name}
+                              type="checkbox"
+                              value={checkedValues}
+                              onChange={() => checkHandle(service._id)}
+                              className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 mt-5 "
+                            />
+                            <div className="w-[100%] ">
+                              <h5> {service.name}</h5>
+                              <p className="mt-[8px]">
+                                {service.description.substring(0, 50)}
+                              </p>
+                            </div>
                           </div>
 
-                          <p>{numeral(service.price).format('0,0 ')} ₮</p>
-                        </div>
+                          <div className=" absolute top-[6px] right-2   ">
+                            {numeral(service.price).format('0,0 ')} ₮
+                          </div>
+                        </label>
                       );
                     }
                   }
