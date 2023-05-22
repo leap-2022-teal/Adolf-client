@@ -5,18 +5,10 @@ import { UserContext, UserProvider } from '@/context/userProvider';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
 import { useEffect, useState } from 'react';
-import { textSpanContainsPosition } from 'typescript';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { OrgInfo, orderInfo } from '@/components/atoms';
-import {
-  AiOutlineArrowLeft,
-  AiOutlineArrowRight,
-  AiOutlineHome,
-} from 'react-icons/ai';
 import Image from 'next/image';
-import { AnyARecord } from 'dns';
 export default function OrderService() {
   const [sP, setSp] = useState<any>([]);
   const [service, setService] = useState<any>([]);
@@ -25,21 +17,13 @@ export default function OrderService() {
   const { orgId } = router.query;
   var numeral = require('numeral');
   const [selectedService, setSelectedService] = useState<any>(undefined);
-  const [selectedExtraService, setSelectedExtraService] =
-    useState<any>(undefined);
-  // const { addToOrder, order } = useContext(UserContext);
-  // const { addToOrder, setSPinfo } = useContext(OrderContext);
-  // const [selectedService, setSelectedService] = useRecoilState(orderInfo);
-  const [UserSelectedService, setUserSelectedService] =
-    useRecoilState(orderInfo);
-  const [selectedSPid, setSelectedSPid] = useRecoilState(OrgInfo);
+  const setUserSelectedService = useSetRecoilState(orderInfo);
+  const setSelectedSPid = useSetRecoilState(OrgInfo);
   const [extraService, setExtraService] = useState<any>([]);
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
-  const [show, setShow] = useState<any>();
-  const [checkedValues, setCheckedValues] = useState<any>(true);
 
-  // const [selecteddSPid, setSedmflectedSPid] = useRecoilState(OrgInfo);
-  // console.log('serviceRecoil', UserSelectedService);
+  const [show, setShow] = useState<any>();
+
+  const [checkedServices, setCheckedServices] = useState<any>([]);
   const car =
     'h-[180px] w-[120px] rounded  border-1 border-black bg-gray-100   focus:bg-blue-500  text-gray-500 flex flex-col items-center cursor-pointer ';
   const setCar =
@@ -64,7 +48,7 @@ export default function OrderService() {
         });
     }
   }, [orgId]);
-  console.log(selectedService);
+
   useEffect(() => {
     axios
       .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/service`)
@@ -72,6 +56,7 @@ export default function OrderService() {
         setService(res.data);
       });
   }, []);
+
   useEffect(() => {
     axios
       .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceExtra`)
@@ -87,34 +72,38 @@ export default function OrderService() {
     setShow(id);
   }
 
-  // function handleSaveExtra(id: any) {
-  //   const selectedExtraInfo = extraService.find((one: any) => one._id === id);
-  //   console.log('extraEsnebna', selectedExtraInfo);
-  //   setSelectedExtraService(selectedExtraInfo);
-  // }
+  const handleChange = (e: any) => {
+    const { value, checked } = e.target;
 
-  const handleSaveExtra = (serviceId: string) => {
-    const selectedService = extraService.find(
-      (service: any) => service._id === serviceId
-    );
-    if (selectedService) {
-      setSelectedServices((prevSelectedServices) => [
-        ...prevSelectedServices,
-        selectedService,
-      ]);
+    let newValue;
+    if (checked) {
+      newValue = [...checkedServices, value];
+    } else {
+      newValue = [...checkedServices].filter((e: any) => e !== value);
     }
-    setSelectedExtraService(selectedServices);
+    setCheckedServices(newValue);
   };
-  const checkHandle = (id: any) => {
-    if (id === 'Суудал') {
-      if (checkedValues === true) {
-        console.log(id, 'eniig haraa');
-      }
+  console.log({ checkedServices });
 
-      setCheckedValues(!checkedValues);
-    }
-  };
-  console.log({ selectedServices });
+  let selectedExtraService: any = [];
+  function getEachServiceInfo() {
+    const selectedServicesArray = checkedServices.map((one: any) => {
+      const ServiceObjects = extraService.find(
+        (service: any) => service._id === one
+      );
+      selectedExtraService.push(ServiceObjects);
+    });
+  }
+  console.log({ selectedExtraService });
+
+  function handleNext() {
+    getEachServiceInfo();
+    setUserSelectedService({
+      selectedExtraService,
+      selectedService,
+    });
+  }
+
   return (
     <UserProvider>
       <MainLayout>
@@ -228,8 +217,9 @@ export default function OrderService() {
                             <input
                               id={service.name}
                               type="checkbox"
-                              value={checkedValues}
-                              onChange={() => checkHandle(service._id)}
+                              name="services"
+                              value={service._id}
+                              onChange={handleChange}
                               className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 mt-5 "
                             />
                             <div className="w-[100%] ">
@@ -272,12 +262,7 @@ export default function OrderService() {
                 className="rounded  bg-blue-500 w-[120px] h-[40px] text-white  flex justify-center items-center  "
                 href={`/order/${orgId}/calendar`}
                 type="button"
-                onClick={() =>
-                  setUserSelectedService({
-                    selectedService,
-                    selectedExtraService,
-                  })
-                }
+                onClick={handleNext}
               >
                 Үргэлжлүүлэх
               </Link>
