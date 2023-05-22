@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { OrgInfo, orderInfo } from '@/components/atoms';
 import Image from 'next/image';
-
+import { useContext } from 'react';
 import { AnyARecord } from 'dns';
 import { Example } from '@/context/StepperContext';
 import StepperComponents from '@/components/stepper';
@@ -20,6 +20,7 @@ export default function OrderService() {
   const [service, setService] = useState<any>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const router = useRouter();
+  const step = useContext<any>(AppContext);
   const { orgId } = router.query;
   var numeral = require('numeral');
   const [selectedService, setSelectedService] = useState<any>(undefined);
@@ -29,10 +30,8 @@ export default function OrderService() {
 
   const [show, setShow] = useState<any>();
 
-
   const [checkedServices, setCheckedServices] = useState<any>([]);
 
-  const step = useContext<any>(AppContext);
   // const [selecteddSPid, setSedmflectedSPid] = useRecoilState(OrgInfo);
   // console.log('serviceRecoil', UserSelectedService);
 
@@ -87,7 +86,6 @@ export default function OrderService() {
   const handleChange = (e: any) => {
     const { value, checked } = e.target;
 
-
     let newValue;
     if (checked) {
       newValue = [...checkedServices, value];
@@ -115,7 +113,7 @@ export default function OrderService() {
       selectedExtraService,
       selectedService,
     });
-     step?.handleNext();
+    step?.handleNext();
   }
 
   return (
