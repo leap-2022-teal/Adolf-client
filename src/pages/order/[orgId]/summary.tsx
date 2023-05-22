@@ -13,18 +13,19 @@ import {
 } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { IoLocationOutline } from 'react-icons/io5';
 import { FiClock } from 'react-icons/fi';
 import { UserProvider } from '@/context/userProvider';
 import { MainLayout } from '@/components/MainLayout';
 import Image from 'next/image';
 import StepperComponents from '@/components/stepper';
+import AppContext from '@/context/AppContext';
 export default function Summary() {
   const UserSelectedService = useRecoilValue(orderInfo);
   const selectedSPid = useRecoilValue(OrgInfo);
   const selectedDate = useRecoilValue(selectedDateInfo);
-
+  const step = useContext<any>(AppContext);
   const totalPrice = useRecoilValue(totalPriceSelector);
   const [sP, setSp] = useState<any>([]);
   const router = useRouter();
@@ -115,6 +116,7 @@ export default function Summary() {
             <div className="max-w-[450px] h-[80px]  mx-auto mt-10 flex justify-around gap-4 items-center ">
               <Link
                 href={`/order/${orgId}/calendar`}
+                onClick={() => step?.handlePrev()}
                 className="rounded   bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
               >
                 Буцах
@@ -131,6 +133,7 @@ export default function Summary() {
                 className="rounded  bg-blue-500 w-[120px] h-[40px] text-white  flex justify-center items-center  "
                 href={`/order/${orgId}/payment`}
                 type="button"
+                onClick={() => step?.handleNext()}
               >
                 Цаг захиалах
               </Link>
