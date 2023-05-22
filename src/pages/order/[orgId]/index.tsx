@@ -139,7 +139,7 @@ export default function OrderService() {
               >
                 <img
                   src="/sedan.png"
-                  className="w-[100px] h-[100px]  "
+                  className="w-[100px] h-[100px]   "
                   alt=""
                 />
                 <h5 className="text-xl font-large font-medium ">SEDAN</h5>
@@ -250,7 +250,7 @@ export default function OrderService() {
               >
                 Буцах
               </Link>
-              <Link href={`/`}>
+              <Link href={`/`} onClick={step?.handleHome}>
                 <Image
                   src="/home-button.png "
                   width={42}

@@ -193,7 +193,7 @@ export default function Calendar() {
               >
                 Буцах
               </Link>
-              <Link href={`/`}>
+              <Link href={`/`} onClick={step?.handleHome}>
                 {/* <AiOutlineHome className="w-[30px] h-[30px] " type="button" /> */}
                 <Image
                   src="/home-button.png "
