@@ -17,6 +17,9 @@ import {
 } from 'react-icons/ai';
 import Image from 'next/image';
 import { AnyARecord } from 'dns';
+import { Example } from '@/context/StepperContext';
+import StepperComponents from '@/components/stepper';
+import AppContext from '@/context/AppContext';
 export default function OrderService() {
   const [sP, setSp] = useState<any>([]);
   const [service, setService] = useState<any>([]);
@@ -36,6 +39,7 @@ export default function OrderService() {
   const [extraService, setExtraService] = useState<any>([]);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [show, setShow] = useState<any>();
+  const step = useContext<any>(AppContext);
   // const [selecteddSPid, setSedmflectedSPid] = useRecoilState(OrgInfo);
   // console.log('serviceRecoil', UserSelectedService);
   const car =
@@ -93,6 +97,13 @@ export default function OrderService() {
   //   setSelectedExtraService(selectedExtraInfo);
   // }
 
+  const handleClick = () => {
+    setUserSelectedService({
+      selectedService,
+      selectedExtraService,
+    });
+    step?.handleNext();
+  };
   const handleSaveExtra = (serviceId: string) => {
     const selectedService = extraService.find(
       (service: any) => service._id === serviceId
@@ -110,6 +121,7 @@ export default function OrderService() {
     <UserProvider>
       <MainLayout>
         <div className="w-[400px] mx-auto h-screen ">
+          <StepperComponents />
           <div>
             <h1 className="mb-2 text-xl font-large font-medium text-blue-500 ml-4">
               {sP.orgName}
@@ -234,6 +246,7 @@ export default function OrderService() {
               <Link
                 href={`/`}
                 className="rounded   bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
+                onClick={step?.handlePrev}
               >
                 Буцах
               </Link>
@@ -249,12 +262,8 @@ export default function OrderService() {
                 className="rounded  bg-blue-500 w-[120px] h-[40px] text-white  flex justify-center items-center  "
                 href={`/order/${orgId}/calendar`}
                 type="button"
-                onClick={() =>
-                  setUserSelectedService({
-                    selectedService,
-                    selectedExtraService,
-                  })
-                }
+                // onClick={step?.handleNext}
+                onClick={handleClick}
               >
                 Үргэлжлүүлэх
               </Link>

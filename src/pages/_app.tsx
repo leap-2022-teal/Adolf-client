@@ -19,10 +19,28 @@ export default function App({ Component, pageProps }: AppProps) {
   }
   // const { userPhoneNumber } = useContext<any>(UserProfileContext);
   const [phone, setPhone] = useState('');
+  const [activeStep, setActiveStep] = useState<any>(0);
+  const [isLastStep, setIsLastStep] = useState<any>(false);
+  const [isFirstStep, setIsFirstStep] = useState<any>(false);
+  const handleNext = () => !isLastStep && setActiveStep((cur: any) => cur + 1);
+  const handlePrev = () => !isFirstStep && setActiveStep((cur: any) => cur - 1);
 
   return (
     <>
-      <AppContext.Provider value={{ phone, setPhone }}>
+      <AppContext.Provider
+        value={{
+          phone,
+          setPhone,
+          activeStep,
+          setActiveStep,
+          isFirstStep,
+          isLastStep,
+          setIsFirstStep,
+          setIsLastStep,
+          handleNext,
+          handlePrev,
+        }}
+      >
         <UserProvider>
           <RecoilRoot>
             <OrderProvider>

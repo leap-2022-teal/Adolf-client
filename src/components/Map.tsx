@@ -8,6 +8,7 @@ import { BiCurrentLocation } from 'react-icons/bi';
 import Script from 'next/script';
 import mapIcon from '../image/map-marker-area-line.svg';
 import { SPlist } from './SPlist';
+import Example from './stepper';
 const containerStyle = {
   height: '300px',
   width: '90%',
@@ -205,7 +206,6 @@ export default function Map() {
         {' '}
         Байршил тогтоох! <BiCurrentLocation className="text-4xl" />
       </button>
-
       <SPlist spList={lists} />
     </div>
   );
