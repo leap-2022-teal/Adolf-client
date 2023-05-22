@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
 import { getDistance } from 'geolib';
 import axios from 'axios';
@@ -8,6 +8,10 @@ import { BiCurrentLocation } from 'react-icons/bi';
 import Script from 'next/script';
 import mapIcon from '../image/map-marker-area-line.svg';
 import { SPlist } from './SPlist';
+import Example from './stepper';
+import Link from 'next/link';
+import AppContext from '@/context/AppContext';
+
 const containerStyle = {
   height: '300px',
   width: '90%',
@@ -35,6 +39,7 @@ export default function Map() {
     lat: 47.92307127568066,
     lng: 106.96024750913087,
   });
+  const step = useContext<any>(AppContext);
   const [mapZoom, setMapZoom] = useState<number>(12);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: 'AIzaSyBtqzOp_Nbaz-txtDb4ijwHpz3MRxVXj7c',
@@ -169,7 +174,13 @@ export default function Map() {
                 }}
               >
                 <div>
-                  <h1>{list.name}</h1>
+                  <Link
+                    href={`/order/${list._id}`}
+                    onClick={() => step?.handleNext()}
+                    className=""
+                  >
+                    <h5 className='font-bold"'>{list.orgName}</h5>
+                  </Link>
                   {userLoc !== null ? (
                     getDistance(
                       { latitude: userLoc.lat, longitude: userLoc.lng },
@@ -205,7 +216,6 @@ export default function Map() {
         {' '}
         Байршил тогтоох! <BiCurrentLocation className="text-4xl" />
       </button>
-
       <SPlist spList={lists} />
     </div>
   );

@@ -86,12 +86,12 @@ export default function Login() {
         </div>
         <Link
           href="#"
-          className=" text-sky-500 text-[10px] ml-[200px] mt-[-10px]  "
+          className=" text-blue-500 text-[10px] ml-[200px] mt-[-10px]  "
         >
           Нууц үг мартсан ?
         </Link>
         <button
-          className=" text-white h-[2.5rem] w-[80%] bg-sky-600  rounded-[10px] cursor-pointer "
+          className=" text-white h-[2.5rem] w-[80%] bg-blue-600  rounded-[10px] cursor-pointer "
           onClick={handleLogin}
         >
           Нэвтрэх

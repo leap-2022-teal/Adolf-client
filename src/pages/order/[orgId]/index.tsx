@@ -9,6 +9,12 @@ import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { OrgInfo, orderInfo } from '@/components/atoms';
 import Image from 'next/image';
+
+import { AnyARecord } from 'dns';
+import { Example } from '@/context/StepperContext';
+import StepperComponents from '@/components/stepper';
+import AppContext from '@/context/AppContext';
+
 export default function OrderService() {
   const [sP, setSp] = useState<any>([]);
   const [service, setService] = useState<any>([]);
@@ -23,7 +29,13 @@ export default function OrderService() {
 
   const [show, setShow] = useState<any>();
 
+
   const [checkedServices, setCheckedServices] = useState<any>([]);
+
+  const step = useContext<any>(AppContext);
+  // const [selecteddSPid, setSedmflectedSPid] = useRecoilState(OrgInfo);
+  // console.log('serviceRecoil', UserSelectedService);
+
   const car =
     'h-[180px] w-[120px] rounded  border-1 border-black bg-gray-100   focus:bg-blue-500  text-gray-500 flex flex-col items-center cursor-pointer ';
   const setCar =
@@ -75,6 +87,7 @@ export default function OrderService() {
   const handleChange = (e: any) => {
     const { value, checked } = e.target;
 
+
     let newValue;
     if (checked) {
       newValue = [...checkedServices, value];
@@ -102,12 +115,14 @@ export default function OrderService() {
       selectedExtraService,
       selectedService,
     });
+     step?.handleNext();
   }
 
   return (
     <UserProvider>
       <MainLayout>
         <div className="w-[400px] mx-auto h-screen ">
+          <StepperComponents />
           <div>
             <h1 className="mb-2 text-xl font-large font-medium text-blue-500 ml-4">
               {sP.orgName}
@@ -125,7 +140,7 @@ export default function OrderService() {
               >
                 <img
                   src="/sedan.png"
-                  className="w-[100px] h-[100px]  "
+                  className="w-[100px] h-[100px]   "
                   alt=""
                 />
                 <h5 className="text-xl font-large font-medium ">SEDAN</h5>
@@ -247,10 +262,11 @@ export default function OrderService() {
               <Link
                 href={`/`}
                 className="rounded   bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
+                onClick={step?.handlePrev}
               >
                 Буцах
               </Link>
-              <Link href={`/`}>
+              <Link href={`/`} onClick={step?.handleHome}>
                 <Image
                   src="/home-button.png "
                   width={42}

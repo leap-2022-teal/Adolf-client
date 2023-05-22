@@ -39,7 +39,7 @@ export function UserSideBar() {
             className={showDashboard ? onShow : onHide}
             aria-labelledby="drawer-navigation-label"
           >
-            <div className="w-[500px] border-2 h-[25%] bg-blue-600 relative ">
+            <div className="w-[500px] border-2 h-[25%] bg-blue-500 relative ">
               <img
                 src={user?.image}
                 className=" w-[65px] h-[65px] rounded-[50%] border-1 border-slate-500 absolute top-[50px] border-2 border-white left-10"

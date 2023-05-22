@@ -211,7 +211,7 @@ export default function RegistrationInfo() {
             type="submit"
             // onClick={handleLogin}
             value={'Бүртгүүлэх'}
-            className=" text-white h-[2.5rem] w-[80%] bg-sky-600 text:flex rounded-[10px] cursor-pointer  mt-[30px] ml-[40px]"
+            className=" text-white h-[2.5rem] w-[80%] bg-blue-600 text:flex rounded-[10px] cursor-pointer  mt-[30px] ml-[40px]"
           />
           {/* <span className="flex justify-center pt-[6px]"> Бүртгүүлэх</span> */}
           {/* </input> */}

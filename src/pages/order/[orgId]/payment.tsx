@@ -18,6 +18,8 @@ import {
   AiOutlineHome,
 } from 'react-icons/ai';
 import { useRecoilValue } from 'recoil';
+import StepperComponents from '@/components/stepper';
+import AppContext from '@/context/AppContext';
 export default function Payment() {
   const router = useRouter();
   const { orgId } = router.query;
@@ -26,6 +28,7 @@ export default function Payment() {
   const selectedDate = useRecoilValue(selectedDateInfo);
   const totalPrice = useRecoilValue(totalPriceSelector);
   const user = useContext<any>(UserContext);
+  const step = useContext<any>(AppContext);
 
   const extraServices: string[] =
     UserSelectedService?.selectedExtraService?.map((obj: any) => obj._id);
@@ -46,22 +49,25 @@ export default function Payment() {
           alert('Success');
         }
       });
+    step?.handleNext();
   }
   return (
     <>
       <UserProvider>
         <MainLayout>
           <div className="max-w-[400px] flex flex-col  mx-auto">
+            <StepperComponents />
             <h1>Та Төлбөрөө төлснөөр таны захиалга баталгаажих болно.</h1>
 
             <div className="w-[100%] h-[80px]  mx-auto mt-10 flex justify-around  items-center">
               <Link
                 href={`/order/${orgId}/summary`}
+                onClick={step?.handlePrev}
                 className="rounded   bg-blue-500 w-[100px] h-[40px] text-white  flex justify-center items-center  "
               >
                 Буцах
               </Link>
-              <Link href={`/`}>
+              <Link href={`/`} onClick={step?.handleHome}>
                 <Image
                   src="/home-button.png "
                   width={42}
