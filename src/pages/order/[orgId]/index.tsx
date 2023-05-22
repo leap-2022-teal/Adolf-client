@@ -5,21 +5,16 @@ import { UserContext, UserProvider } from '@/context/userProvider';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
 import { useEffect, useState } from 'react';
-import { textSpanContainsPosition } from 'typescript';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { OrgInfo, orderInfo } from '@/components/atoms';
-import {
-  AiOutlineArrowLeft,
-  AiOutlineArrowRight,
-  AiOutlineHome,
-} from 'react-icons/ai';
 import Image from 'next/image';
+
 import { AnyARecord } from 'dns';
 import { Example } from '@/context/StepperContext';
 import StepperComponents from '@/components/stepper';
 import AppContext from '@/context/AppContext';
+
 export default function OrderService() {
   const [sP, setSp] = useState<any>([]);
   const [service, setService] = useState<any>([]);
@@ -28,20 +23,19 @@ export default function OrderService() {
   const { orgId } = router.query;
   var numeral = require('numeral');
   const [selectedService, setSelectedService] = useState<any>(undefined);
-  const [selectedExtraService, setSelectedExtraService] =
-    useState<any>(undefined);
-  // const { addToOrder, order } = useContext(UserContext);
-  // const { addToOrder, setSPinfo } = useContext(OrderContext);
-  // const [selectedService, setSelectedService] = useRecoilState(orderInfo);
-  const [UserSelectedService, setUserSelectedService] =
-    useRecoilState(orderInfo);
-  const [selectedSPid, setSelectedSPid] = useRecoilState(OrgInfo);
+  const setUserSelectedService = useSetRecoilState(orderInfo);
+  const setSelectedSPid = useSetRecoilState(OrgInfo);
   const [extraService, setExtraService] = useState<any>([]);
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+
   const [show, setShow] = useState<any>();
+
+
+  const [checkedServices, setCheckedServices] = useState<any>([]);
+
   const step = useContext<any>(AppContext);
   // const [selecteddSPid, setSedmflectedSPid] = useRecoilState(OrgInfo);
   // console.log('serviceRecoil', UserSelectedService);
+
   const car =
     'h-[180px] w-[120px] rounded  border-1 border-black bg-gray-100   focus:bg-blue-500  text-gray-500 flex flex-col items-center cursor-pointer ';
   const setCar =
@@ -66,21 +60,20 @@ export default function OrderService() {
         });
     }
   }, [orgId]);
-  console.log(selectedService);
+
   useEffect(() => {
     axios
       .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/service`)
       .then((res) => {
         setService(res.data);
-        console.log(res.data);
       });
   }, []);
+
   useEffect(() => {
     axios
       .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/serviceExtra`)
       .then((res) => {
         setExtraService(res.data);
-        console.log(res.data);
       });
   }, []);
   if (!sP) return <div>Уншиж байна...</div>;
@@ -91,32 +84,40 @@ export default function OrderService() {
     setShow(id);
   }
 
-  // function handleSaveExtra(id: any) {
-  //   const selectedExtraInfo = extraService.find((one: any) => one._id === id);
-  //   console.log('extraEsnebna', selectedExtraInfo);
-  //   setSelectedExtraService(selectedExtraInfo);
-  // }
+  const handleChange = (e: any) => {
+    const { value, checked } = e.target;
 
-  const handleClick = () => {
-    setUserSelectedService({
-      selectedService,
-      selectedExtraService,
-    });
-    step?.handleNext();
-  };
-  const handleSaveExtra = (serviceId: string) => {
-    const selectedService = extraService.find(
-      (service: any) => service._id === serviceId
-    );
-    if (selectedService) {
-      setSelectedServices((prevSelectedServices) => [
-        ...prevSelectedServices,
-        selectedService,
-      ]);
+
+    let newValue;
+    if (checked) {
+      newValue = [...checkedServices, value];
+    } else {
+      newValue = [...checkedServices].filter((e: any) => e !== value);
     }
-    setSelectedExtraService(selectedServices);
+    setCheckedServices(newValue);
   };
-  console.log({ selectedServices });
+  console.log({ checkedServices });
+
+  let selectedExtraService: any = [];
+  function getEachServiceInfo() {
+    const selectedServicesArray = checkedServices.map((one: any) => {
+      const ServiceObjects = extraService.find(
+        (service: any) => service._id === one
+      );
+      selectedExtraService.push(ServiceObjects);
+    });
+  }
+  console.log({ selectedExtraService });
+
+  function handleNext() {
+    getEachServiceInfo();
+    setUserSelectedService({
+      selectedExtraService,
+      selectedService,
+    });
+     step?.handleNext();
+  }
+
   return (
     <UserProvider>
       <MainLayout>
@@ -213,26 +214,41 @@ export default function OrderService() {
           <h5 className="text-slate-500 text-[15px] font-normal ml-5 mb-2">
             Нэмэлт үйлчилгээ
           </h5>
-          <div className="w-[90%] h-[200px] mx-auto  overflow-x-auto  rounded mt-4 ">
-            <div className="w-[400px]  flex gap-5 ">
+          <div className="w-[90%] h-[200px] mx-auto  overflow-x-auto  rounded mt-4 border-y  border-t-slate-200">
+            <div className="flex flex-col gap-2 divide-y  divide-slate-200   ">
               {extraService.map((service: any, index: number) => {
                 if (service.orgId === orgId) {
                   if (service.carCategory === selectedCategory) {
                     if (selectedService?.name !== 'Иж бүрэн') {
                       return (
-                        <div
+                        <label
+                          htmlFor={service.name}
                           key={service._id}
-                          className={
-                            selectedService === service._id ? setCar : normal
-                          }
-                          onClick={(e) => handleSaveExtra(service._id)}
+                          className="max-w-[500px] h-[100px] relative "
+
+                          // onClick={(e) => handleSaveExtra(service._id)}
                         >
-                          <div className="w-[90%] h-[90px] mt-1  rounded mx-auto from-slate-400  ">
-                            {service.name}
+                          <div className=" flex items-center gap-4 mt-1  ">
+                            <input
+                              id={service.name}
+                              type="checkbox"
+                              name="services"
+                              value={service._id}
+                              onChange={handleChange}
+                              className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 mt-5 "
+                            />
+                            <div className="w-[100%] ">
+                              <h5> {service.name}</h5>
+                              <p className="mt-[8px]">
+                                {service.description.substring(0, 50)}
+                              </p>
+                            </div>
                           </div>
 
-                          <p>{numeral(service.price).format('0,0 ')} ₮</p>
-                        </div>
+                          <div className=" absolute top-[6px] right-2   ">
+                            {numeral(service.price).format('0,0 ')} ₮
+                          </div>
+                        </label>
                       );
                     }
                   }
@@ -262,8 +278,7 @@ export default function OrderService() {
                 className="rounded  bg-blue-500 w-[120px] h-[40px] text-white  flex justify-center items-center  "
                 href={`/order/${orgId}/calendar`}
                 type="button"
-                // onClick={step?.handleNext}
-                onClick={handleClick}
+                onClick={handleNext}
               >
                 Үргэлжлүүлэх
               </Link>

@@ -29,7 +29,7 @@ export function UserProvider({ children }: any) {
 export function CurrentUser() {
   const router = useRouter();
   const [user, setUser] = useState<any>(undefined);
-  console.log('user ni', user);
+  // console.log('user ni', user);
   useEffect(() => {
     const token = localStorage.getItem('loginToken');
     axios
