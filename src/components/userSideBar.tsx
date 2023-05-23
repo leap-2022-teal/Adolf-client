@@ -26,7 +26,7 @@ export function UserSideBar() {
       <div className="flex justify-between max-w-[500px] mx-auto mt-5">
         <div>
           <BsList
-            className="w-[30px] h-[30px] ml-4 cursor-pointer "
+            className="w-[30px] h-[30px] ml-5 cursor-pointer text-blue-500 "
             type="button"
             data-drawer-target="drawer-navigation"
             data-drawer-show="drawer-navigation"
@@ -42,12 +42,12 @@ export function UserSideBar() {
             <div className="w-[500px] border-2 h-[25%] bg-blue-500 relative ">
               <img
                 src={user?.image}
-                className=" w-[65px] h-[65px] rounded-[50%] border-1 border-slate-500 absolute top-[50px] border-2 border-white left-10"
+                className=" w-[65px] h-[65px] rounded-[50%] border-1 border-gray-500 absolute top-[50px] border-2 border-white left-10"
               />
               <h2 className="text-white font-normal text-lg absolute top-[125px] left-10">
                 {user?.firstName} {user?.lastName}
               </h2>
-              <span className="text-slate-300 text-[11px] font-normal absolute top-[150px] left-10">
+              <span className="text-gray-300 text-[11px] font-normal absolute top-[150px] left-10">
                 {user?.phoneNumber}
               </span>
             </div>
@@ -79,7 +79,7 @@ export function UserSideBar() {
                     href="#"
                     className="flex items-center p-2 hover:text-blue-500 rounded-lg text-black hover:bg-blue-100"
                   >
-                    <BsCarFrontFill className=" w-7 h-7 text-slate-400 " />
+                    <BsCarFrontFill className=" w-7 h-7 text-gray-500 " />
 
                     <span className="ml-3">Машины мэдээлэл</span>
                   </Link>
@@ -89,7 +89,7 @@ export function UserSideBar() {
                     href="#"
                     className="flex items-center p-2 hover:text-blue-500 rounded-lg text-black hover:bg-blue-100"
                   >
-                    <BiCalendar className=" w-7 h-7 text-slate-400 " />
+                    <BiCalendar className=" w-7 h-7 text-gray-500 " />
 
                     <span className="ml-3">Захиалгууд</span>
                   </a>
@@ -99,7 +99,7 @@ export function UserSideBar() {
                     href="#"
                     className="flex items-center p-2 hover:text-blue-500 rounded-lg text-black hover:bg-blue-100"
                   >
-                    <CiCreditCard1 className=" w-7 h-7 text-slate-400 " />
+                    <CiCreditCard1 className=" w-7 h-7 text-gray-500 " />
 
                     <span className="ml-3">Төлбөрийн систем</span>
                   </a>
@@ -109,7 +109,7 @@ export function UserSideBar() {
                     href="/userProfile"
                     className="flex items-center p-2 hover:text-blue-500 rounded-lg text-black hover:bg-blue-100"
                   >
-                    <CgProfile className=" w-7 h-7 text-slate-400 " />
+                    <CgProfile className=" w-7 h-7 text-gray-500 " />
 
                     <span className="ml-3"> Тохиргоо</span>
                   </Link>
@@ -119,7 +119,7 @@ export function UserSideBar() {
                     // href="#"
                     className="flex items-center p-2 hover:text-red-500 rounded-lg text-black hover:bg-red-50 cursor-pointer "
                   >
-                    <VscSignOut className=" w-7 h-7 text-slate-400 " />
+                    <VscSignOut className=" w-7 h-7 text-gray-500 " />
 
                     <a onClick={handleSignOut} className="ml-3">
                       Гарах
@@ -132,7 +132,7 @@ export function UserSideBar() {
         </div>
 
         <div>
-          <HiOutlineBell className=" w-[25px] h-[30px] mr-4 cursor-pointer" />
+          <HiOutlineBell className=" w-[25px] h-[30px] mr-6 cursor-pointer text-blue-500" />
         </div>
       </div>
     </>

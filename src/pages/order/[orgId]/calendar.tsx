@@ -130,10 +130,10 @@ export default function Calendar() {
       <MainLayout>
         <div className="w-[400px] h-screen  mx-auto">
           <StepperComponents />
-          <h1 className="mb-2 text-xl font-large font-medium text-slate-700 ml-8 mt-5">
+          <h1 className="mb-2 text-xl font-large font-medium text-gray-700 ml-10 mt-5">
             Захиалгын огноо сонгох
           </h1>
-          <h5 className="text-slate-500 text-[15px] font-normal ml-10 mb-2 mt-10">
+          <h5 className="text-gray-600 text-[15px] font-normal ml-10 mb-2 mt-10">
             Та өдрөө сонгоно уу!!
           </h5>
           <div className="w-[80%] h-[100px] mx-auto  overflow-x-auto   rounded mt-4">
@@ -164,7 +164,7 @@ export default function Calendar() {
               })}
             </div>
           </div>
-          <h5 className="text-slate-500 text-[15px] font-normal ml-10 mb-2 mt-4">
+          <h5 className="text-gray-600 text-[15px] font-normal ml-10 mb-2 mt-4">
             Цаг сонгох
           </h5>
           <div className=" w-[80%] mx-auto  ">
@@ -216,15 +216,4 @@ export default function Calendar() {
       </MainLayout>
     </UserProvider>
   );
-}
-// onClick={() => setSelectedDate(DateTime)}
-{
-  /* <Footer
-prev={`/order/${orgId}`}
-next={`/order/${orgId}/summary`}
-/>
-<button onClick={() => setSelectedDate(DateTime)}> save </button> */
-}
-{
-  /* <Footer next={'summary'} prev ={""} /> */
 }

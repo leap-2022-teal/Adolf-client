@@ -101,11 +101,10 @@ export default function Login() {
       <div className="flex gap-[20px] justify-center ">
         <Link
           href="/registrationNumber"
-          className="my-[10px] text-[13px] tracking-[0.1rem] text-sky-500  mt-[40px]"
+          className="my-[10px] text-[13px] tracking-[0.1rem] t mt-[40px]"
         >
           <span className="text-slate-400"> Бүртгэл байхгүй бол?</span>
-          <span> </span>
-          Бүртгүүлэх
+          <span className="text-blue-500"> Бүртгүүлэх</span>
         </Link>
       </div>
     </div>

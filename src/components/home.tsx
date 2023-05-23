@@ -16,9 +16,9 @@ export default function HomePage() {
           <div className="relative w-[100%] flex  mt-[20px] mb-7">
             <input
               type="text"
-              className=" h-[30px] w-[90%] mx-auto placeholder:text-[#cbd5e1] placeholder:font-normal bg-white rounded-[10px] border-[1px] border-[#334155] outline-[none]  focus:outline-none text-black"
+              className=" h-[30px] w-[90%] mx-auto bg-white rounded-[10px] border-[1px] border-gray-500 outline-[none] text-ml-5 focus:outline-none pl-3  text-black"
             />
-            <CiSearch className="absolute top-1 right-[50px] w-5 h-5 " />
+            <CiSearch className="absolute top-1 right-[50px] w-5 h-5  text-gray-600" />
           </div>
         </div>
         <Map />

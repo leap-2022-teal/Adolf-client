@@ -201,10 +201,10 @@ export default function RegistrationInfo() {
             <input type="checkbox" id="checkbox" />
             <label
               htmlFor="checkbox"
-              className="flex justify-center mt-[-10px] text-slate-500 text-[11px] font-light pt-[9px] ml-[50px]"
+              className="flex justify-center mt-[-10px] text-gray-500 text-[11px] font-light pt-[9px] ml-[50px]"
             >
               By creating an account, you agree to our
-              <span className="text-sky-600 font-normal px-1"> Terms</span>
+              <span className="text-blue-600 font-normal px-1"> Terms</span>
             </label>
           </div>
           <input

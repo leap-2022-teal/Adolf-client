@@ -8,7 +8,7 @@ export default function StepperComponents() {
   const text = useContext<any>(AppContext);
 
   return (
-    <div className="w-full py-4 px-8">
+    <div className="w-full py-4 px-8 mt-5">
       <Stepper
         activeStep={text?.activeStep}
         isLastStep={(e) => text?.setIsLastStep(e)}

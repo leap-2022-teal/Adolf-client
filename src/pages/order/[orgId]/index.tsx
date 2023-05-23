@@ -127,7 +127,7 @@ export default function OrderService() {
             </h1>
           </div>
           {/* <p>{service.price}</p> */}
-          <h5 className="text-slate-500 text-[15px] font-car ml-5 mb-2">
+          <h5 className="text-gray-500 text-[15px] font-car ml-5 mb-2">
             Машины төрөл сонгох
           </h5>
           <div className="w-[90%] h-[200px] mx-auto  overflow-x-auto  rounded ">
@@ -177,7 +177,7 @@ export default function OrderService() {
               </div>
             </div>
           </div>
-          <h5 className="text-slate-500 text-[15px] font-normal ml-5 mb-2">
+          <h5 className="text-gray-500 text-[15px] font-normal ml-5 mb-2">
             Үйлчилгээ сонгох
           </h5>
           <div className="w-[90%] h-[200px] mx-auto  overflow-x-auto  rounded mt-4 ">
@@ -209,11 +209,11 @@ export default function OrderService() {
               })}
             </div>
           </div>
-          <h5 className="text-slate-500 text-[15px] font-normal ml-5 mb-2">
+          <h5 className="text-gray-500 text-[15px] font-normal ml-5 mb-2">
             Нэмэлт үйлчилгээ
           </h5>
-          <div className="w-[90%] h-[200px] mx-auto  overflow-x-auto  rounded mt-4 border-y  border-t-slate-200">
-            <div className="flex flex-col gap-2 divide-y  divide-slate-200   ">
+          <div className="w-[90%] h-[200px] mx-auto  overflow-x-auto  rounded mt-4 border-y  border-t-gray-200">
+            <div className="flex flex-col gap-2 divide-y  divide-gray-200   ">
               {extraService.map((service: any, index: number) => {
                 if (service.orgId === orgId) {
                   if (service.carCategory === selectedCategory) {
@@ -236,14 +236,14 @@ export default function OrderService() {
                               className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 mt-5 "
                             />
                             <div className="w-[100%] ">
-                              <h5> {service.name}</h5>
-                              <p className="mt-[8px]">
+                              <h5 className="font-bold"> {service.name}</h5>
+                              <p className="mt-[8px] text-gray-500 text-[15px] font-normal ">
                                 {service.description.substring(0, 50)}
                               </p>
                             </div>
                           </div>
 
-                          <div className=" absolute top-[6px] right-2   ">
+                          <div className=" absolute top-[6px] right-2  font-bold  ">
                             {numeral(service.price).format('0,0 ')} ₮
                           </div>
                         </label>

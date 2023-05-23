@@ -6,14 +6,14 @@ export default function RegistrationNumber() {
 
   return (
     <>
-      <div className="w-[400px] flex flex-col items-center gap-[20px] mt-[20px] mx-auto">
+      <div className="max-w-[400px] flex flex-col items-center gap-[20px] mt-[20px] mx-auto">
         <div className="w-[150px] h-[150px] mx-auto mt-[40px]">
           <img src="/car-wash.png" alt="logo" />
         </div>
-        <h1 className="text-black  flex justify-center my-[10px] tracking-[0.5px] text-[22px] font-medium">
+        <h1 className="text-black   flex justify-center my-[10px] tracking-[0.5px] text-[22px] font-medium">
           Бүртгүүлэх
         </h1>
-        <span className="flex justify-center mt-[-30px] text-slate-500 text-[11px] font-light ">
+        <span className="flex justify-center mt-[-30px] text-gray-500 text-[11px] font-light max-w-[300px] ">
           Бид таны утасны дугаар луу баталгаажуулалтын код явуулах болно
         </span>
         <input
@@ -26,7 +26,7 @@ export default function RegistrationNumber() {
         />
         <Link
           href="/registrationInfo"
-          className=" text-white h-[2.5rem] w-[80%] bg-sky-600 text:flex rounded-[10px] cursor-pointer "
+          className=" text-white h-[2.5rem] w-[80%] bg-blue-600 text:flex rounded-[10px] cursor-pointer "
         >
           <span className="flex justify-center pt-[6px]"> Үргэлжлүүлэх</span>
         </Link>
@@ -35,9 +35,8 @@ export default function RegistrationNumber() {
           href="/"
           className="my-[10px] text-[13px] tracking-[0.1rem] text-sky-500  mt-[40px]"
         >
-          <span className="text-slate-400">Та аль хэдийн бүртгэлтэй юу?</span>
-          <span> </span>
-          Нэвтрэх
+          <span className="text-gray-500">Та аль хэдийн бүртгэлтэй юу?</span>
+          <span className="text-blue-500"> Нэвтрэх </span>
         </Link>
       </div>
     </>

@@ -51,66 +51,71 @@ export default function Summary() {
     <>
       <UserProvider>
         <MainLayout>
-          {/* <h1>Summary</h1> */}
-          <div className="max-w-[400px] h-[360px] mx-auto bg-zinc-50 mt-10 rounded">
+          <div className="max-w-[400px] mx-auto">
             <StepperComponents />
-            <div className="w-[90%]  divide-y  divide-slate-200 mx-auto">
-              <h5 className="font-semibold text-[30px] ml-10 p-2">
-                Таны захиалга
-              </h5>
-              <div className="w-[100%] p-2 flex gap-6">
-                <IoLocationOutline className="w-6 h-6 mt-2 text-slate-500" />
-                <div>
-                  <h5 className="font-bold">{sP.name}</h5>
-                  <p className="text-slate-500">{sP.address?.extraAddress}</p>
-                </div>
-              </div>
-              <div className="p-2 flex gap-8 ">
-                <FiClock className="w-5 h-5 ml-1 mt-3" />
-                <div>
-                  <h5 className="font-semibold">{selectedDate[0]}</h5>
-                  <p className="text-slate-500 ">{selectedDate[1]}</p>
-                </div>
-              </div>
-              <div>
-                <span className="text-grey-900 font-bold p-2">
-                  Үйлчилгээний төрөл
-                </span>
-                <h5 className="flex justify-between p-2 mb-5 font-semibold">
-                  <span>{UserSelectedService.selectedService.name}</span>
-                  <span>
-                    {numeral(UserSelectedService.selectedService.price).format(
-                      '0,0 '
-                    )}{' '}
-                    ₮
-                  </span>
+            <div className="max-w-[400px]  mx-auto bg-gray-50 mt-10 rounded">
+              <div className="w-[90%]  divide-y  divide-gray-200 mx-auto">
+                <h5 className="font-semibold text-[30px] ml-10 p-2">
+                  Таны захиалга
                 </h5>
-                {UserSelectedService.selectedExtraService && (
-                  <>
-                    <span className="text-grey-900 font-bold p-2">
-                      Нэмэлт үйлчилгээ
+                <div className="w-[100%] p-2 flex gap-6">
+                  <IoLocationOutline className="w-6 h-6 mt-2 text-gray-500" />
+                  <div>
+                    <h5 className="font-bold">{sP.name}</h5>
+                    <p className="text-gray-500">{sP.address?.extraAddress}</p>
+                  </div>
+                </div>
+                <div className="p-2 flex gap-8 ">
+                  <FiClock className="w-5 h-5 ml-1 mt-3 text-gray-500" />
+                  <div>
+                    <h5 className="font-semibold">{selectedDate[0]}</h5>
+                    <p className="text-gray-500 ">{selectedDate[1]}</p>
+                  </div>
+                </div>
+                <div>
+                  <span className="text-gray-900 font-bold p-2">
+                    Үйлчилгээний төрөл
+                  </span>
+                  <h5 className="flex justify-between p-2 mb-5 font-semibold">
+                    <span>{UserSelectedService.selectedService.name}</span>
+                    <span>
+                      {numeral(
+                        UserSelectedService.selectedService.price
+                      ).format('0,0 ')}{' '}
+                      ₮
                     </span>
-                    {UserSelectedService.selectedExtraService.map(
-                      (one: any) => {
-                        return (
-                          <>
-                            <h5 className="flex justify-between p-2 mb-5 font-semibold">
-                              <span>{one.name}</span>
-                              <span>{numeral(one.price).format('0,0 ')} ₮</span>
-                            </h5>
-                          </>
-                        );
-                      }
-                    )}
-                  </>
-                )}
-              </div>
-              <div className="flex justify-between p-2 font-semibold pt-5 ">
-                <span>Total</span>
-                <span>
-                  {/* {numeral(UserSelectedService.price).format('0,0 ')} ₮ */}
-                  {numeral(totalPrice).format('0,0 ')} ₮
-                </span>
+                  </h5>
+                </div>
+                <div>
+                  {UserSelectedService.selectedExtraService && (
+                    <>
+                      <span className="text-gray-900 font-bold p-2">
+                        Нэмэлт үйлчилгээ
+                      </span>
+                      {UserSelectedService.selectedExtraService.map(
+                        (one: any) => {
+                          return (
+                            <>
+                              <h5 className="flex justify-between p-2 mb-5 font-semibold">
+                                <span>{one.name}</span>
+                                <span>
+                                  {numeral(one.price).format('0,0 ')} ₮
+                                </span>
+                              </h5>
+                            </>
+                          );
+                        }
+                      )}
+                    </>
+                  )}
+                </div>
+                <div className="flex justify-between p-2 font-semibold pt-5 ">
+                  <span>Total</span>
+                  <span>
+                    {/* {numeral(UserSelectedService.price).format('0,0 ')} ₮ */}
+                    {numeral(totalPrice).format('0,0 ')} ₮
+                  </span>
+                </div>
               </div>
             </div>
             <div className="max-w-[450px] h-[80px]  mx-auto mt-10 flex justify-around gap-4 items-center ">

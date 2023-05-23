@@ -212,10 +212,6 @@ export default function Map() {
           }
         ></MarkerF>
       </GoogleMap>
-      <button onClick={() => findCoordinate()}>
-        {' '}
-        Байршил тогтоох! <BiCurrentLocation className="text-4xl" />
-      </button>
       <SPlist spList={lists} />
     </div>
   );
