@@ -236,14 +236,17 @@ export default function OrderService() {
                               className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 mt-5 "
                             />
                             <div className="w-[100%] ">
-                              <h5 className="font-bold"> {service.name}</h5>
+                              <h5 className="font-medium text-gray-600">
+                                {' '}
+                                {service.name}
+                              </h5>
                               <p className="mt-[8px] text-gray-500 text-[15px] font-normal ">
                                 {service.description.substring(0, 50)}
                               </p>
                             </div>
                           </div>
 
-                          <div className=" absolute top-[6px] right-2  font-bold  ">
+                          <div className=" absolute top-[6px] right-2   font-medium text-gray-600  ">
                             {numeral(service.price).format('0,0 ')} ₮
                           </div>
                         </label>

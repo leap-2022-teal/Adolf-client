@@ -77,51 +77,59 @@ export function UserSideBar() {
                 <li>
                   <Link
                     href="#"
-                    className="flex items-center p-2 hover:text-blue-500 rounded-lg text-black hover:bg-blue-100"
+                    className=" group flex items-center p-2 group-hover:text-blue-500 rounded-lg text-black hover:bg-blue-100"
                   >
-                    <BsCarFrontFill className=" w-7 h-7 text-gray-500 " />
+                    <BsCarFrontFill className=" w-7 h-7 text-gray-500 group-hover:text-blue-500 " />
 
-                    <span className="ml-3">Машины мэдээлэл</span>
+                    <span className="ml-3 text-gray-700 group-hover:text-blue-500 ">
+                      Машины мэдээлэл
+                    </span>
                   </Link>
                 </li>
                 <li>
                   <a
                     href="#"
-                    className="flex items-center p-2 hover:text-blue-500 rounded-lg text-black hover:bg-blue-100"
+                    className="group flex items-center p-2 group-hover:text-blue-500  rounded-lg text-black hover:bg-blue-100"
                   >
-                    <BiCalendar className=" w-7 h-7 text-gray-500 " />
+                    <BiCalendar className=" w-7 h-7 text-gray-500 group-hover:text-blue-500  " />
 
-                    <span className="ml-3">Захиалгууд</span>
+                    <span className="ml-3 text-gray-700">Захиалгууд</span>
                   </a>
                 </li>
                 <li>
                   <a
                     href="#"
-                    className="flex items-center p-2 hover:text-blue-500 rounded-lg text-black hover:bg-blue-100"
+                    className=" group flex items-center p-2 group-hover:text-blue-500 rounded-lg text-black hover:bg-blue-100"
                   >
-                    <CiCreditCard1 className=" w-7 h-7 text-gray-500 " />
+                    <CiCreditCard1 className=" w-7 h-7 text-gray-500 group-hover:text-blue-500  " />
 
-                    <span className="ml-3">Төлбөрийн систем</span>
+                    <span className="ml-3 text-gray-700">Төлбөрийн систем</span>
                   </a>
                 </li>
                 <li>
                   <Link
                     href="/userProfile"
-                    className="flex items-center p-2 hover:text-blue-500 rounded-lg text-black hover:bg-blue-100"
+                    className="group flex items-center p-2 text-gray-500  group-hover:text-blue-500 rounded-lg text-black hover:bg-blue-100"
                   >
-                    <CgProfile className=" w-7 h-7 text-gray-500 " />
+                    <CgProfile className=" w-7 h-7  group-hover:text-blue-500 " />
 
-                    <span className="ml-3"> Тохиргоо</span>
+                    <span className="ml-3 text-gray-700 group-hover:text-blue-500">
+                      {' '}
+                      Тохиргоо
+                    </span>
                   </Link>
                 </li>
                 <li>
                   <div
                     // href="#"
-                    className="flex items-center p-2 hover:text-red-500 rounded-lg text-black hover:bg-red-50 cursor-pointer "
+                    className="group flex items-center p-2 group-hover:text-red-500 rounded-lg text-black hover:bg-red-50 cursor-pointer "
                   >
-                    <VscSignOut className=" w-7 h-7 text-gray-500 " />
+                    <VscSignOut className=" w-7 h-7 text-gray-500  group-hover:text-red-500" />
 
-                    <a onClick={handleSignOut} className="ml-3">
+                    <a
+                      onClick={handleSignOut}
+                      className="ml-3 text-gray-700  group-hover:text-red-500"
+                    >
                       Гарах
                     </a>
                   </div>

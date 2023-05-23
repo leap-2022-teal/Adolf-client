@@ -11,7 +11,7 @@ import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   AiOutlineArrowLeft,
   AiOutlineArrowRight,
@@ -20,6 +20,7 @@ import {
 import { useRecoilValue } from 'recoil';
 import StepperComponents from '@/components/stepper';
 import AppContext from '@/context/AppContext';
+import { BsCheckLg } from 'react-icons/bs';
 export default function Payment() {
   const router = useRouter();
   const { orgId } = router.query;
@@ -29,7 +30,7 @@ export default function Payment() {
   const totalPrice = useRecoilValue(totalPriceSelector);
   const user = useContext<any>(UserContext);
   const step = useContext<any>(AppContext);
-
+  const [show, setShow] = useState<boolean>(false);
   const extraServices: string[] =
     UserSelectedService?.selectedExtraService?.map((obj: any) => obj._id);
   const order = [
@@ -50,14 +51,26 @@ export default function Payment() {
         }
       });
     step?.handleNext();
+    setShow(true);
+  }
+  const style = 'opacity-25 ';
+  function handleClick() {
+    setShow(false);
+    step?.handleHome();
   }
   return (
     <>
       <UserProvider>
         <MainLayout>
-          <div className="max-w-[400px] flex flex-col  mx-auto">
-            <StepperComponents />
-            <h1>Та Төлбөрөө төлснөөр таны захиалга баталгаажих болно.</h1>
+          <div className="max-w-[400px] flex flex-col  mx-auto relative">
+            <div
+              className={show === true ? style : 'flex flex-col items-center'}
+            >
+              <StepperComponents />
+              <h1 className="font-medium text-gray-800 w-[80%] text-[18px] ">
+                Та Төлбөрөө төлснөөр таны захиалга баталгаажих болно.
+              </h1>
+            </div>
 
             <div className="w-[100%] h-[80px]  mx-auto mt-10 flex justify-around  items-center">
               <Link
@@ -84,6 +97,27 @@ export default function Payment() {
                 Төлбөр төлөх
               </Link>
             </div>
+
+            {show === true ? (
+              <div className="w-full h-[400px] bg-white  border-t-2 rounded-t-lg  absolute top-[180px] flex flex-col items-center gap-10 ease-in-out duration-300">
+                <div className="w-[120px] h-[120px] rounded-full border-[1px] flex items-center justify-center border-blue-100  mt-10 ">
+                  <div className="w-[100px] h-[100px] rounded-full border-[1px] flex items-center border-blue-300">
+                    <div className="w-[80px] h-[80px] rounded-full bg-blue-500 mx-auto flex items-center">
+                      <BsCheckLg className="w-10 h-10 mx-auto text-white" />
+                    </div>
+                  </div>
+                </div>
+                <h5 className="text-gray-900 font-bold">Амжилттай</h5>
+                <Link
+                  href="/"
+                  type="button"
+                  onClick={handleClick}
+                  className="text-white w-[200px] bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 flex justify-center "
+                >
+                  Буцах
+                </Link>
+              </div>
+            ) : null}
           </div>
         </MainLayout>
       </UserProvider>
