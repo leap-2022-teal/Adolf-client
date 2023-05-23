@@ -11,7 +11,11 @@ export function UserProvider({ children }: any) {
   const router = useRouter();
 
   if (user === undefined) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-[150px] h-[150px] mx-auto">
+        <img className="w-[150px] h-[150px]" src="/car2.gif" alt="" />
+      </div>
+    );
   }
 
   if (user === null) {
