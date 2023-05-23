@@ -61,7 +61,7 @@ export default function Summary() {
                 <div className="w-[100%] p-2 flex gap-6">
                   <IoLocationOutline className="w-6 h-6 mt-2 text-gray-500" />
                   <div>
-                    <h5 className="font-bold">{sP.name}</h5>
+                    <h5 className="font-bold">{sP.orgName}</h5>
                     <p className="text-gray-500">{sP.address?.extraAddress}</p>
                   </div>
                 </div>
