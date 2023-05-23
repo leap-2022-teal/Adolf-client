@@ -62,7 +62,7 @@ export default function OrderService() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/service`)
+      .get(`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/service/${orgId}`)
       .then((res) => {
         setService(res.data);
       });
@@ -183,29 +183,29 @@ export default function OrderService() {
           <div className="w-[90%] h-[200px] mx-auto  overflow-x-auto  rounded mt-4 ">
             <div className="w-[400px]  flex gap-5 ">
               {service.map((service: any, index: number) => {
-                if (service.orgId === orgId) {
-                  if (service.carCategory === selectedCategory) {
-                    return (
-                      <div
-                        key={service._id}
-                        className={show === service._id ? setCar : car}
-                        onClick={(e) => handleSave(service._id)}
-                      >
-                        <div className="w-[90%] h-[90px] mt-1  rounded mx-auto from-slate-400  ">
-                          <img
-                            src="/car-wash.png"
-                            className="w-[100px] h-[80px] mx-auto"
-                            alt=""
-                          />
-                        </div>
-                        <h5 className="text-xl font-large font-medium ">
-                          {service.name}
-                        </h5>
-                        <p>{numeral(service.price).format('0,0 ')} ₮</p>
+                // if (service.orgId === orgId) {
+                if (service.carCategory === selectedCategory) {
+                  return (
+                    <div
+                      key={service._id}
+                      className={show === service._id ? setCar : car}
+                      onClick={(e) => handleSave(service._id)}
+                    >
+                      <div className="w-[90%] h-[90px] mt-1  rounded mx-auto from-slate-400  ">
+                        <img
+                          src="/car-wash.png"
+                          className="w-[100px] h-[80px] mx-auto"
+                          alt=""
+                        />
                       </div>
-                    );
-                  }
+                      <h5 className="text-xl font-large font-medium ">
+                        {service.name}
+                      </h5>
+                      <p>{numeral(service.price).format('0,0 ')} ₮</p>
+                    </div>
+                  );
                 }
+                // }
               })}
             </div>
           </div>
