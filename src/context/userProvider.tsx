@@ -12,8 +12,8 @@ export function UserProvider({ children }: any) {
 
   if (user === undefined) {
     return (
-      <div className="w-[150px] h-[150px] mx-auto">
-        <img className="w-[150px] h-[150px]" src="/car2.gif" alt="" />
+      <div className="w-[200px] h-[200px] mx-auto mt-[40px]">
+        <img className="w-[200px] h-[200px]" src="/car2.gif" alt="" />
       </div>
     );
   }

@@ -41,6 +41,7 @@ export default function Calendar() {
     ' flex flex-col border-2 text-white bg-blue-500  w-[50px] h-[80px]  items-center rounded';
   const normalTime = 'rounded bg-gray-100 h-8 text-gray-600 cursor-pointer  ';
   const activeTime = 'rounded bg-blue-500 h-8 text-white  ';
+  const red = 'rounded bg-red-500 h-8 text-white';
   const step = useContext<any>(AppContext);
   const getDaysArray = function (s: any, e: any) {
     for (

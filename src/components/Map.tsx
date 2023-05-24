@@ -179,7 +179,10 @@ export default function Map() {
                     onClick={() => step?.handleNext()}
                     className=""
                   >
-                    <h5 className='font-bold"'>{list.orgName}</h5>
+                    <h5 className="font-bold text-blue-500">{list.orgName}</h5>
+                    <p className="font-normal text-gray-500">
+                      {list.address.extraAddress}
+                    </p>
                   </Link>
                   {userLoc !== null ? (
                     getDistance(
