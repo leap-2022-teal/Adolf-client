@@ -31,7 +31,9 @@ export default function Calendar() {
   const [orderDate, SetorderDate] = useState<any>();
   const [selectTime, setSelectTime] = useState<any>({});
   const [back, setBack] = useState<any>();
+  const [isAvailable, setIsAvailable] = useState<any>(undefined);
   const [selectedDate, setSelectedDate] = useRecoilState(selectedDateInfo);
+  const [bookedDate, setBookedDate] = useState<any[]>([]);
   const { addToOrder, setSPinfo, SPinfo, setUserSelectedDate } =
     useContext(OrderContext);
   const weekDays = ['Ням', 'Дав', 'Мяг', 'Лха', 'Пүр', 'Баа', 'Бям'];
@@ -75,10 +77,36 @@ export default function Calendar() {
     }
   }, []);
 
+  useEffect(() => {
+    getBookedDate();
+  }, []);
+  function getBookedDate() {
+    axios
+      .get(
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/booking/bookedDate/${orgId}`
+      )
+      .then(
+        (res) => {
+          setBookedDate(res.data);
+        }
+        //   const { data, status } = res;
+        //   if (status === 200) {
+        //     setBookedDate(data);
+        //   } else {
+        //     alert('aldaa');
+        //   }
+        // }
+      );
+  }
+  console.log(bookedDate);
+
   const beginning = Number(start?.dayStart.substring(0, 2));
   const close = Number(start?.dayEnd.substring(0, 2));
+  const CurrentTime = dayjs(new Date()).hour();
+  console.log({ CurrentTime });
   const times = [];
   for (let i = beginning; i <= close; i++) {
+    const isAvailable = i >= CurrentTime;
     // const bookingLog = booking.filter((e: any) => {
     //   if (e.time.start >= i && e.time.end < i) {
     //     return i;
@@ -95,7 +123,7 @@ export default function Calendar() {
     times.push({
       label: `${i}:00 - ${i + 1}:00`,
       value: i,
-      // isAvailable: false,
+      isAvailable: isAvailable,
     });
     // }
   }
@@ -114,6 +142,7 @@ export default function Calendar() {
     setSelectCalendar(date);
     SetorderDate(dayjs(date).format('DD/MM/YYYY'));
   }
+
   // console.log(orderDate, selectTime);
   const DateTime: any[] = [];
   if (orderDate && selectTime) {
@@ -126,6 +155,7 @@ export default function Calendar() {
     setSelectedDate(DateTime);
     step?.handleNext();
   };
+  const blocked = 'rounded bg-gray-200 h-8 text-gray-400 cursor-not-allowed';
   return (
     <UserProvider>
       <MainLayout>
@@ -174,11 +204,23 @@ export default function Calendar() {
                 <div
                   key={`time-${i}`}
                   className={
-                    selectTime === time.label ? activeTime : normalTime
+                    // selectTime === time.label ? activeTime : normalTime
+                    selectTime === time.label
+                      ? activeTime
+                      : time.isAvailable
+                      ? normalTime
+                      : blocked
                   }
-                  onClick={() => setSelectTime(time.label)}
+                  onClick={() => {
+                    if (time.isAvailable) {
+                      setSelectTime(time.label);
+                    }
+                  }}
+                  // disabled={!time.isAvailable} // Add the disabled attribute
                 >
                   <div className="h-2 w-[110px] pt-1  mx-auto">
+                    {/* {time.value < CurrentTime ? null : null} */}
+
                     {time.label}
                   </div>
                 </div>
