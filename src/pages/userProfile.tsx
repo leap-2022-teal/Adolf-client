@@ -7,12 +7,12 @@ import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { AiFillCamera } from 'react-icons/ai';
 import { AiOutlineHome } from 'react-icons/ai';
-
+import { Spinner } from '@material-tailwind/react';
 export default function UserProfile() {
   const router = useRouter();
   const user = useContext<any>(UserContext);
   console.log(user, 'ploop');
-  const [profilePicture, setProfilepicture] = useState('/blank-profile.png');
+
   const [firstName, setUpdatedFName] = useState<any>(
     user?.firstName || undefined
   );
@@ -68,6 +68,7 @@ export default function UserProfile() {
   if (!user && user === null) {
     router.replace('/login');
   }
+  const blank = '/blank-profile.jpeg';
   return (
     <>
       <UserProvider>
@@ -77,10 +78,11 @@ export default function UserProfile() {
               <div className="max-w-[500px]  h-[200px] rounded-t-2xl border-2">
                 <div className="relative w-[110px] h-[110px] rounded-full border-2 border-white mx-auto mt-4 ">
                   <img
-                    src={user?.image}
+                    src={user?.image === undefined ? blank : user?.image}
                     className="w-[107px] h-[106px] rounded-full"
                     alt=""
                   />
+
                   <label className="w-9 h-9 flex flex-col items-center  bg-white text-blue rounded-full shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white absolute top-[65px] left-[75px]">
                     <input
                       type="file"
@@ -128,16 +130,21 @@ export default function UserProfile() {
                 type="text"
                 className="bg-white rounded-lg border-[1px] border-[#334155] h-[2.5rem] w-[100%] outline-[none] px-[10px] focus:outline-none text-black"
               />
-              <input
-                type="submit"
-                onClick={(e) => handleUpdate({ e, id: user._id })}
-                value={'Хадгалах'}
-                className=" text-white h-[2.5rem] w-[100%] bg-blue-600 text:flex rounded-[10px] cursor-pointer  mt-[100px] "
-              />
+              <div className="flex gap-4">
+                <Link
+                  href={`/`}
+                  className="text-white h-[2.5rem] w-[100%] bg-blue-600 text:flex rounded-[10px] cursor-pointer flex justify-center items-center "
+                >
+                  Буцах
+                </Link>
+                <input
+                  type="submit"
+                  onClick={(e) => handleUpdate({ e, id: user._id })}
+                  value={'Хадгалах'}
+                  className=" text-white h-[2.5rem] w-[100%] bg-blue-600 text:flex rounded-[10px] cursor-pointer   "
+                />
+              </div>
             </form>
-            <Link href={`/`} className="mx-auto">
-              <AiOutlineHome className="w-[30px] h-[30px] " type="button" />
-            </Link>
           </div>
         </MainLayout>
       </UserProvider>

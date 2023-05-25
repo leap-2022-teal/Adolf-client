@@ -21,6 +21,7 @@ export function UserSideBar() {
     localStorage.removeItem('loginToken');
     window.location.reload();
   }
+  const blank = '/blank-profile.jpeg';
   return (
     <>
       <div className="flex justify-between max-w-[500px] mx-auto mt-5">
@@ -41,7 +42,8 @@ export function UserSideBar() {
           >
             <div className="w-[500px] border-2 h-[25%] bg-blue-500 relative ">
               <img
-                src={user?.image}
+                src={user?.image === undefined ? blank : user?.image}
+                // src={user?.image}
                 className=" w-[65px] h-[65px] rounded-[50%] border-1 border-gray-500 absolute top-[50px] border-2 border-white left-10"
               />
               <h2 className="text-white font-normal text-lg absolute top-[125px] left-10">
