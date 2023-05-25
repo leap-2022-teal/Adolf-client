@@ -191,9 +191,9 @@ export default function OrderService() {
                       className={show === service._id ? setCar : car}
                       onClick={(e) => handleSave(service._id)}
                     >
-                      <div className="w-[90%] h-[90px] mt-1  rounded mx-auto from-slate-400  ">
+                      <div className="w-[90%] h-[90px] mt-1  rounded ml-5 from-slate-400  ">
                         <img
-                          src="/car-wash.png"
+                          src="/Car wash-rafiki.png"
                           className="w-[100px] h-[80px] mx-auto"
                           alt=""
                         />

@@ -47,10 +47,10 @@ export default function Login() {
   // console.log('dugaar', userPhoneNumber);
   return (
     <div className=" w-[400px] bg-white h-[800px] rounded-[20px] shadow-black mx-auto">
-      <div className="w-[150px] h-[150px] mx-auto mt-[40px]">
-        <img src="/car-wash.png" alt="logo" />
+      <div className="w-[200px] h-[150px] mx-auto mt-[40px]">
+        <img src="/City driver-rafiki.svg" alt="logo" />
       </div>
-      <h1 className="text-black uppercase flex justify-center my-[10px] tracking-[0.5px] text-[20px] font-medium">
+      <h1 className="text-black uppercase flex justify-center my-[10px] mt-10 tracking-[0.5px] text-[20px] font-medium">
         Тавтай морил!
       </h1>
       <span className="flex justify-center mt-[-10px] text-slate-500 text-[11px] font-light ">
