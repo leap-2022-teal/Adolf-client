@@ -1,3 +1,4 @@
+import GuestLogin from '@/components/guestLogin';
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -96,6 +97,7 @@ export default function Login() {
         >
           Нэвтрэх
         </button>
+        <GuestLogin />
       </div>
 
       <div className="flex gap-[20px] justify-center ">

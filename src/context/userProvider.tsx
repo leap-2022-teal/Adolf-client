@@ -5,6 +5,7 @@ import { Router, useRouter } from 'next/router';
 import { useEffect, useState, createContext } from 'react';
 import RegistrationNumber from '../pages/registrationNumber';
 import RegistrationInfo from '@/pages/registrationInfo';
+
 export const UserContext = createContext<any>(undefined);
 export function UserProvider({ children }: any) {
   const user = CurrentUser();
@@ -24,7 +25,11 @@ export function UserProvider({ children }: any) {
     } else if (router.pathname === '/registrationInfo') {
       return <RegistrationInfo />;
     }
-    return <Login />;
+    return (
+      <>
+        <Login />
+      </>
+    );
   }
 
   return <UserContext.Provider value={user}> {children}</UserContext.Provider>;

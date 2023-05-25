@@ -125,13 +125,11 @@ export function UserSideBar() {
                   <div
                     // href="#"
                     className="group flex items-center p-2 group-hover:text-red-500 rounded-lg text-black hover:bg-red-50 cursor-pointer "
+                    onClick={handleSignOut}
                   >
                     <VscSignOut className=" w-7 h-7 text-gray-500  group-hover:text-red-500" />
 
-                    <a
-                      onClick={handleSignOut}
-                      className="ml-3 text-gray-700  group-hover:text-red-500"
-                    >
+                    <a className="ml-3 text-gray-700  group-hover:text-red-500">
                       Гарах
                     </a>
                   </div>
