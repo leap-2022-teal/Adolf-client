@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 export default function GuestLogin() {
-  const userInput = {
-    phoneNumber: Math.floor(Math.random() * 100000000),
-    password: '1',
-  };
   async function handleRegister(e: any) {
     e.preventDefault();
+    const userInput = {
+      phoneNumber: Math.floor(Math.random() * 100000000),
+      password: '1',
+    };
     await axios
       .post(
         `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/user/registration`,
