@@ -129,7 +129,12 @@ export default function Summary() {
                 Буцах
               </Link>
               <Link href={`/`} onClick={step?.handleHome}>
-                <Image src="/home.png " width={42} height={42} alt="button" />
+                <img
+                  src="/home-button.png "
+                  width={42}
+                  height={42}
+                  alt="button"
+                />
               </Link>
               <Link
                 className="rounded  bg-blue-500 w-[120px] h-[40px] text-white  flex justify-center items-center  "
