@@ -238,12 +238,7 @@ export default function Calendar() {
               </Link>
               <Link href={`/`} onClick={step?.handleHome}>
                 {/* <AiOutlineHome className="w-[30px] h-[30px] " type="button" /> */}
-                <Image
-                  src="/home-button.png "
-                  width={42}
-                  height={42}
-                  alt="button"
-                />
+                <Image src="/home.png " width={42} height={42} alt="button" />
               </Link>
               <Link
                 className="rounded  bg-blue-500 w-[120px] h-[40px] text-white  flex justify-center items-center  "
