@@ -46,10 +46,10 @@ export function UserSideBar() {
                 // src={user?.image}
                 className=" w-[65px] h-[65px] rounded-[50%] border-1 border-gray-500 absolute top-[50px] border-2 border-white left-10"
               />
-              <h2 className="text-white font-normal text-lg absolute top-[125px] left-10">
+              <h2 className="text-white font-normal text-lg absolute top-[120px] left-10">
                 {user?.firstName} {user?.lastName}
               </h2>
-              <span className="text-gray-300 text-[11px] font-normal absolute top-[150px] left-10">
+              <span className="text-gray-300 text-[11px] font-normal absolute top-[140px] left-10">
                 {user?.phoneNumber}
               </span>
             </div>

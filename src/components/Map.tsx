@@ -11,7 +11,6 @@ import { SPlist } from './SPlist';
 import Example from './stepper';
 import Link from 'next/link';
 import AppContext from '@/context/AppContext';
-
 const containerStyle = {
   height: '300px',
   width: '90%',
@@ -56,6 +55,11 @@ export default function Map() {
     }
   }, [userLoc]);
   if (!isLoaded) return <div>Уншиж байна...</div>;
+
+  function handleClick(list: any) {
+    setSelectedElement(list);
+    setVisible(list._id);
+  }
   function findCoordinate() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((positions) => {
@@ -68,10 +72,6 @@ export default function Map() {
     } else {
       alert('ajilkubna');
     }
-  }
-  function handleClick(list: any) {
-    setSelectedElement(list);
-    setVisible(list._id);
   }
   // function loadData() {
   //   axios
@@ -136,7 +136,13 @@ export default function Map() {
   // );
 
   return (
-    <div>
+    <div className="relative">
+      <button
+        className="ml-7 absolute top-4 z-30 left-[195px]"
+        onClick={() => findCoordinate()}
+      >
+        <BiCurrentLocation className="text-3xl" />
+      </button>
       {/* <GoogleMap zoom={12} center={center} mapContainerStyle={containerStyle}> */}
       <GoogleMap
         zoom={mapZoom}
